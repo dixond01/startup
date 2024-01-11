@@ -15,7 +15,7 @@
 - file type to quickly edit text
 - has many features, reference in [this article](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 - for test notes:
-  - links are `\[LINK TEXT\]\(LINK\)`
+  - links are `[LINK TEXT](LINK)`
   - unordered lists use '-', '*' or '+'
   - paragraphs need a newline between them
   - use '\#' to reference issues and pull requests (haven't figured out yet)
