@@ -18,13 +18,15 @@
   - links are `\[LINK TEXT\]\(LINK\)`
   - unordered lists use '-', '*' or '+'
   - paragraphs need a newline between them
-  - use '#' to reference issues and pull requests (haven't figured out yet)
+  - use '\#' to reference issues and pull requests (haven't figured out yet)
   - emojis are `:EMOJICODE:`
   - quotes are `>`
   - quote or code blocks are enclosed by
-  ```
-  ```
+  
+  \```
+
   TEXT
-  ```
-  ```
-  - in-line code is `\`CODE\``
+  
+  \```
+  
+  - in-line code is \`CODE\`
