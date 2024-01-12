@@ -21,3 +21,19 @@ For single BYU students, FHE is usually fun activities, not peer Gospel study. T
 - Peer-to-peer communication
 - Can see and join any thread
 
+### Technologies
+
+The required technologies will be met as follows:
+
+- **HTML:** Uses correct structure. Four pages: login (with study group), main discussion, archived discussions, who's online.
+- **CSS:** Style the pages for web and phone screens, everything looks clean, appropriate colors and contrast.
+- **JavaScript:** Login, navigating pages, populating the discussion, replying, display online status.
+- **Service:** Backend service with endpoints for:
+  - login
+  - writing user messages
+  - replying to other users
+  - retrieving online status
+  - retriving archived discussions
+- **DB/Login:** Store users and study groups in database. Register and login users. Credentials stores securely in database. Cannot see discussions unless authenticated.
+- **Websocket:** When users post or reply, all other users in the study group can see it.
+- **React:** Application ported to use the React web framework.
