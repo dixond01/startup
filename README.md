@@ -12,6 +12,7 @@ For single BYU students, FHE is usually fun activities, not peer Gospel study. T
 
 #### Home (Discussion)
 
+![Home](InspireUS_Home.jpg)
 
 ### Key Features
 - Secure login over HTTPS
