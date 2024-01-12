@@ -30,3 +30,40 @@
   \```
   
   - in-line code is \`CODE\`
+
+## Questions
+
+- Levels of questioning
+  - Yourself
+  - The Oracle (Stack overflow, AI, etc.)
+  - Peers (builds collaboration)
+  - TAs
+  - Instructors
+- Think critically about the answers (an answer may not be a good answer)
+
+## Overview for Specification
+
+- HTML
+  - Structure
+  - what is what
+- CSS
+  - Style
+  - Make it look pretty
+- Javascript
+  - Functionality
+  - Interaction
+  - What I used in AP CS
+- Service
+  - Web service endpoints
+- Database/Login
+  - Authentication: returns a token that allows the user to use the program without logging in constantly
+  - Database: stores these credentials
+    - Mongo
+- WebSocket
+  - Data pushed from server, chat
+  - "Initiate send from server to client" (notifications)
+  - also peer-to-peer (chat)
+    - both send to server, server sends back
+- React
+  - web framework
+  - rework everything to work with React
