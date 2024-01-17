@@ -67,3 +67,16 @@
 - React
   - web framework
   - rework everything to work with React
+
+## History
+
+- Internet started as war communication technology
+
+### HTTP, HTML, URL
+
+- WWW started as a communication for research papers with hyperlinks
+  - Tim Berners-Lee
+- CSS was created by Hakon Wium Lie to make sure the internet would allow for creativity in presentation
+- JavaScript made to make the web interactive by Brendan Eich
+  - called "Java"Script purely for marketing - Java was really big
+- web browsers --> web servers --> cloud services
