@@ -46,6 +46,7 @@ The required technologies will be met as follows:
   - replying to other users
   - retrieving online status
   - retriving archived discussions
+  - accessing scripture references from third-party server
 - **DB/Login:** Store users and study groups in database. Register and login users. Credentials stored securely in database. Cannot see discussions unless authenticated.
 - **Websocket:** When users post or reply, all other users in the study group can see it.
 - **React:** Application ported to use the React web framework.
