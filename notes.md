@@ -71,12 +71,17 @@
 ## History
 
 - Internet started as war communication technology
-
-### HTTP, HTML, URL
-
 - WWW started as a communication for research papers with hyperlinks
   - Tim Berners-Lee
 - CSS was created by Hakon Wium Lie to make sure the internet would allow for creativity in presentation
 - JavaScript made to make the web interactive by Brendan Eich
   - called "Java"Script purely for marketing - Java was really big
 - web browsers --> web servers --> cloud services
+
+## EC2 Notes
+
+The server on AWS is up and running. Named darbidixon-260startup-base. 
+
+**IP Address (Elastic):** 3.234.33.64
+
+**Command to Access SSH:**  ssh -i /Users/darbi/Desktop/Classes/Winter-24-Classes/CS-260/production.pem ubuntu@3.234.33.64
