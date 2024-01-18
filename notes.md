@@ -85,3 +85,10 @@ The server on AWS is up and running. Named darbidixon-260startup-base.
 **IP Address (Elastic):** 3.234.33.64
 
 **Command to Access SSH:**  ssh -i /Users/darbi/Desktop/Classes/Winter-24-Classes/CS-260/production.pem ubuntu@3.234.33.64
+
+**Command to Access Caaddyfile (from SSH):** vi Caddyfile
+
+**Command to update Caddyfile after changes:** sudo service caddy restart
+
+**Subdomains:** startup.inspireus.click, simon.inspireus.click
+
