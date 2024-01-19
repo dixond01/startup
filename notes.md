@@ -84,11 +84,25 @@ The server on AWS is up and running. Named darbidixon-260startup-base.
 
 **IP Address (Elastic):** 3.234.33.64
 
-**Command to Access SSH:**  ssh -i /Users/darbi/Desktop/Classes/Winter-24-Classes/CS-260/production.pem ubuntu@3.234.33.64
+**Command to Access SSH:**  `ssh -i /Users/darbi/Desktop/Classes/Winter-24-Classes/CS-260/production.pem ubuntu@3.234.33.64`
 
-**Command to Access Caaddyfile (from SSH):** vi Caddyfile
+**Command to Access Caaddyfile (from SSH):** `vi Caddyfile`
 
-**Command to update Caddyfile after changes:** sudo service caddy restart
+**Command to update Caddyfile after changes:** `sudo service caddy restart`
 
 **Subdomains:** startup.inspireus.click, simon.inspireus.click
+
+- Technology Stack
+  - Pieces that work together to make the code
+  - Us:
+    - REACT: frontend, HTML
+    - Caddy 2: route requests
+    - node JS: JavaScript interpreter in the server (uses Google's open source interpreter that they use in their browsers
+    - mongo DB: database
+  - Services deliver functionality
+    - Startup.name and simon.name are both services
+  - Servers are the computer that runs it
+- DNS
+  - **D**omain **N**ame **S**ystem
+  - connect IP addresses with domain names
 
