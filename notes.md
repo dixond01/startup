@@ -80,6 +80,8 @@
 
 ## EC2 Notes
 
+-**E**lastic **C**ompute
+
 The server on AWS is up and running. Named darbidixon-260startup-base. 
 
 **IP Address (Elastic):** 3.234.33.64
