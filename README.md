@@ -50,3 +50,13 @@ The required technologies will be met as follows:
 - **DB/Login:** Store users and study groups in database. Register and login users. Credentials stored securely in database. Cannot see discussions unless authenticated.
 - **Websocket:** When users post or reply, all other users in the study group can see it.
 - **React:** Application ported to use the React web framework.
+
+## HTML Deliverable
+- **HTML Pages:** four html pages: index.html with login, discussion.html with the main discussion functionality, archive.html where links to past discussions will be stored (these links do not work yet), users.html with the members of the study group, their online status, and an image.
+- **Links:** each page has links to the others, excluding the login page. There is also a link to this repository on each page.
+- **Text:** placeholder text for discussion titles (based on Come, Follow Me for that week) and users' posts is present. Placeholder archived discussion titles also present.
+- **3rd Party Service Calls:** placeholders for posted messages, online status, login, archived discussions
+- **Images:** my application is not based around images, so the only one I included was for decoration on the users.html page.
+- **Login Placeholder:** index.html contains a login form, users' names are displayed when they post a message and on the users.html page.
+- **Database:** placeholder text for a box that would appear on hover over a user's scripture reference containing the reference retrieved from a database, placeholder for discussion titles, image may be a placeholder or it may stay the same.
+- **WebSocket:** placeholder for realtime discussions, number of users in study group, and online status.
