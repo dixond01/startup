@@ -348,5 +348,45 @@ There are also keystrokes that have special meaning in the console.
 | RGB function | `rgb(128, 255, 128, 0.5)` | Red, green, and blue as a percentage or number between 0 and 255, with an optional alpha opacity percentage                                                                                                       |
 | HSL          | `hsl(180, 30%, 90%, 0.5)` | Hue, saturation, and light, with an optional opacity percentage. Hue is the position on the 365 degree color wheel (red is 0 and 255). Saturation is how gray the color is, and light is how bright the color is. |
 
+### Fonts
 
-    
+```
+@font-face{
+font-family: "<name>";
+src: url('<url>');
+}
+p{
+font-family: <name>;
+font-size: 20vh
+```
+```
+@import
+url('<url>');
+```
+- @import's url is a link to a css declaration
+
+#### Unicode and UTF-8
+- unicode represents a ton of characters
+- UTF-8 manages all of these characters so it only renders what is needed
+
+### Animation
+
+```
+@keyframes demo {
+from {
+  font-size: 0vh;
+}
+95% {
+  font-size: 21vh;
+}
+to (
+  fonrt-size: 20vh;
+}
+}
+
+p {
+animation-name: demo;
+animation-duration: 3s;
+}
+```
+- must declare the animation and then call its variable name
