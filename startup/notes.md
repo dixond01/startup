@@ -157,6 +157,13 @@ There are also keystrokes that have special meaning in the console.
 
 - **Comments:** `<!-- Comment text -->`
 - The "base" HTML file for most websites is named `index.html`. Thus, google.com will bring you to google.com/index.html
+- @ top of document:
+```
+<meta
+  name="viewport"
+content="width=device-width, initial-scale=1"
+/>
+```
 
 ### Common Elements
 
@@ -390,3 +397,40 @@ animation-duration: 3s;
 }
 ```
 - must declare the animation and then call its variable name
+
+### Responsive Design
+
+- float declaration
+- display declaration
+  - none: allocates no space, JS can still mess with it
+  - block: occupy the width of the display by default
+  - inline: only occupy the width needed for the content
+  - flex: display using rules for the child elements
+  - grid: responsive tables
+```
+.<container> {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(300px, 1fr(fractional units)));
+  grid-auto-rows: 300px;
+  grid-gap: 1em;
+}
+```
+- flex
+  - "holy grail of layout"
+```
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+```
+#### Media Queries
+
+```
+@media (<choice rendering>) {
+div {
+  <stuff>;
+}
+```
+- media just refers to the rendering of the entire page
