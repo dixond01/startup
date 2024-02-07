@@ -48,14 +48,18 @@
   
   footer {
     background-color: #a1b051;
-    margin-top: 2vh;
-    padding: 2vh;
+    /* margin-top: 2vh;
+    padding: 2vh; */
     flex: 0 5vh;
     color: #4e413f;
   
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; */
+    text-align: left;
+  }
+
+  footer a {
+    float: right;
   }
   
