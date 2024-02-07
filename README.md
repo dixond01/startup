@@ -63,4 +63,4 @@ The required technologies will be met as follows:
 
 ## CSS Deliverable
 
-I deployed the simon css at [simon.inspireus.click].
+I deployed the simon css at [simon.inspireus.click](simon.inspireus.click).
