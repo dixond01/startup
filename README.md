@@ -60,3 +60,7 @@ The required technologies will be met as follows:
 - **Login Placeholder:** index.html contains a login form, users' names are displayed when they post a message and on the users.html page.
 - **Database:** placeholder text for a box that would appear on hover over a user's scripture reference containing the reference retrieved from a database, placeholder for discussion titles, image may be a placeholder or it may stay the same.
 - **WebSocket:** placeholder for realtime discussions, number of users in study group, and online status.
+
+## CSS Deliverable
+
+I deployed the simon css at [simon.inspireus.click].
