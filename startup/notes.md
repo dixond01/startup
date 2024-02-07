@@ -157,6 +157,13 @@ There are also keystrokes that have special meaning in the console.
 
 - **Comments:** `<!-- Comment text -->`
 - The "base" HTML file for most websites is named `index.html`. Thus, google.com will bring you to google.com/index.html
+- @ top of document:
+```
+<meta
+  name="viewport"
+content="width=device-width, initial-scale=1"
+/>
+```
 
 ### Common Elements
 
@@ -348,5 +355,121 @@ There are also keystrokes that have special meaning in the console.
 | RGB function | `rgb(128, 255, 128, 0.5)` | Red, green, and blue as a percentage or number between 0 and 255, with an optional alpha opacity percentage                                                                                                       |
 | HSL          | `hsl(180, 30%, 90%, 0.5)` | Hue, saturation, and light, with an optional opacity percentage. Hue is the position on the 365 degree color wheel (red is 0 and 255). Saturation is how gray the color is, and light is how bright the color is. |
 
+### Fonts
 
-    
+```
+@font-face{
+font-family: "<name>";
+src: url('<url>');
+}
+p{
+font-family: <name>;
+font-size: 20vh
+```
+```
+@import
+url('<url>');
+```
+- @import's url is a link to a css declaration
+
+#### Unicode and UTF-8
+- unicode represents a ton of characters
+- UTF-8 manages all of these characters so it only renders what is needed
+
+### Animation
+
+```
+@keyframes demo {
+from {
+  font-size: 0vh;
+}
+95% {
+  font-size: 21vh;
+}
+to (
+  fonrt-size: 20vh;
+}
+}
+
+p {
+animation-name: demo;
+animation-duration: 3s;
+}
+```
+- must declare the animation and then call its variable name
+
+### Responsive Design
+
+- float declaration
+- display declaration
+  - none: allocates no space, JS can still mess with it
+  - block: occupy the width of the display by default
+  - inline: only occupy the width needed for the content
+  - flex: display using rules for the child elements
+  - grid: responsive tables
+```
+.<container> {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(300px, 1fr(fractional units)));
+  grid-auto-rows: 300px;
+  grid-gap: 1em;
+}
+```
+- flex
+  - "holy grail of layout"
+```
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+```
+#### Media Queries
+
+```
+@media (<choice rendering>) {
+div {
+  <stuff>;
+}
+```
+- media just refers to the rendering of the entire page
+
+### CSS Frameworks
+
+- Bootstrap
+  - most popular
+  - reference bootsrap classes in html elements
+  - reference in code to include
+  - for now: <link rel="stylesheet" href="https://cdn.jsdelivr.nep/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+  ```
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+        crossorigin="anonymous"
+      />
+    </head>
+    <body>
+      ...
+    </body>
+  </html>
+  ```
+  - to work with javascript:
+    ```
+    <body>
+    ...
+      <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+      ></script>
+    </body>
+    ``` 
+- Tailwind
+  - in-line html
+  - rising in popularity
