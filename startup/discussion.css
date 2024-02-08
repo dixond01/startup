@@ -8,6 +8,12 @@ main {
 .scriptureReference {
     text-decoration: underline;
 }
+#discussion {
+    height: 80%;
+}
+#discussionFeed {
+    height: 100%;
+}
 main h3 {
     /* align-self: flex-start; */
 }
