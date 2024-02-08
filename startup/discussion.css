@@ -8,6 +8,7 @@ main {
     padding: 2vh;
     flex-grow: 1;
     max-height: 60vh;
+    position: relative;
 }
 .userName {
     font-weight: bold;
@@ -24,7 +25,7 @@ main {
     max-height: 70vh;
 }
 #discussionFeed {
-    max-height: 60%;
+    max-height: 70%;
     overflow: auto;
 }
 footer {
