@@ -7,7 +7,7 @@ main {
     font-size: 1em;
     padding: 2vh;
     flex-grow: 1;
-    max-height: 60vh;
+    max-height: 80vh;
     position: relative;
 }
 .userName {
