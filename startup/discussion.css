@@ -8,10 +8,14 @@ main {
     padding: 2vh;
     flex-grow: 1;
     /* max-height: 80vh; */
-    max-height: calc(100% - 50px - 40px);
+    /* max-height: calc(100% - 50px - 40px); */
     position: relative;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+#discussion h1, h3{
+    flex: 0;
 }
 .userName {
     font-weight: bold;
@@ -25,13 +29,18 @@ main {
     flex: 1;
 } */
 #discussion {
-    max-height: 70vh;
+    /* max-height: 70vh; */
     display: flex;
     flex-direction:column;
+    flex: 1;
+    overflow: hidden;
 }
 #discussionFeed {
-    max-height: 70%;
+    max-height: 80%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 footer {
     margin-top: auto;
