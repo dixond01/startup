@@ -31,6 +31,8 @@ main {
 footer {
     margin-top: auto;
     flex-shrink: 0;
+    height: 50px;
+    display: flex;
 }
 form {
     flex-shrink: 0;
