@@ -1,11 +1,13 @@
 
 body {
-    overflow: auto;
+    overflow: hidden;
+    min-height: 100vh;
 }
 main {
     font-size: 1em;
     padding: 2vh;
     flex-grow: 1;
+    max-height: 60vh;
 }
 .userName {
     font-weight: bold;
@@ -13,17 +15,25 @@ main {
 .scriptureReference {
     text-decoration: underline;
 }
-.staticFooterWrapper {
+/* .staticFooterWrapper {
     display: flex;
     flex-direction: column;
-    min-height: 80vh;
-}
+    flex: 1;
+} */
 #discussion {
     max-height: 70vh;
 }
 #discussionFeed {
-    height: 100%;
+    max-height: 60%;
     overflow: auto;
+}
+footer {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+form {
+    flex-shrink: 0;
+    margin-top: auto;
 }
 main h3 {
     /* align-self: flex-start; */
