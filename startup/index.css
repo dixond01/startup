@@ -1,5 +1,5 @@
 main {
-    color: #4e413f;
+    color: var(--secondary-color);
     flex: 1;
     font-size: 2em;
   
@@ -10,7 +10,7 @@ main {
   }
 
 .btn-primary {
-    background-color: #4e413f;
+    background-color: var(--secondary-color);
     border: none;
     width: 75%;
     margin: 10px;
