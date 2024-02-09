@@ -19,6 +19,7 @@ table {
     flex: 1;
     margin: 2vh;
     width: 80%;
+    margin-bottom: 5vh;
 }
 tr {
     border-bottom: 2px solid var(--secondary-color-lighter-1);
@@ -38,7 +39,7 @@ img {
     background-size: cover;
     color: white;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: bottom;
     flex: 0 0 150px;
     display: flex;
     flex-direction: column;
