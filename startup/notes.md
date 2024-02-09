@@ -636,26 +636,26 @@ div {
   }
   ```
 
-  ### String
+### String
 
-  - `` ` `` (backticks)
-    - declare string literals
-      - can contain javascript evaluated in place and concatenated into the string
-      - replacement specifier: `${javascript}`
-      - ex.
-        ```
-        const l = 'literal';
-        console.l og(`string ${l + (1 + 1)} text`);
-        ```
-    - for multi-line strings w/o escaping the newline
-      
-    #### String Functions
+- `` ` `` (backticks)
+  - declare string literals
+    - can contain javascript evaluated in place and concatenated into the string
+    - replacement specifier: `${javascript}`
+    - ex.
+      ```
+      const l = 'literal';
+      console.l og(`string ${l + (1 + 1)} text`);
+      ```
+  - for multi-line strings w/o escaping the newline
+    
+  #### String Functions
 
-    | Function      | Meaning                                                      |
-    | ------------- | ------------------------------------------------------------ |
-    | length        | The number of characters in the string                       |
-    | indexOf()     | The starting index of a given substring                      |
-    | split()       | Split the string into an array on the given delimiter string |
-    | startsWith()  | True if the string has a given prefix                        |
-    | endsWith()    | True if the string has a given suffix                        |
-    | toLowerCase() | Converts all characters to lowercase                         |
+  | Function      | Meaning                                                      |
+  | ------------- | ------------------------------------------------------------ |
+  | length        | The number of characters in the string                       |
+  | indexOf()     | The starting index of a given substring                      |
+  | split()       | Split the string into an array on the given delimiter string |
+  | startsWith()  | True if the string has a given prefix                        |
+  | endsWith()    | True if the string has a given suffix                        |
+  | toLowerCase() | Converts all characters to lowercase                         |
