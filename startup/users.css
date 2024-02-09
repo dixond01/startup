@@ -23,25 +23,38 @@ img {
     width: 100%;
 }
 #imgTitle {
-    width:100%;
+    width: 100%;
     position: relative;
+    background-image: url("https://www.churchofjesuschrist.org/imgs/4005509d620611eebc38eeeeac1ec7196f7f2ce7/full/!1920%2C440/0/default");
+    background-size: cover;
+    color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
-
-.pageTitle {
+#studyGroupTitle {
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+}
+/* .pageTitle {
     position: absolute;
-    top: 50%; /* Adjust as needed */
-    left: 50%; /* Adjust as needed */
-    transform: translate(-50%, -50%); /* Center the text */
-    z-index: 1; /* Ensure the text appears above the image */
-    color: white; /* Optional: Set text color */
-    /* font-size: 24px; */
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    z-index: 1; 
+    color: white; 
+    
 }
 #members {
     position: absolute;
-    top: 50%; /* Adjust as needed */
-    left: 50%; /* Adjust as needed */
-    transform: translate(-50%, -50%); /* Center the text */
-    z-index: 1; /* Ensure the text appears above the image */
-    color: white; /* Optional: Set text color */
-    /* font-size: 24px; */
-}
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1; 
+    color: white; 
+} */
