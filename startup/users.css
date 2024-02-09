@@ -21,7 +21,10 @@ table {
     width: 80%;
 }
 tr {
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid var(--secondary-color-lighter-1);
+}
+th {
+    color: var(--secondary-color-darker)
 }
 img {
     flex: 0;
