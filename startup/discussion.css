@@ -69,6 +69,20 @@ input {
     --bs-btn-active-bg: var(--secondary-color-lighter-2);
 }
 
+.sidebar {
+    position: fixed;
+    top: 0;
+    width: 250px;
+    right: -250px;
+    height: 100%;
+    background-color: var(--secondary-color-lighter-1);
+    transition: right 0.3s ease;
+}
+
+.sidebar.show {
+    right: 0; /*for using js: add show class to the sidebar*/
+}
+
 @media (max-height: 600px) {
     header {
       display: none;
