@@ -13,7 +13,10 @@ h1, h3, hr {
 .studyGroup {
     margin-top: 2vh;
 }
-h1 {
+main h1 {
+    font-size: 2rem;
+}
+main h3 {
     font-size: 1.5rem;
 }
 hr {
@@ -40,5 +43,5 @@ hr {
     opacity: 0.65;
 }
 .lessonTitle {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
