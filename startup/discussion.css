@@ -59,11 +59,14 @@ input {
     padding: 1vw;
     width: 80%;
     height: 80%;
+    outline-color: none;
 }
 .btn-primary {
     background-color: var(--secondary-color);
     border: none;
-    --bs-btn-hover-bg: #9f8b88;
+    --bs-btn-hover-bg: var(--secondary-color-lighter-1);
+    flex: 0.5;
+    --bs-btn-active-bg: var(--secondary-color-lighter-2);
 }
 
 @media (max-height: 600px) {
