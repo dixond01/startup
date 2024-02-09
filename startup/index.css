@@ -17,6 +17,7 @@ main {
     --bs-btn-active-bg: var(--secondary-color-lighter-2);
     width: 75%;
     margin: 10px;
+    font-weight: bold;
 }
 form {
     max-width: 100%;
