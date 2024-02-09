@@ -48,15 +48,21 @@ form {
     flex-shrink: 0;
     margin-top: auto;
     flex: 0 0 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 input {
     border-radius: 20px;
     border: none;
     padding: 1vw;
+    width: 80%;
 }
 .btn-primary {
     background-color: var(--secondary-color);
     border: none;
+    --bs-btn-hover-bg: #9f8b88;
 }
 
 @media (max-height: 600px) {
