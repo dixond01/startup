@@ -12,6 +12,9 @@ main {
 .btn-primary {
     background-color: var(--secondary-color);
     border: none;
+    --bs-btn-hover-bg: var(--secondary-color-lighter-1);
+    flex: 0.5;
+    --bs-btn-active-bg: var(--secondary-color-lighter-2);
     width: 75%;
     margin: 10px;
 }
@@ -33,6 +36,7 @@ input {
     border-radius: 20px;
     border: none;
     height: 4vh;
+    outline: none;
 }
 h2 {
     font-size: 1.5em;
