@@ -37,6 +37,7 @@ main {
     flex-direction: column;
     flex: 1;
     text-align: left;
+    font-size: 1.15em;
 }
 footer {
     margin-top: auto;
@@ -67,6 +68,7 @@ input {
     --bs-btn-hover-bg: var(--secondary-color-lighter-1);
     flex: 0.5;
     --bs-btn-active-bg: var(--secondary-color-lighter-2);
+    font-weight: bold;
 }
 
 .sidebar {
