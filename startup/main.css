@@ -1,3 +1,10 @@
+:root {
+  --primary-color: #ded5c9;
+  --secondary-color: #4e413f;
+  --secondary-color-darker: #2d2524;
+  --accent-color: #a1b051;
+}
+
 * {
     font-family: sans-serif;
   }
@@ -12,7 +19,7 @@
     flex-direction: column;
     text-align: center;
   
-    background-color: #ded5c9;
+    background-color: var(--primary-color);
     margin: 0;
     height: 100%;
   }
