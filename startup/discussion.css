@@ -49,6 +49,11 @@ form {
     margin-top: auto;
     flex: 0 0 40px;
 }
+input {
+    border-radius: 20px;
+    border: none;
+    padding: 1vw;
+}
 .btn-primary {
     background-color: var(--secondary-color);
     border: none;
