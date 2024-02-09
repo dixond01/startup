@@ -473,3 +473,206 @@ div {
 - Tailwind
   - in-line html
   - rising in popularity
+
+## Javascript
+
+- Javascript official name: ECMAScript
+- Inspired by Scheme
+- Interpreted
+  - never compiled
+- Dynamically typed
+- F12 -> Console is a javascript interpreter
+- Node.js
+  - executable, allows JS to run without a browser (wrapped around V8 open source Chrome interpreter)
+  - Also has libraries and other things
+- Playgrounds
+  - Browser debugging console
+  - CodePen
+  - VSCode (LiveServer)
+  - Node.js
+- Printing
+  - console.log(str);
+  - can use css as a parameter
+    - ex. `console.log('%cstr', 'font-size:2em; color:red;');`
+    - %c says to apply the next parameter as css styling
+  - can format strings with %s
+    - ex. `console.log('Hello, %s!', 'world')`
+    - %s is a placeholder for the next parameter
+- initialize array
+  - `const words = ['hello', 'world'];`
+- define function
+  - `function f() {}`
+- embedding in html
+  - `<script src='jsfile.js"></script>`
+  - `<script>jscode</script>`
+  - script attribute
+    - ex. `<div onclick="function"></div>`
+- variables
+  - do not need to declare types "dynamically typed language"
+  - var (DO NOT USE)
+  - `let y = 1`
+  - `const x = 3`
+    - cannot change x
+- types
+  - dynamically typed
+  - undefined diff from null
+    - undefined is not "none" it is just not defined yet
+    
+  ### Primitive Types
+
+  | Type        | Meaning                                                    |
+  | ----------- | ---------------------------------------------------------- |
+  | `Null`      | The type of a variable that has not been assigned a value. |
+  | `Undefined` | The type of a variable that has not been defined.          |
+  | `Boolean`   | true or false.                                             |
+  | `Number`    | A 64-bit signed number.                                    |
+  | `BigInt`    | A number of arbitrary magnitude.                           |
+  | `String`    | A textual sequence of characters.                          |
+  | `Symbol`    | A unique value.                                            |
+
+  ### Object Types
+
+| Type       | Use                                                                                    | Example            |
+| ---------- | -------------------------------------------------------------------------------------- | ------------------------ |
+| `Object`   | A collection of properties represented by name-value pairs. Values can be of any type. | `{a:3, b:'fish'}`        |
+| `Function` | An object that has the ability to be called.                                           | `function a() {}`        |
+| `Date`     | Calendar dates and times.                                                              | `new Date('1995-12-17')` |
+| `Array`    | An ordered sequence of any type.                                                       | `[3, 'fish']`            |
+| `Map`      | A collection of key-value pairs that support efficient lookups.                        | `new Map()`              |
+| `JSON`     | A lightweight data-interchange format used to share information across programs.       | `{"a":3, "b":"fish"}`    |
+
+  - objects are key-value pairs
+    - not all things are objects (strings are not objects)
+    - objects `{}` and arrays `[]`
+      - in arrays: index is key and the value is value
+  - `var instanceof type` returns boolean
+  - dynamic conversions
+    - can add a string and the first element of an array (i think)
+    - can add numbers and strings
+    - CANNOT multiply numbers and strings
+    - adding arrays of numbers converts them to strings first
+      - `[2] + [3] = 23`
+  ### Operators
+  - `+`, `-`, `*`, `/`, `===` (equality), `!==` (inequality)
+    - `===` is for strict equality; it does not use type conversions
+  - for strings: `+` (concatenation), `===` (equality)
+- equality
+  - use `===` triple equals for equality
+  - map
+- debugging
+  - timers to measure the time a section of code takes
+    - wrap with
+    ```
+    console.time('demo time');
+    //code
+    console.timeEnd('demo time');
+    ```
+  - count to count how many times a block of code is called
+  ```
+  console.count('a');
+  // OUTPUT: a: 1
+  console.count('a');
+  // OUTPUT: a: 2
+  console.count('b');
+  // OUTPUT: b: 1
+  ```
+
+### Conditionals
+
+- `if`, `else if`, `else`
+  - ex.
+    ```
+    if (a === 1) {
+    //...
+    } else if (b === 2) {
+      //...
+    } else {
+      //...
+    }
+    ```
+- can use ternary operator
+  `condition ? expression1 : expression2`
+  - evaluates condition. If true, returns expression1. If false, returns expression2.
+- boolean operators
+  - `&&`, `||`, `!`
+  
+### Loops
+
+- `for`, `for in`, `for of`, `while`, `do while`, and `switch`
+- do while
+  ```
+  let i = 0;
+  do {
+    console.log(i);
+    i++;
+  } while (i < 2);
+  // OUTPUT: 0 1
+  ```
+- for in iterates over an object's property **names**
+  ```
+  const obj = { a: 1, b: 'fish' };
+  for (const name in obj) {
+    console.log(name);
+  }
+  ```
+- for of iteratres over an iterable's property **values**
+  ```
+  const arr = ['a', 'b'];
+  for (const val of arr) {
+    console.log(val);
+  }
+  ```
+- allow for `break` or `continue`
+  ```
+  let i = 0;
+  while (true) {
+    console.log(i);
+    if (i === 0) {
+      i++;
+      continue;
+    } else {
+      break;
+    }
+  }
+  ```
+
+### String
+
+- `` ` `` (backticks)
+  - declare string literals
+    - can contain javascript evaluated in place and concatenated into the string
+    - replacement specifier: `${javascript}`
+    - ex.
+      ```
+      const l = 'literal';
+      console.l og(`string ${l + (1 + 1)} text`);
+      ```
+  - for multi-line strings w/o escaping the newline
+    
+  #### String Functions
+
+  | Function      | Meaning                                                      |
+  | ------------- | ------------------------------------------------------------ |
+  | length        | The number of characters in the string                       |
+  | indexOf()     | The starting index of a given substring                      |
+  | split()       | Split the string into an array on the given delimiter string |
+  | startsWith()  | True if the string has a given prefix                        |
+  | endsWith()    | True if the string has a given suffix                        |
+  | toLowerCase() | Converts all characters to lowercase                         |
+
+### Array Object Functions
+
+| Function | Meaning                                                   | Example                       |
+| -------- | --------------------------------------------------------- | ----------------------------- |
+| push     | Add an item to the end of the array                       | `a.push(4)`                   |
+| pop      | Remove an item from the end of the array                  | `x = a.pop()`                 |
+| slice    | Return a sub-array                                        | `a.slice(1,-1)`               |
+| sort     | Run a function to sort an array in place                  | `a.sort((a,b) => b-a)`        |
+| values   | Creates an iterator for use with a `for of` loop          | `for (i of a.values()) {...}` |
+| find     | Find the first item satisfied by a test function          | `a.find(i => i < 2)`          |
+| forEach  | Run a function on each array item                         | `a.forEach(console.log)`      |
+| reduce   | Run a function to reduce each array item to a single item | `a.reduce((a, c) => a + c)`   |
+| map      | Run a function to map an array to a new array             | `a.map(i => i+i)`             |
+| filter   | Run a function to remove items                            | `a.filter(i => i%2)`          |
+| every    | Run a function to test if all items match                 | `a.every(i => i < 3)`         |
+| some     | Run a function to test if any items match                 | `a.some(i => 1 < 1)`          |
