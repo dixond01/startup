@@ -43,7 +43,7 @@ main {
     flex-direction: column;
     flex: 1;
     text-align: left;
-    font-size: 1.15rem;
+    font-size: 1rem;
 }
 footer {
     margin-top: auto;
