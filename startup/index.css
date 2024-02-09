@@ -12,7 +12,7 @@ main {
 .btn-primary {
     background-color: #4e413f;
     border: none;
-    max-width: 50%;
+    width: 75%;
     margin: 10px;
 }
 form {
@@ -27,10 +27,14 @@ label {
 }
 
 input {
-    max-width: 80%;
     font-size: .5em;
-    text-align: center
+    text-align: center;
+    width: 150%;
+    border-radius: 20px;
+    border: none;
+    height: 4vh;
 }
 h2 {
     font-size: 1.5em;
+    margin-bottom: 3vh;
 }

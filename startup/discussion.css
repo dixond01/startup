@@ -5,7 +5,7 @@ body {
 }
 main {
     font-size: 1em;
-    padding: 2vh;
+    padding: 3vh;
     flex-grow: 1;
     /* max-height: 80vh; */
     /* max-height: calc(100% - 50px - 40px); */
@@ -23,11 +23,6 @@ main {
 .scriptureReference {
     text-decoration: underline;
 }
-/* .staticFooterWrapper {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-} */
 #discussion {
     /* max-height: 70vh; */
     display: flex;
@@ -41,6 +36,7 @@ main {
     display: flex;
     flex-direction: column;
     flex: 1;
+    text-align: left;
 }
 footer {
     margin-top: auto;
