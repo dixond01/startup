@@ -64,3 +64,10 @@ The required technologies will be met as follows:
 ## CSS Deliverable
 
 I deployed the simon css at [simon.inspireus.click](https://simon.inspireus.click).
+
+- **Header, Footer, and Main Content Body:** Formatted the application to look like my initial design with some modifications. The header and footer disappear to save space when the vertical height of the viewport is small enough. Headers and footers stay where they should.
+- **Navigation Elements:** I implemented a header with navigation to the archive, home (discussion), and users pages. This header is not visible on the index.html page because the user needs to log in before they can access their study group's discussion
+- **Responsive to Window Resizing:** Application dynamically resizes to device dimensions and looks good (unless the screen is extremely small).
+- **Application Elements:** Implemented a color scheme with good contrast, the page layout and whitespace is visually pleasing, the scripture reference sidebar cannot be seen (it is -250px off the discussion page to the right), but it is formatted correctly and ready to be deployed with javascript.
+- **Application Text Elements:** Font and font size consistent and readable. Font weight is used appropriately.
+- **Application Images:** The only image in my application is on the Users page. It is formatted as the background for the page title and positioned and sized as a banner, as intended.
