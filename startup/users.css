@@ -7,6 +7,7 @@ main {
 }
 h1 {
     flex: 0;
+    font-size: 1.5em;
 }
 h3 {
     flex: 0;
@@ -15,7 +16,7 @@ hr {
     flex: 0;
 }
 table {
-    flex: 0;
+    flex: 1;
 }
 img {
     flex: 0;
@@ -24,13 +25,13 @@ img {
 }
 #imgTitle {
     width: 100%;
-    position: relative;
+    /* position: relative; */
     background-image: url("https://www.churchofjesuschrist.org/imgs/4005509d620611eebc38eeeeac1ec7196f7f2ce7/full/!1920%2C440/0/default");
     background-size: cover;
     color: white;
     background-repeat: no-repeat;
     background-position: center;
-    flex: 1;
+    flex: 0 0 150px;
     display: flex;
     flex-direction: column;
 }
@@ -41,20 +42,10 @@ img {
     flex-direction: column;
     flex: 1;
 }
-/* .pageTitle {
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    z-index: 1; 
-    color: white; 
-    
+
+.logged-in {
+    color: green;
 }
-#members {
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    z-index: 1; 
-    color: white; 
-} */
+.logged-out {
+    color: red;
+}
