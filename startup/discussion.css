@@ -51,11 +51,9 @@ footer {
 form {
     flex-shrink: 0;
     margin-top: auto;
-    flex: 0 0 10%;
+    flex: 0 0 40px;
 }
-main h3 {
-    /* align-self: flex-start; */
-}
+
 @media (max-height: 600px) {
     header {
       display: none;
