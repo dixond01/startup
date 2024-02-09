@@ -473,3 +473,58 @@ div {
 - Tailwind
   - in-line html
   - rising in popularity
+
+## Javascript
+
+- Javascript official name: ECMAScript
+- Inspired by Scheme
+- Interpreted
+  - never compiled
+- Dynamically typed
+- F12 -> Console is a javascript interpreter
+- Node.js
+  - executable, allows JS to run without a browser (wrapped around V8 open source Chrome interpreter)
+  - Also has libraries and other things
+- Playgrounds
+  - Browser debugging console
+  - COdePen
+  - VSCode (LiveServer)
+  - Node.js
+- Printing
+  - console.log(str);
+  - can use css as a parameter
+    - ex. `console.log('str', 'font-size:2em; color:
+    - red;');`
+- initialize array
+  - `const words = ['hello', 'world'];`
+- define function
+  - `function f() {}`
+- embedding in html
+  - `<script src='jsfile.js"></script>`
+  - `<script>jscode</script>`
+  - script attribute
+    - ex. `<div onclick="function"></div>`
+- variables
+  - do not need to declare types "dynamically typed language"
+  - var (DO NOT USE)
+  - `let y = 1`
+  - `const x = 3`
+    - cannot change x
+- types
+  - dynamically typed
+  - undefined diff from null
+    - undefined is not "none" it is just not defined yet
+  - objects are key-value pairs
+    - not all things are objects (strings are not objects)
+    - objects `{}` and arrays `[]`
+      - in arrays: index is key and the value is value
+  - `var instanceof type` returns boolean
+  - dynamic conversions
+    - can add a string and the first element of an array (i think)
+    - can add numbers and strings
+    - CANNOT multiply numbers and strings
+    - adding arrays of numbers converts them to strings first
+      - `[2] + [3] = 23`
+- equality
+  - use `===` triple equals for equality
+  - map
