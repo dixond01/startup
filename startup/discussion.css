@@ -59,7 +59,7 @@ input {
     padding: 1vw;
     width: 80%;
     height: 80%;
-    outline-color: none;
+    outline: none;
 }
 .btn-primary {
     background-color: var(--secondary-color);
