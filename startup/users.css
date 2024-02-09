@@ -1,3 +1,23 @@
+body {
+    overflow: auto;
+}
 main {
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+h1 {
+    flex: 0;
+}
+h3 {
+    flex: 0;
+}
+hr {
+    flex: 0;
+}
+table {
+    flex: 0;
+}
+img {
+    flex: 0;
+    margin: 2vh;
 }
