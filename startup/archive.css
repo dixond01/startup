@@ -4,7 +4,7 @@ body {
     overflow: auto;
 }
 main {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     display: block;
 }
 h1, h3, hr {
@@ -14,7 +14,7 @@ h1, h3, hr {
     margin-top: 2vh;
 }
 h1 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 hr {
     margin-left: 3vh;
@@ -40,5 +40,5 @@ hr {
     opacity: 0.65;
 }
 .lessonTitle {
-    font-size: 1.25em;
+    font-size: 1.25rem;
 }

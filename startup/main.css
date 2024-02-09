@@ -32,7 +32,7 @@
     background-color: var(--secondary-color);
     padding-top: 2vh;
     /* padding-bottom: 2vh; */
-    font-size: 1.5em;
+    font-size: 1.5rem;
     color: var(--accent-color);
   
     display: flex;
@@ -47,7 +47,7 @@
   justify-content: center;
   align-items: flex-start;
   text-align: left;
-  font-size: 1.75em;
+  font-size: 1.75rem;
 }
 
 .pageNav {
@@ -82,7 +82,7 @@
   main {
     color: var(--secondary-color);
     flex: 1;
-    font-size: 2em;
+    font-size: 2rem;
   
     display: flex;
     flex-direction: column;
@@ -91,7 +91,7 @@
   }
   
   /* div {
-    padding: 0 0.5em;
+    padding: 0 0.5rem;
   } */
   
   footer {
