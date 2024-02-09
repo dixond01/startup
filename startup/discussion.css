@@ -52,8 +52,6 @@ form {
 .btn-primary {
     background-color: var(--secondary-color);
     border: none;
-    width: 75%;
-    margin: 10px;
 }
 
 @media (max-height: 600px) {
