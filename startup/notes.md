@@ -615,7 +615,7 @@ div {
     console.log(name);
   }
   ```
-- for of iteratres over an iterable's property **values**
+- for of iterates over an iterable's property **values**
   ```
   const arr = ['a', 'b'];
   for (const val of arr) {
@@ -636,7 +636,7 @@ div {
   }
   ```
 
-### String
+### Strings
 
 - `` ` `` (backticks)
   - declare string literals
@@ -647,7 +647,29 @@ div {
       const l = 'literal';
       console.l og(`string ${l + (1 + 1)} text`);
       ```
+    - use ${some stuff} for kinda like fstrings from python
   - for multi-line strings w/o escaping the newline
+- let s = "some stuff";
+  - string literal declaration
+- s = new String("Some stuff");
+  - string object declaration
+  - only difference is really where it is stored in memory
+- can slice strings as well
+  - s.slice(3,7)
+    - 3 inclusive, 7 exclusive
+    - s is immutable, so slicing does not modify s
+- s.char(2)
+  - index into the 3rd spot
+  - cannot change the string, must create a new string to store the character
+- regex
+  - regExExp = /cat.?/i
+    - groupings: (dog)
+  - s.match(regExExp);
+  - s.replace(regExEsp, 'something');
+    - replaces all matches of regExExp with 'something'
+  - regExExp.test(s)
+    - returns true or false if the regExExp matches something in string s
+  - 
     
   #### String Functions
 
@@ -660,12 +682,21 @@ div {
   | endsWith()    | True if the string has a given suffix                        |
   | toLowerCase() | Converts all characters to lowercase                         |
 
-### Array Object Functions
+### Arrays
+
+- let numbers = []
+- numbers.push(2)
+  - numbers = [2]
+- numbers.pop()
+  - numbers = []
+  
+
+#### Array Object Functions
 
 | Function | Meaning                                                   | Example                       |
 | -------- | --------------------------------------------------------- | ----------------------------- |
-| push     | Add an item to the end of the array                       | `a.push(4)`                   |
-| pop      | Remove an item from the end of the array                  | `x = a.pop()`                 |
+| push     | Add an item to the **end** of the array                   | `a.push(4)`                   |
+| pop      | Remove an item from the **end** of the array              | `x = a.pop()`                 |
 | slice    | Return a sub-array                                        | `a.slice(1,-1)`               |
 | sort     | Run a function to sort an array in place                  | `a.sort((a,b) => b-a)`        |
 | values   | Creates an iterator for use with a `for of` loop          | `for (i of a.values()) {...}` |
@@ -676,3 +707,62 @@ div {
 | filter   | Run a function to remove items                            | `a.filter(i => i%2)`          |
 | every    | Run a function to test if all items match                 | `a.every(i => i < 3)`         |
 | some     | Run a function to test if any items match                 | `a.some(i => 1 < 1)`          |
+
+- numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+- numbers.reduce((a, c) => a + c)
+  - a is accumulation value
+  -  can specify a to combine multiple lists (return from the first one is the a for the second one) default is 0
+- numbers.forEach((n) => console.log(n % 2))
+  - prints out each value mod 2
+- numbers. filter((n) => n % 2)
+  - filters out the even numbers
+  - numbers = [1, 3, 5, 7, 9]
+- return a new array 
+
+### Exceptions
+
+```
+try {
+  (() => {
+    throw 'trouble in river city';
+  })();
+}  catch (error)
+   console.log('error: ' + error);
+} finally {
+  console.log('finally1');
+}
+```
+- when there is an exception, throws
+- since there is a catch block, that runs
+- finally always runs whether there is an exception or not
+- `() =>` is just an example lambda function
+- `()` is calling that lambda function
+
+### Special Operators
+
+- let x = null || 5
+  - null is falsy and 5 is truthy, so x = 5
+- x = x || 10
+  - x is 5, and truthy (doesn't evaluate 10 becase 5 is truthy), so x = 5
+- nullish coalescing operator `??`
+- z ?? (z = x);
+  - z is undefined, so it is nullish, so z = x = 5
+- y ??= 30
+  - if y is nullish, y = 30
+- y ?? 40
+  - y = 30, so it is not nullish, so y = 30
+ 
+### Objects
+
+```
+let obj = {
+  animal: 'fish';
+};
+```
+- obj.count = 3
+  - obj = {animal: 'fish', count: 3}
+- can also obj.anotherobj to nest them
+- object function
+  - obj.print()
+  -   this.animal()
+- 
