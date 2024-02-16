@@ -689,6 +689,17 @@ div {
   - numbers = [2]
 - numbers.pop()
   - numbers = []
+#### Destructuring
+- a = [1, 2]
+- [x] = a;
+  - takes the first value of x and puts it into x
+- [x, y, z] = a
+  - x = 1, y = 2, z = undefined
+  - can put z =100 to make a default value for z if there is not a third value in a
+- [x, y, ...z] = a
+  - if a is [1, 2, 3, 4, 5, 6, 7]
+  - then x = 1, y = 2, and z = [3, 4, 5, 6, 7]
+  - 
   
 
 #### Array Object Functions
@@ -765,4 +776,54 @@ let obj = {
 - object function
   - obj.print()
   -   this.animal()
-- 
+- x.method = () => what happens
+#### Destructuring
+- function of({ a = 3, b = {animal: 'rat'}} = {}) {
+-   console.log('a' ${a} b: ${b.animal}')
+- when function is called
+  - a and b have defaults that can be overridden by the input
+  - can be overwritten individually
+
+### Rest and Spread
+
+- spread (...<array>) puts whichever values are in the array into the container
+- rest ...<vars> accepts however many variables are provided (used as a parameter for a function)
+  - can only be the last parameter
+
+### json
+
+- a textual representation of data
+- no functions
+- JSON.stringify(obj
+- console.log('json: ', JSON.stringify(obj));
+- console.log('rehydrate: ', JSON.parse(JSON.stringify(obj))
+- (line 620)
+
+### Document Object Model (DOM)
+
+- takes html and css and builds a ??
+```
+function displayElement(el) {
+  console.log(el.tagName);
+  for (const child of el.children) {
+    displayElement(child);
+} }
+displayElement(document)
+```
+  - finds all of the elements in the document
+  - (actually only follows one line, have to fix code)
+- `const el = document.querySelectorAll('tag')`
+- el.innterHTML = '<div class="injected"><b>Hello</b>!</div>'
+  - not good for text others input because if they put javascript in there, it will execute
+
+### Event Handlers
+
+- `<button onclick='alerkt("clicked")'>Click me</button>`
+- get from gitHub
+
+### Local Storage
+
+- store in local storage at first
+  - then upload to database
+- localStorage.setItem('user', user)
+- find in inspect under application
