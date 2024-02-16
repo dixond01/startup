@@ -802,6 +802,9 @@ let obj = {
 ### Document Object Model (DOM)
 
 - takes html and css and builds a ??
+- an object representation of the html elements that the browser uses to render the display
+- global variable `document` accesses the DOM
+  - points to the root element of the DOM
 ```
 function displayElement(el) {
   console.log(el.tagName);
@@ -811,10 +814,35 @@ function displayElement(el) {
 displayElement(document)
 ```
   - finds all of the elements in the document
-  - (actually only follows one line, have to fix code)
 - `const el = document.querySelectorAll('tag')`
-- el.innterHTML = '<div class="injected"><b>Hello</b>!</div>'
+- el.innterHTML returns '<div class="injected"><b>Hello</b>!</div>'
   - not good for text others input because if they put javascript in there, it will execute
+  - returns a textual representation of the inner HTML
+- el.textContent returns all of an element's text
+  - including child elements
+- append new child element
+  ```
+  function insertChild(parentSelector, text) {
+    const newChild = document.createElement('div');
+    newChild.textContent = text;
+  
+    const parentElement = document.querySelector(parentSelector);
+    parentElement.appendChild(newChild);
+  }
+
+  insertChild('#courses', 'new course');
+  ```
+- remove child
+  ```
+  function deleteElement(elementSelector) {
+    const el = document.querySelector(elementSelector);
+    el.parentElement.removeChild(el);
+  }
+
+  deleteElement('#courses div');
+  ```
+  - use for delete message?
+
 
 ### Event Handlers
 
@@ -827,3 +855,23 @@ displayElement(document)
   - then upload to database
 - localStorage.setItem('user', user)
 - find in inspect under application
+
+### Modules
+
+- must both export from one file and import from another
+```
+export function f() {
+  does stuff;
+}
+```
+```
+import { f } from './f_file';
+
+f();
+```
+- Javascript modules: ES Modules
+- node.js modules: CommonJS Modules
+  - created first
+- can do `window.btnclick = f;` and call with `<button onclick=btnclick(function arguments)>Press Me</button>`
+  - creates a method for the elements
+
