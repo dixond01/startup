@@ -875,3 +875,51 @@ f();
 - can do `window.btnclick = f;` and call with `<button onclick=btnclick(function arguments)>Press Me</button>`
   - creates a method for the elements
 
+### Promises
+
+- JavaScript is single-threaded
+  - only one line of code running at once
+  - everything must be asynchronous
+- browser rendering is single-threaded (call stack)
+- browser itself has a second thread (Web API) that monitors promises(?)
+  - handles "blocking IO," things that are waiting for other things to happen
+  - external network calls go here until the call returns
+```
+setTimeout(()=> {
+  functionToCall();
+}, ms);
+```
+- 3 stages
+  - pending - currently running asynchronously
+  - fulfilled - completed successfully
+  - rejected - failed to complete
+- a promise is its own object
+`new Promise((resolve, reject) => resolve(true))`
+```
+p.then(
+  (resolve_result) => console.log(resolve_result),
+  (reject_result) => console.log(reject_result));
+```
+  - the order matters for resolve_result and reject_result (not the names)
+  - if the Promise resolves, it will run the first one
+  - if the Promise rejects, it will run the second one
+- prevents browser from locking up
+
+#### Async/Await
+
+- simplified syntax for promises
+```
+try {
+  const result = await funcName;
+  console.log('do stuff ${result}');
+} catch (err) {
+  console.error('Error ${err}');
+} finally {
+  console.log("Done");
+}
+```
+- will block until resolves or rejects
+- wrapped with a promise
+- need `await`
+- to call something with await, must declare the function as `async`
+- entire call stack must be await
