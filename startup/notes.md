@@ -923,3 +923,12 @@ try {
 - need `await`
 - to call something with await, must declare the function as `async`
 - entire call stack must be await
+
+### Debugging
+
+- console.log debugging
+  - checking outputs
+  - kinda weak
+- source debugging
+  - using the debugger
+  - set breakpoints
