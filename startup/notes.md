@@ -615,7 +615,7 @@ div {
     console.log(name);
   }
   ```
-- for of iteratres over an iterable's property **values**
+- for of iterates over an iterable's property **values**
   ```
   const arr = ['a', 'b'];
   for (const val of arr) {
@@ -636,7 +636,7 @@ div {
   }
   ```
 
-### String
+### Strings
 
 - `` ` `` (backticks)
   - declare string literals
@@ -647,7 +647,29 @@ div {
       const l = 'literal';
       console.l og(`string ${l + (1 + 1)} text`);
       ```
+    - use ${some stuff} for kinda like fstrings from python
   - for multi-line strings w/o escaping the newline
+- let s = "some stuff";
+  - string literal declaration
+- s = new String("Some stuff");
+  - string object declaration
+  - only difference is really where it is stored in memory
+- can slice strings as well
+  - s.slice(3,7)
+    - 3 inclusive, 7 exclusive
+    - s is immutable, so slicing does not modify s
+- s.char(2)
+  - index into the 3rd spot
+  - cannot change the string, must create a new string to store the character
+- regex
+  - regExExp = /cat.?/i
+    - groupings: (dog)
+  - s.match(regExExp);
+  - s.replace(regExEsp, 'something');
+    - replaces all matches of regExExp with 'something'
+  - regExExp.test(s)
+    - returns true or false if the regExExp matches something in string s
+  - 
     
   #### String Functions
 
@@ -660,12 +682,32 @@ div {
   | endsWith()    | True if the string has a given suffix                        |
   | toLowerCase() | Converts all characters to lowercase                         |
 
-### Array Object Functions
+### Arrays
+
+- let numbers = []
+- numbers.push(2)
+  - numbers = [2]
+- numbers.pop()
+  - numbers = []
+#### Destructuring
+- a = [1, 2]
+- [x] = a;
+  - takes the first value of x and puts it into x
+- [x, y, z] = a
+  - x = 1, y = 2, z = undefined
+  - can put z =100 to make a default value for z if there is not a third value in a
+- [x, y, ...z] = a
+  - if a is [1, 2, 3, 4, 5, 6, 7]
+  - then x = 1, y = 2, and z = [3, 4, 5, 6, 7]
+  - 
+  
+
+#### Array Object Functions
 
 | Function | Meaning                                                   | Example                       |
 | -------- | --------------------------------------------------------- | ----------------------------- |
-| push     | Add an item to the end of the array                       | `a.push(4)`                   |
-| pop      | Remove an item from the end of the array                  | `x = a.pop()`                 |
+| push     | Add an item to the **end** of the array                   | `a.push(4)`                   |
+| pop      | Remove an item from the **end** of the array              | `x = a.pop()`                 |
 | slice    | Return a sub-array                                        | `a.slice(1,-1)`               |
 | sort     | Run a function to sort an array in place                  | `a.sort((a,b) => b-a)`        |
 | values   | Creates an iterator for use with a `for of` loop          | `for (i of a.values()) {...}` |
@@ -676,3 +718,217 @@ div {
 | filter   | Run a function to remove items                            | `a.filter(i => i%2)`          |
 | every    | Run a function to test if all items match                 | `a.every(i => i < 3)`         |
 | some     | Run a function to test if any items match                 | `a.some(i => 1 < 1)`          |
+
+- numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+- numbers.reduce((a, c) => a + c)
+  - a is accumulation value
+  -  can specify a to combine multiple lists (return from the first one is the a for the second one) default is 0
+- numbers.forEach((n) => console.log(n % 2))
+  - prints out each value mod 2
+- numbers. filter((n) => n % 2)
+  - filters out the even numbers
+  - numbers = [1, 3, 5, 7, 9]
+- return a new array 
+
+### Exceptions
+
+```
+try {
+  (() => {
+    throw 'trouble in river city';
+  })();
+}  catch (error)
+   console.log('error: ' + error);
+} finally {
+  console.log('finally1');
+}
+```
+- when there is an exception, throws
+- since there is a catch block, that runs
+- finally always runs whether there is an exception or not
+- `() =>` is just an example lambda function
+- `()` is calling that lambda function
+
+### Special Operators
+
+- let x = null || 5
+  - null is falsy and 5 is truthy, so x = 5
+- x = x || 10
+  - x is 5, and truthy (doesn't evaluate 10 becase 5 is truthy), so x = 5
+- nullish coalescing operator `??`
+- z ?? (z = x);
+  - z is undefined, so it is nullish, so z = x = 5
+- y ??= 30
+  - if y is nullish, y = 30
+- y ?? 40
+  - y = 30, so it is not nullish, so y = 30
+ 
+### Objects
+
+```
+let obj = {
+  animal: 'fish';
+};
+```
+- obj.count = 3
+  - obj = {animal: 'fish', count: 3}
+- can also obj.anotherobj to nest them
+- object function
+  - obj.print()
+  -   this.animal()
+- x.method = () => what happens
+#### Destructuring
+- function of({ a = 3, b = {animal: 'rat'}} = {}) {
+-   console.log('a' ${a} b: ${b.animal}')
+- when function is called
+  - a and b have defaults that can be overridden by the input
+  - can be overwritten individually
+
+### Rest and Spread
+
+- spread (...<array>) puts whichever values are in the array into the container
+- rest ...<vars> accepts however many variables are provided (used as a parameter for a function)
+  - can only be the last parameter
+
+### json
+
+- a textual representation of data
+- no functions
+- JSON.stringify(obj
+- console.log('json: ', JSON.stringify(obj));
+- console.log('rehydrate: ', JSON.parse(JSON.stringify(obj))
+- (line 620)
+
+### Document Object Model (DOM)
+
+- takes html and css and builds a ??
+- an object representation of the html elements that the browser uses to render the display
+- global variable `document` accesses the DOM
+  - points to the root element of the DOM
+```
+function displayElement(el) {
+  console.log(el.tagName);
+  for (const child of el.children) {
+    displayElement(child);
+} }
+displayElement(document)
+```
+  - finds all of the elements in the document
+- `const el = document.querySelectorAll('tag')`
+- el.innterHTML returns '<div class="injected"><b>Hello</b>!</div>'
+  - not good for text others input because if they put javascript in there, it will execute
+  - returns a textual representation of the inner HTML
+- el.textContent returns all of an element's text
+  - including child elements
+- append new child element
+  ```
+  function insertChild(parentSelector, text) {
+    const newChild = document.createElement('div');
+    newChild.textContent = text;
+  
+    const parentElement = document.querySelector(parentSelector);
+    parentElement.appendChild(newChild);
+  }
+
+  insertChild('#courses', 'new course');
+  ```
+- remove child
+  ```
+  function deleteElement(elementSelector) {
+    const el = document.querySelector(elementSelector);
+    el.parentElement.removeChild(el);
+  }
+
+  deleteElement('#courses div');
+  ```
+  - use for delete message?
+
+
+### Event Handlers
+
+- `<button onclick='alerkt("clicked")'>Click me</button>`
+- get from gitHub
+
+### Local Storage
+
+- store in local storage at first
+  - then upload to database
+- localStorage.setItem('user', user)
+- find in inspect under application
+
+### Modules
+
+- must both export from one file and import from another
+```
+export function f() {
+  does stuff;
+}
+```
+```
+import { f } from './f_file';
+
+f();
+```
+- Javascript modules: ES Modules
+- node.js modules: CommonJS Modules
+  - created first
+- can do `window.btnclick = f;` and call with `<button onclick=btnclick(function arguments)>Press Me</button>`
+  - creates a method for the elements
+
+### Promises
+
+- JavaScript is single-threaded
+  - only one line of code running at once
+  - everything must be asynchronous
+- browser rendering is single-threaded (call stack)
+- browser itself has a second thread (Web API) that monitors promises(?)
+  - handles "blocking IO," things that are waiting for other things to happen
+  - external network calls go here until the call returns
+```
+setTimeout(()=> {
+  functionToCall();
+}, ms);
+```
+- 3 stages
+  - pending - currently running asynchronously
+  - fulfilled - completed successfully
+  - rejected - failed to complete
+- a promise is its own object
+`new Promise((resolve, reject) => resolve(true))`
+```
+p.then(
+  (resolve_result) => console.log(resolve_result),
+  (reject_result) => console.log(reject_result));
+```
+  - the order matters for resolve_result and reject_result (not the names)
+  - if the Promise resolves, it will run the first one
+  - if the Promise rejects, it will run the second one
+- prevents browser from locking up
+
+#### Async/Await
+
+- simplified syntax for promises
+```
+try {
+  const result = await funcName;
+  console.log('do stuff ${result}');
+} catch (err) {
+  console.error('Error ${err}');
+} finally {
+  console.log("Done");
+}
+```
+- will block until resolves or rejects
+- wrapped with a promise
+- need `await`
+- to call something with await, must declare the function as `async`
+- entire call stack must be await
+
+### Debugging
+
+- console.log debugging
+  - checking outputs
+  - kinda weak
+- source debugging
+  - using the debugger
+  - set breakpoints
