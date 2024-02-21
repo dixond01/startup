@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="index.css" />
+    <script defer src="login.js"></script>
 
     <title>InspireUs Login</title>
     </head>
@@ -21,14 +22,14 @@
         </header>
         <main>
             <h2 class="pageTitle">Login</h2>
-            <form method="get" action="discussion.html">
+            <form method="get">
                 <label for="name">Name:</label>
                 <input type="text" id="name" placeholder="Your name here" />
                 <label for="password">Password:</label>
                 <input type="text" id="passwordInput" placeholder="Your password here" />
-                <label for="study group">Study Group:</label>
-                <input type="text" id="study group" placeholder="Study group name here" />
-                <button class="btn btn-primary rounded-pill px-3" type="submit">Login</button>
+                <label for="studyGroup">Study Group:</label>
+                <input type="text" id="studyGroup" placeholder="Study group name here" />
+                <button class="btn btn-primary rounded-pill px-3" onclick="login()">Login</button>
               </form>
               <div id="createstudy"><h2 id="or">Or</h2>
               <button class="btn btn-primary rounded-pill px-3" id="studybtn" onclick="window.location.href='createstudygroup.html';">Create Study Group</button>
