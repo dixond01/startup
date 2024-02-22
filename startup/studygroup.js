@@ -1,3 +1,8 @@
 function setStudyGroupName() {
-    localStorage.getItem('studyName')
-}
+    studyNameVar = localStorage.getItem('studyName');
+    const studyClassEl = document.querySelector('.studyGroup');
+    studyClassEl.textContent = studyNameVar;
+
+};
+
+setStudyGroupName();
