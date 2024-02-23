@@ -365,6 +365,7 @@ src: url('<url>');
 p{
 font-family: <name>;
 font-size: 20vh
+}
 ```
 ```
 @import
@@ -877,6 +878,16 @@ displayElement(document)
 
 ### Local Storage
 
+
+| Function             | Meaning                                      |
+| -------------------- | -------------------------------------------- |
+| setItem(name, value) | Sets a named item's value into local storage |
+| getItem(name)        | Gets a named item's value from local storage |
+| removeItem(name)     | Removes a named item from local storage      |
+| clear()              | Clears all items in local storage            |
+
+- must be `string`, `number`, or `boolean`
+- to pass in array or object, first convert to JSON string with `JSON.stringify()` on insertion and parse it back to javascript with `JSON.parse()` on retrieval
 - store in local storage at first
   - then upload to database
 - localStorage.setItem('user', user)
