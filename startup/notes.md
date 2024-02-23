@@ -939,10 +939,10 @@ try {
 - `i` after means case does not matter
 - `n` skips newlines?
 
-## DNS
+## DNS Records
 
+- A - Map domain names to IP addresses
 - SOA - start of authority
-  - link to another person
+  - records about the domain name owner
 - CNAME
   - aliases for DNS
-LOOK AT INSTRUCTION
