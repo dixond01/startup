@@ -932,3 +932,17 @@ try {
 - source debugging
   - using the debugger
   - set breakpoints
+ 
+### Regex
+
+- delimited by `/<stuff>/`
+- `i` after means case does not matter
+- `n` skips newlines?
+
+## DNS
+
+- SOA - start of authority
+  - link to another person
+- CNAME
+  - aliases for DNS
+LOOK AT INSTRUCTION
