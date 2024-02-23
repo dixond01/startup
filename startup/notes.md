@@ -801,10 +801,28 @@ let obj = {
 ### json
 
 - a textual representation of data
-- no functions
-- JSON.stringify(obj
-- console.log('json: ', JSON.stringify(obj));
-- console.log('rehydrate: ', JSON.parse(JSON.stringify(obj))
+  - not functions
+- stringify
+  - `const json = JSON.stringify(obj)`
+  - convert javascript to JSON
+- parse
+  - convert JSON to javascript
+  - `const objFromJson = JSON.parse(json);`
+- `console.log('json: ', JSON.stringify(obj));`
+- `console.log('rehydrate: ', JSON.parse(JSON.stringify(obj))`
+- keys are **strings**
+- values are JSON data types
+  - cannot represent undefined objects
+  
+  | Type    | Example                 |
+  | ------- | ----------------------- |
+  | string  | "crockford"             |
+  | number  | 42                      |
+  | boolean | true                    |
+  | array   | [null,42,"crockford"]   |
+  | object  | {"a":1,"b":"crockford"} |
+  | null    | null                    |
+  
 - (line 620)
 
 ### Document Object Model (DOM)
