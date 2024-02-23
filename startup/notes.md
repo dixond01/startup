@@ -661,7 +661,7 @@ div {
 - s.char(2)
   - index into the 3rd spot
   - cannot change the string, must create a new string to store the character
-- regex
+#### regex
   - regExExp = /cat.?/i
     - groupings: (dog)
   - s.match(regExExp);
@@ -669,7 +669,15 @@ div {
     - replaces all matches of regExExp with 'something'
   - regExExp.test(s)
     - returns true or false if the regExExp matches something in string s
-  - 
+  - delimited by `/<stuff>/`
+  - flags
+    - `i` case insensitive search
+    - `n` Specifies that the only captures are explicitly named groups of the form (?<name>…). This allows unnamed (…) parentheses to act as noncapturing groups without the syntactic clumsiness of the expression (?:…)
+    - `m` allows `^` and `$` to match next to newline characters
+    - `s` allows `.` to match newline characters
+    - `d` generates indices for substring matches
+    - `g` global search
+
     
   #### String Functions
 
@@ -932,12 +940,6 @@ try {
 - source debugging
   - using the debugger
   - set breakpoints
- 
-### Regex
-
-- delimited by `/<stuff>/`
-- `i` after means case does not matter
-- `n` skips newlines?
 
 ## DNS Records
 
