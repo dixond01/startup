@@ -27,7 +27,7 @@ main {
 #studysubmitbtn {
 width: 30%; 
 }
-#form {
+.form {
     max-width: 100%;
     display: flex;
     flex-direction: column;

@@ -17,13 +17,10 @@ function login() {
     }
     else {
       window.usersList = [{name: nameEl.value, status: "online"}];
-      console.log(usersList);
     }
 //implement an array of objects with the keys 'name' and 'status' where 'status' is 'online' or 'offline'
     //updates usersList in localStorage (not sure if stringify in right place)
     localStorage.setItem('usersList', JSON.stringify(usersList));
-    console.log('JSON: ', JSON.parse(localStorage.getItem('usersList')));
-    console.log('end of debug');
 
     window.location.href = 'discussion.html';
     //moving windows may not work. works in debugger but not otherwise
