@@ -5,7 +5,7 @@ function login() {
     localStorage.setItem('studyName', studyNameEl.value);
 
     if (localStorage.getItem('usersList')) {
-      let usersList = JSON.parse(localStorage.getItem('usersList'));
+      window.usersList = JSON.parse(localStorage.getItem('usersList'));
       for (user in usersList) {
         if (user['name'] === nameEl.value) {
           user['status'] = "online";
