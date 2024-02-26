@@ -365,6 +365,7 @@ src: url('<url>');
 p{
 font-family: <name>;
 font-size: 20vh
+}
 ```
 ```
 @import
@@ -661,7 +662,7 @@ div {
 - s.char(2)
   - index into the 3rd spot
   - cannot change the string, must create a new string to store the character
-- regex
+#### regex
   - regExExp = /cat.?/i
     - groupings: (dog)
   - s.match(regExExp);
@@ -669,7 +670,15 @@ div {
     - replaces all matches of regExExp with 'something'
   - regExExp.test(s)
     - returns true or false if the regExExp matches something in string s
-  - 
+  - delimited by `/<stuff>/`
+  - flags
+    - `i` case insensitive search
+    - `n` Specifies that the only captures are explicitly named groups of the form (?<name>…). This allows unnamed (…) parentheses to act as noncapturing groups without the syntactic clumsiness of the expression (?:…)
+    - `m` allows `^` and `$` to match next to newline characters
+    - `s` allows `.` to match newline characters
+    - `d` generates indices for substring matches
+    - `g` global search
+
     
   #### String Functions
 
@@ -793,10 +802,28 @@ let obj = {
 ### json
 
 - a textual representation of data
-- no functions
-- JSON.stringify(obj
-- console.log('json: ', JSON.stringify(obj));
-- console.log('rehydrate: ', JSON.parse(JSON.stringify(obj))
+  - not functions
+- stringify
+  - `const json = JSON.stringify(obj)`
+  - convert javascript to JSON
+- parse
+  - convert JSON to javascript
+  - `const objFromJson = JSON.parse(json);`
+- `console.log('json: ', JSON.stringify(obj));`
+- `console.log('rehydrate: ', JSON.parse(JSON.stringify(obj))`
+- keys are **strings**
+- values are JSON data types
+  - cannot represent undefined objects
+  
+  | Type    | Example                 |
+  | ------- | ----------------------- |
+  | string  | "crockford"             |
+  | number  | 42                      |
+  | boolean | true                    |
+  | array   | [null,42,"crockford"]   |
+  | object  | {"a":1,"b":"crockford"} |
+  | null    | null                    |
+  
 - (line 620)
 
 ### Document Object Model (DOM)
@@ -851,6 +878,16 @@ displayElement(document)
 
 ### Local Storage
 
+
+| Function             | Meaning                                      |
+| -------------------- | -------------------------------------------- |
+| setItem(name, value) | Sets a named item's value into local storage |
+| getItem(name)        | Gets a named item's value from local storage |
+| removeItem(name)     | Removes a named item from local storage      |
+| clear()              | Clears all items in local storage            |
+
+- must be `string`, `number`, or `boolean`
+- to pass in array or object, first convert to JSON string with `JSON.stringify()` on insertion and parse it back to javascript with `JSON.parse()` on retrieval
 - store in local storage at first
   - then upload to database
 - localStorage.setItem('user', user)
@@ -932,3 +969,81 @@ try {
 - source debugging
   - using the debugger
   - set breakpoints
+ 
+## Web Services
+
+- need IP addresses to find web servers
+- so we buy domain names to connect IP addresses to memorable names
+- computers connect to DNS before that tranlates to an IP address that we can connect to
+- Layers (bottom to top)
+  - Link
+    - fiber, hardware
+    - physical connections
+  - Internet
+    - ex. IP
+    - establishing connections
+  - Transport
+    - Ex. TCP/UDP
+      - TCP - send this, expect a sequence of packets
+        - allows confirmation for reception
+      - UDP - not sequential, just sends a bunch of packets
+        - more efficient
+    - moving connection informaiton packets
+  - Application
+    - Ex. HTTPS, HTTP, SSH, FTP, SMTP (emails)
+    - funcitonality like web browsing
+- Web Server: a computing device that connects to other web servers
+  - usses HTTP as its protocol to talk to other computers with HTTP
+  - can call other web servers to get the data it needs (proxy)
+- Services
+  - Web services - take HTTP requests and...
+  - on our servers: have 3 services: startup, simon, and welcome to web programming
+- Ports
+  - ports connect to services via protocols
+  - HTTPS port is 443
+  - HTTP port is 80
+  - don't want to expose ports publicly
+    - expose one port (443) and point to a gateway service
+    - gateway service points to other services possibly through urls?
+    
+### Domains
+
+- Top level domains
+  - originals: com, org, edu, gov, mil, int, net
+  - country: uk, cn, tv (Tuvalu), ...
+  - generic: click, gold, ceo, fishing, ...
+- localhost (127.0.0.1)
+  - special domain name, automatically connects to that IP
+  - connects back to itself
+
+### DNS Records
+
+- A/AAAA - Addresss. Specific IP addresses. IPV4 and IPV6. Map domain names to IP addresses
+- SOA - start of authority. Propagotion information
+  - records about the domain name owner
+- CNAME
+  - canonical nae
+  - alias (5 domain names go to one website)
+- NS
+  - name server. Authority for queries and proof of ownership
+- TEXT
+  - metadata. Used for policies and verification
+  - google analytics
+
+### Leasing a domain name
+
+- 1-10 yeaers, renew required. $3 to $100,000+
+- IANA - internet assigned numbers authority, define domain names
+  - registrar - orders for renting domain
+    - registry - authoritative DNS records, licensed by registrar to lease domain names, give a portion of the lease money to the registrar
+      - registrant - Lessee (you)
+
+### Fetch
+
+- returns a promise
+```
+fetch(url)
+  .then(r => r.text())
+  .then(text => console.log(text))
+```
+- uses fetch command to access the css?
