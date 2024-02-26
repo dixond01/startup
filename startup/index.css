@@ -1,7 +1,7 @@
 main {
     color: var(--secondary-color);
     flex: 1;
-    font-size: 2rem;
+    font-size: 1.5rem;
   
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@ input {
 }
 h2 {
     font-size: 3rem;
-    margin-bottom: 3vh;
+    /* margin-bottom: 3vh; */
 }
 #createstudy {
     display: flex;
@@ -62,3 +62,8 @@ h2 {
     margin-bottom: 0;
 }
 
+#studyLoginTitle {
+    font-size: 2.5rem;
+    margin-bottom: 5vh;
+    flex: 1;
+}
