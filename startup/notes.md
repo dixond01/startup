@@ -969,11 +969,81 @@ try {
 - source debugging
   - using the debugger
   - set breakpoints
+ 
+## Web Services
 
-## DNS Records
+- need IP addresses to find web servers
+- so we buy domain names to connect IP addresses to memorable names
+- computers connect to DNS before that tranlates to an IP address that we can connect to
+- Layers (bottom to top)
+  - Link
+    - fiber, hardware
+    - physical connections
+  - Internet
+    - ex. IP
+    - establishing connections
+  - Transport
+    - Ex. TCP/UDP
+      - TCP - send this, expect a sequence of packets
+        - allows confirmation for reception
+      - UDP - not sequential, just sends a bunch of packets
+        - more efficient
+    - moving connection informaiton packets
+  - Application
+    - Ex. HTTPS, HTTP, SSH, FTP, SMTP (emails)
+    - funcitonality like web browsing
+- Web Server: a computing device that connects to other web servers
+  - usses HTTP as its protocol to talk to other computers with HTTP
+  - can call other web servers to get the data it needs (proxy)
+- Services
+  - Web services - take HTTP requests and...
+  - on our servers: have 3 services: startup, simon, and welcome to web programming
+- Ports
+  - ports connect to services via protocols
+  - HTTPS port is 443
+  - HTTP port is 80
+  - don't want to expose ports publicly
+    - expose one port (443) and point to a gateway service
+    - gateway service points to other services possibly through urls?
+    
+### Domains
 
-- A - Map domain names to IP addresses
-- SOA - start of authority
+- Top level domains
+  - originals: com, org, edu, gov, mil, int, net
+  - country: uk, cn, tv (Tuvalu), ...
+  - generic: click, gold, ceo, fishing, ...
+- localhost (127.0.0.1)
+  - special domain name, automatically connects to that IP
+  - connects back to itself
+
+### DNS Records
+
+- A/AAAA - Addresss. Specific IP addresses. IPV4 and IPV6. Map domain names to IP addresses
+- SOA - start of authority. Propagotion information
   - records about the domain name owner
 - CNAME
-  - aliases for DNS
+  - canonical nae
+  - alias (5 domain names go to one website)
+- NS
+  - name server. Authority for queries and proof of ownership
+- TEXT
+  - metadata. Used for policies and verification
+  - google analytics
+
+### Leasing a domain name
+
+- 1-10 yeaers, renew required. $3 to $100,000+
+- IANA - internet assigned numbers authority, define domain names
+  - registrar - orders for renting domain
+    - registry - authoritative DNS records, licensed by registrar to lease domain names, give a portion of the lease money to the registrar
+      - registrant - Lessee (you)
+
+### Fetch
+
+- returns a promise
+```
+fetch(url)
+  .then(r => r.text())
+  .then(text => console.log(text))
+```
+- uses fetch command to access the css?
