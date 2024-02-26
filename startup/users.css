@@ -54,9 +54,9 @@ img {
     flex: 1;
 }
 
-.logged-in {
+.online {
     color: green;
 }
-.logged-out {
+.offline {
     color: red;
 }

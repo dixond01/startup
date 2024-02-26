@@ -3,7 +3,6 @@ function setStudyGroupName() {
     const studyClassEls = document.getElementsByClassName('studyGroup');
     for (el of studyClassEls) {
         el.textContent = studyNameVar;
-        console.log(el.textConent)
     }
 };
 
