@@ -49,7 +49,17 @@ function pushMessage() {
 
 }
 
+function setDiscussion() {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+
+    const discussionName = document.getElementById('discussionName');
+    discussionName.appendChild(document.createTextNode(`${currentMonth} ${currentDay}`));
+}
+
 displayMessages();
+setDiscussion();
 
 //need to create and display the array 
 //need to add daily chat refresh with heading change
