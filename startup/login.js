@@ -6,14 +6,7 @@ function login() {
 
     if (localStorage.getItem('usersList')) {
       window.usersList = JSON.parse(localStorage.getItem('usersList'));
-      // for (user in usersList) {
-      //   if (user['name'] === nameEl.value) {
-      //     user['status'] = "online";
-      //   }
-      //   else {
-      //     usersList.push({name: nameEl.value, status: "online"});
-      //   }
-      // }
+      //current implementation will not create two instances of the same name. Fix during authentication?
       if (usersList.find(x => x.name === nameEl.value)) {
         usersList.find(x => x.name === nameEl.value).status = "online";
       }
