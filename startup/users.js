@@ -6,7 +6,6 @@ function usersDisplay() {
 
 function updateTable() {
     let tableElement = document.querySelector('#users');
-    //may need of?
     for (user of usersList) {
         const rowElement = document.createElement("tr");
         tableElement.appendChild(rowElement);
