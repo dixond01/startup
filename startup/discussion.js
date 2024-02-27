@@ -6,14 +6,22 @@ function displayMessage(chat) {
     const chatEl = document.createElement('div');
     discussionFeed.appendChild(chatEl);
 
+    //add RegEx for finding the verses
+    scripturePattern = /(\d*)\s*([a-z]+)\s*(\d+)(?::(\d+))?(\s*-\s*(\d+)(?:\s*([a-z]+)\s*(\d+))?(?::(\d+))?)?/i;
+
     const nameEl = document.createElement('span');
     nameEl.classList.add('userName');
-    const nameContent = document.createTextNode(`${chat['name']}: `);
-    nameEl.appendChild(nameContent);
+    nameEl.textContent = `${chat['name']}: `
+    // const nameContent = document.createTextNode(`${chat['name']}: `);
+    // nameEl.appendChild(nameContent);
     chatEl.appendChild(nameEl);
 
-    const chatContent = document.createTextNode(`${chat['message']}`);
-    chatEl.appendChild(chatContent);
+    //add onclick
+    const noHTML = chat['message'].replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, "");
+    const message = noHTML.replace(scripturePattern, "<span class='scriptureReference'>$&<span>");
+    // const chatContent = document.createTextNode(`${chat['message']}`);
+    // chatEl.appendChild(chatContent);
+    chatEl.innerHTML = chatEl.innerHTML + message;
 }
 
 function displayMessages() {
