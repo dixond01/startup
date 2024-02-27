@@ -6,14 +6,21 @@ function login() {
 
     if (localStorage.getItem('usersList')) {
       window.usersList = JSON.parse(localStorage.getItem('usersList'));
-      for (user in usersList) {
-        if (user['name'] === nameEl.value) {
-          user['status'] = "online";
-        }
-        else {
-          usersList.push({name: nameEl.value, status: "online"});
-        }
+      // for (user in usersList) {
+      //   if (user['name'] === nameEl.value) {
+      //     user['status'] = "online";
+      //   }
+      //   else {
+      //     usersList.push({name: nameEl.value, status: "online"});
+      //   }
+      // }
+      if (usersList.find(x => x.name === nameEl.value)) {
+        usersList.find(x => x.name === nameEl.value).status = "online";
       }
+      else {
+        usersList.push({name: nameEl.value, status: "online"});
+      }
+
     }
     else {
       window.usersList = [{name: nameEl.value, status: "online"}];
