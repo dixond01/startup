@@ -43,5 +43,7 @@ function pushMessage() {
 
 }
 
+displayMessages();
+
 //need to create and display the array 
 //need to add daily chat refresh with heading change
