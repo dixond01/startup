@@ -114,6 +114,7 @@ function showSidebar(element) {
     const referenceEl = document.getElementById('reference');
     referenceEl.textContent = referenceText;
 
+    //match and group scriptureReference
     if (element.textContent.match(scripturePattern)) {
         const match = element.textContent.match(scripturePattern);
         if (match[1]) {
@@ -134,6 +135,25 @@ function showSidebar(element) {
                 console.log("nextVerse: ", i);
                 window.verses.push(`${i}`);
             }
+        }
+
+        //updating the #scriptures div
+        const scripturesEl = document.getElementById("scriptures");
+        for (verse of verses) {
+            const verseEl = document.createElement('div');
+            verseEl.classList.add("scripture");
+            scripturesEl.appendChild(verseEl);
+            
+            
+            const numberEl = document.createElement('span');
+            numberEl.classList.add("verseNumber");
+            numberEl.innerText = verse + " ";
+            verseEl.appendChild(numberEl);
+
+            const textEl = document.createElement('span');
+            //may want to add a class
+            textEl.innerText = "This is placeholder text for the verse text from a database."
+            verseEl.appendChild(textEl);
         }
     }
 
