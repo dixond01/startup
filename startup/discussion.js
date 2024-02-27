@@ -13,32 +13,9 @@ function displayMessage(chat) {
 
     const noHTML = chat['message'].replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, "");
     //add RegEx for finding the verses
-    //scripturePattern = /(\d*)\s*([a-z]+)\s*(\d+)(?::(\d+))?(\s*-\s*(\d+)(?:\s*([a-z]+)\s*(\d+))?(?::(\d+))?)?/i;
     scripturePattern = /(?:(\d [a-z]+)|([a-z]+))\ (\d+):(\d+)(?:\ ?-\ ?(\d+))?/i;
     //save books, chapters, and verses to variables for use in a database later (global variables)
-    if (noHTML.match(scripturePattern)) {
-        const match = noHTML.match(scripturePattern);
-        if (match[1]) {
-            console.log("book: ", match[1]);
-            window.book = match[1];
-        }
-        else {
-            console.log("book: ", match[2]);
-            window.book = match[2];
-        }
-        console.log("chapter: ", match[3]);
-        window.chapter = match[3];
-        console.log("first verse: ", match[4]);
-        window.verses = [match[4]]; //may not overwrite previous verses
-        if (match[5]) {
-            console.log("last verse: ", match[5]);
-            for (let i = parseInt(match[4])+1; i<=parseInt(match[5]);i++) {
-                console.log("nextVerse: ", i);
-                window.verses.push(`${i}`);
-            }
-            
-        }
-    }
+    
     
     const message = noHTML.replace(scripturePattern, "<span class='scriptureReference' onclick='showSidebar(this)'>$&</span>");
     chatEl.innerHTML = chatEl.innerHTML + message;
@@ -136,6 +113,29 @@ function showSidebar(element) {
     const referenceText = element.textContent;
     const referenceEl = document.getElementById('reference');
     referenceEl.textContent = referenceText;
+
+    if (element.textContent.match(scripturePattern)) {
+        const match = element.textContent.match(scripturePattern);
+        if (match[1]) {
+            console.log("book: ", match[1]);
+            window.book = match[1];
+        }
+        else {
+            console.log("book: ", match[2]);
+            window.book = match[2];
+        }
+        console.log("chapter: ", match[3]);
+        window.chapter = match[3];
+        console.log("first verse: ", match[4]);
+        window.verses = [match[4]]; //may not overwrite previous verses
+        if (match[5]) {
+            console.log("last verse: ", match[5]);
+            for (let i = parseInt(match[4])+1; i<=parseInt(match[5]);i++) {
+                console.log("nextVerse: ", i);
+                window.verses.push(`${i}`);
+            }
+        }
+    }
 
     sidebarEl.classList.add('show');
 }
