@@ -16,7 +16,7 @@ function displayMessage(chat) {
 
     //add onclick
     const noHTML = chat['message'].replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, "");
-    const message = noHTML.replace(scripturePattern, "<span class='scriptureReference'>$&<span>");
+    const message = noHTML.replace(scripturePattern, "<span class='scriptureReference' onclick='showSidebar()'>$&<span>");
     chatEl.innerHTML = chatEl.innerHTML + message;
 }
 
@@ -108,6 +108,10 @@ function setDiscussion() {
     localStorage.setItem('date', JSON.stringify({month: currentMonth, day: currentDay}));
 }
 
+function showSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.add('show');
+}
 
 //might break something
 if (localStorage.getItem('messageList')) {
