@@ -40,7 +40,8 @@ main {
 }
 #discussionFeed {
     max-height: 80%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     flex: 1;
