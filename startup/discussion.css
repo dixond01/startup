@@ -99,7 +99,7 @@ input {
     right: 0; /*for using js: add show class to the sidebar*/
 }
 
-.sideHead {
+#sideHead {
     flex: 0;
     display: flex;
     flex-direction: row;

@@ -16,8 +16,9 @@ function displayMessage(chat) {
 
     //add onclick
     const noHTML = chat['message'].replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, "");
-    const message = noHTML.replace(scripturePattern, "<span class='scriptureReference' onclick='showSidebar()'>$&<span>");
+    const message = noHTML.replace(scripturePattern, "<span class='scriptureReference' onclick='showSidebar()'>$&</span>");
     chatEl.innerHTML = chatEl.innerHTML + message;
+    console.log(chatEl.innerHTML);
 }
 
 function displayMessages() {
@@ -49,12 +50,12 @@ function pushMessage() {
 }
 
 //webSocket simulation DELETE
-setInterval(() => {
-  chat = {name: 'Rachel', message: 'Helaman 5:12'};
-  messageList.push(chat);
-  localStorage.setItem('messageList', JSON.stringify(messageList));
-  displayMessage(chat);
-}, 7000);
+// setInterval(() => {
+//   chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
+//   messageList.push(chat);
+//   localStorage.setItem('messageList', JSON.stringify(messageList));
+//   displayMessage(chat);
+// }, 7000);
 
 
 function setDiscussion() {
@@ -109,8 +110,12 @@ function setDiscussion() {
 }
 
 function showSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.add('show');
+    const sidebarEl = document.getElementById('sidebar');
+
+    const referenceEl = document.getElementById('reference');
+
+
+    sidebarEl.classList.add('show');
 }
 
 function hideSidebar() {
