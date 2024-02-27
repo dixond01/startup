@@ -35,6 +35,8 @@ main {
     flex-direction:column;
     flex: 1;
     overflow: hidden;
+    margin-left: 5vw;
+    margin-right: 5vw;
 }
 #discussionFeed {
     max-height: 80%;

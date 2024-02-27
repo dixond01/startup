@@ -43,6 +43,7 @@ function pushMessage() {
         displayMessage(chat);
     }
     else {
+        //could give a message saying you must type a character? idk
         return;
     }
 
