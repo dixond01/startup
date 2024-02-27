@@ -113,6 +113,7 @@ function showSidebar() {
     const sidebarEl = document.getElementById('sidebar');
 
     const referenceEl = document.getElementById('reference');
+    //need to update sidebar to match the scriptureReference
 
 
     sidebarEl.classList.add('show');
