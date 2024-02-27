@@ -44,6 +44,15 @@ function pushMessage() {
 
 }
 
+//webSocket simulation DELETE
+setInterval(() => {
+  chat = {name: 'Rachel', message: 'Helaman 5:12'};
+  messageList.push(chat);
+  localStorage.setItem('messageList', JSON.stringify(messageList));
+  displayMessage(chat);
+}, 7000);
+
+
 function setDiscussion() {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
@@ -66,7 +75,6 @@ function setDiscussion() {
         }
     }
 
-    // if (!dateList.find(x => {x.month === currentMonth && x.day === currentDay})) {
     if (!dateList.find(findTest)) {
         //archive discussion
         //change to draw from database?
@@ -116,6 +124,3 @@ else {
 
 displayMessages();
 
-
-//need to create and display the array 
-//need to add daily chat refresh with heading change
