@@ -6,19 +6,42 @@ function displayMessage(chat) {
     const chatEl = document.createElement('div');
     discussionFeed.appendChild(chatEl);
 
-    //add RegEx for finding the verses
-    scripturePattern = /(\d*)\s*([a-z]+)\s*(\d+)(?::(\d+))?(\s*-\s*(\d+)(?:\s*([a-z]+)\s*(\d+))?(?::(\d+))?)?/i;
-
     const nameEl = document.createElement('span');
     nameEl.classList.add('userName');
     nameEl.textContent = `${chat['name']}: `;
     chatEl.appendChild(nameEl);
 
-    //add onclick
     const noHTML = chat['message'].replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, "");
-    const message = noHTML.replace(scripturePattern, "<span class='scriptureReference' onclick='showSidebar()'>$&</span>");
+    //add RegEx for finding the verses
+    //scripturePattern = /(\d*)\s*([a-z]+)\s*(\d+)(?::(\d+))?(\s*-\s*(\d+)(?:\s*([a-z]+)\s*(\d+))?(?::(\d+))?)?/i;
+    scripturePattern = /(?:(\d [a-z]+)|([a-z]+))\ (\d+):(\d+)(?:\ ?-\ ?(\d+))?/i;
+    //save books, chapters, and verses to variables for use in a database later (global variables)
+    if (noHTML.match(scripturePattern)) {
+        const match = noHTML.match(scripturePattern);
+        if (match[1]) {
+            console.log("book: ", match[1]);
+            window.book = match[1];
+        }
+        else {
+            console.log("book: ", match[2]);
+            window.book = match[2];
+        }
+        console.log("chapter: ", match[3]);
+        window.chapter = match[3];
+        console.log("first verse: ", match[4]);
+        window.verses = [match[4]]; //may not overwrite previous verses
+        if (match[5]) {
+            console.log("last verse: ", match[5]);
+            for (let i = parseInt(match[4])+1; i<=parseInt(match[5]);i++) {
+                console.log("nextVerse: ", i);
+                window.verses.push(`${i}`);
+            }
+            
+        }
+    }
+    
+    const message = noHTML.replace(scripturePattern, "<span class='scriptureReference' onclick='showSidebar(this)'>$&</span>");
     chatEl.innerHTML = chatEl.innerHTML + message;
-    console.log(chatEl.innerHTML);
 }
 
 function displayMessages() {
@@ -28,8 +51,6 @@ function displayMessages() {
 
     }
 }
-
-//dont forget the on click for scriptures
 
 function pushMessage() {
     const chatbox = document.getElementById("chatbox");
@@ -56,7 +77,6 @@ function pushMessage() {
 //   localStorage.setItem('messageList', JSON.stringify(messageList));
 //   displayMessage(chat);
 // }, 7000);
-
 
 function setDiscussion() {
     const currentDate = new Date();
@@ -109,12 +129,13 @@ function setDiscussion() {
     localStorage.setItem('date', JSON.stringify({month: currentMonth, day: currentDay}));
 }
 
-function showSidebar() {
+function showSidebar(element) {
     const sidebarEl = document.getElementById('sidebar');
 
-    const referenceEl = document.getElementById('reference');
     //need to update sidebar to match the scriptureReference
-
+    const referenceText = element.textContent;
+    const referenceEl = document.getElementById('reference');
+    referenceEl.textContent = referenceText;
 
     sidebarEl.classList.add('show');
 }
