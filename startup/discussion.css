@@ -111,7 +111,7 @@ input {
     border-bottom: 1px solid var(--secondary-color-lighter-1);
 }
 
-.xButton {
+#xButton {
     background: none;
     border: none;
     position: absolute;

@@ -113,6 +113,11 @@ function showSidebar() {
     sidebar.classList.add('show');
 }
 
+function hideSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.remove('show');
+}
+
 //might break something
 if (localStorage.getItem('messageList')) {
     window.messageList = JSON.parse(localStorage.getItem('messageList'));
