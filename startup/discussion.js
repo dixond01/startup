@@ -38,8 +38,8 @@ function pushMessage() {
     const userName = localStorage.getItem("userName");
     const chat = {name: userName, message: string}
     messageList.push(chat);
-    localStorage.setItem(JSON.stringify('messageList', messageList));
-    displayMessages();
+    localStorage.setItem('messageList', JSON.stringify(messageList));
+    displayMessage(chat);
 
 }
 
