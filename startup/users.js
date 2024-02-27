@@ -16,12 +16,14 @@ function updateTable() {
         rowElement.appendChild(userElement);
         const statusElement = document.createElement("td");
         const spanElement = document.createElement("span");
-        spanElement.innerHTML("●"); //NEED TO FIX THIS LINE
+        const dotContent = document.createTextNode("●")
+        spanElement.appendChild(dotContent);
         spanElement.classList.add(user['status']);
         statusElement.appendChild(spanElement);
         
         rowElement.appendChild(statusElement);
     }
 }
+
 usersDisplay();
 updateTable();
