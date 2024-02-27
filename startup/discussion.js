@@ -11,16 +11,12 @@ function displayMessage(chat) {
 
     const nameEl = document.createElement('span');
     nameEl.classList.add('userName');
-    nameEl.textContent = `${chat['name']}: `
-    // const nameContent = document.createTextNode(`${chat['name']}: `);
-    // nameEl.appendChild(nameContent);
+    nameEl.textContent = `${chat['name']}: `;
     chatEl.appendChild(nameEl);
 
     //add onclick
     const noHTML = chat['message'].replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, "");
     const message = noHTML.replace(scripturePattern, "<span class='scriptureReference'>$&<span>");
-    // const chatContent = document.createTextNode(`${chat['message']}`);
-    // chatEl.appendChild(chatContent);
     chatEl.innerHTML = chatEl.innerHTML + message;
 }
 
