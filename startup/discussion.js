@@ -34,12 +34,17 @@ function displayMessages() {
 function pushMessage() {
     const chatbox = document.getElementById("chatbox");
     const string = chatbox.value;
-    chatbox.value = "";
-    const userName = localStorage.getItem("userName");
-    const chat = {name: userName, message: string}
-    messageList.push(chat);
-    localStorage.setItem('messageList', JSON.stringify(messageList));
-    displayMessage(chat);
+    if (string) {
+        chatbox.value = "";
+        const userName = localStorage.getItem("userName");
+        const chat = {name: userName, message: string}
+        messageList.push(chat);
+        localStorage.setItem('messageList', JSON.stringify(messageList));
+        displayMessage(chat);
+    }
+    else {
+        return;
+    }
 
 }
 
