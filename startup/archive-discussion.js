@@ -19,6 +19,8 @@ function displayMessage(chat) {
     chatEl.innerHTML = chatEl.innerHTML + message;
 }
 
+const currentArchive = JSON.parse(localStorage.getItem('currentArchive'));
+messageList = currentArchive.messages;
 //no messageList. need to replace with specific messageList
 function displayMessages() {
     const discussionFeed = document.getElementById('discussionFeed');
@@ -27,3 +29,9 @@ function displayMessages() {
 
     }
 }
+
+
+
+
+
+displayMessages();
