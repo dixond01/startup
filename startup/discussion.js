@@ -39,6 +39,7 @@ function pushMessage() {
         messageList.push(chat);
         localStorage.setItem('messageList', JSON.stringify(messageList));
         displayMessage(chat);
+        updateScroll();
     }
     else {
         //could give a message saying you must type a character? idk
@@ -104,6 +105,12 @@ function setDiscussion() {
 
     //update date in localstorage
     localStorage.setItem('date', JSON.stringify({month: currentMonth, day: currentDay}));
+}
+
+
+function updateScroll(){
+    var discussionFeedEl = document.getElementById("discussionFeed");
+    discussionFeedEl.scrollTop = discussionFeedEl.scrollHeight;
 }
 
 function showSidebar(element) {
@@ -184,4 +191,6 @@ else {
 }
 
 displayMessages();
+
+updateScroll();
 
