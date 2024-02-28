@@ -1040,10 +1040,103 @@ try {
 
 ### Fetch
 
-- returns a promise
+- returns a promise. Syntax:
 ```
 fetch(url)
   .then(r => r.text())
   .then(text => console.log(text))
 ```
+- to convert to json
+```
+fetch(url)
+  .then(r => r.json())
+  .then(j => console.log(j.value))
+```
+
+or
+
+```
+const r = await fetch(url)
+const j = await r.json()
+console.log(j.content)
+```
+- r is the response object
+- r.json also returns a promise
 - uses fetch command to access the css?
+- fetching some resource from the internet
+- endpoints
+  - [POST] and [GET]
+- `curl -v <url>`
+  - see the details of one request
+  - `-v` means verbose
+    
+### URL
+
+- https://byu.edu:443/api/city?q=pro#3
+  - scheme
+    - https://
+  - domain
+    - byu.edu
+  - port
+    - :443
+  - path
+    - /api/city
+  - parameters
+    - ?q=pro
+    - specific to the path
+  - anchor
+    - #3
+    - navigational aid
+  - Ports and protocols
+| Port | Protocol                                                                                           |
+| ---- | -------------------------------------------------------------------------------------------------- |
+| 20   | File Transfer Protocol (FTP) for data transfer                                                     |
+| 22   | Secure Shell (SSH) for connecting to remote devices                                                |
+| 25   | Simple Mail Transfer Protocol (SMTP) for sending email                                             |
+| 53   | Domain Name System (DNS) for looking up IP addresses                                               |
+| 80   | Hypertext Transfer Protocol (HTTP) for web requests                                                |
+| 110  | Post Office Protocol (POP3) for retrieving email                                                   |
+| 123  | Network Time Protocol (NTP) for managing time                                                      |
+| 161  | Simple Network Management Protocol (SNMP) for managing network devices such as routers or printers |
+| 194  | Internet Relay Chat (IRC) for chatting                                                             |
+| 443  | HTTP Secure (HTTPS) for secure web requests                                                        |
+
+### HTTP
+
+- request
+  - `POST /api/city?q=provo HTTP/1.1`
+  - method
+    - POST
+  - path
+    - /api/city?q=provo
+  - version
+    - HTTP/1.1
+  - Headers (key-value pairs)
+    - Host: cs260.click
+    - User-Agent: curl/7.77.0 <-- Headers
+    - Content-Length: 14
+    - Accept: application/json, text/plain, image/jpeg, */*
+    - accept=encoding: gzip, deflate
+  - Body
+    - {"user":"tim"}
+- Methods
+  - GET: get an existing resource (not sending a body)
+  - POST: create a new resource
+  - PUT: update an existing resource
+  - DELETE: delete a resource
+  - OPTIONS: get information about a resource
+- Response
+  - HTTP/1.1 200 OK
+  - Version
+    - HTTP/1.1
+  - Status Code
+    - 200
+  - Status message
+    - OK
+
+- Status Codes
+  - 2xx: 200 Success, 204 No Content
+  - 3xx: 301/302 Redirect, 304 not modified
+  - 4xx: 400 bad request, 404 not found, 403 forbidden, 429 too many requests
+  - 5xx: 500 server error, 503 not available
+  
