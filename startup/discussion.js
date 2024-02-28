@@ -139,6 +139,7 @@ function showSidebar(element) {
 
         //updating the #scriptures div
         const scripturesEl = document.getElementById("scriptures");
+        scripturesEl.textContent = "";
         for (verse of verses) {
             const verseEl = document.createElement('div');
             verseEl.classList.add("scripture");
