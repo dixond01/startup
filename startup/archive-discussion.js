@@ -93,6 +93,9 @@ function updateScroll(){
 
 
 
+const discussionName = document.getElementById('discussionName');
+discussionName.appendChild(document.createTextNode(`${currentArchive.month} ${currentArchive.day}`));
+
 displayMessages();
 
 updateScroll();
