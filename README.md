@@ -71,3 +71,12 @@ I deployed the simon css at [simon.inspireus.click](https://simon.inspireus.clic
 - **Application Elements:** Implemented a color scheme with good contrast, the page layout and whitespace is visually pleasing, the scripture reference sidebar cannot be seen (it is -250px off the discussion page to the right), but it is formatted correctly and ready to be deployed with javascript.
 - **Application Text Elements:** Font and font size consistent and readable. Font weight is used appropriately.
 - **Application Images:** The only image in my application is on the Users page. It is formatted as the background for the page title and positioned and sized as a banner, as intended.
+
+## JavaScript Deliverable
+
+I deployed the simon javascript at [simon.inspireus.click](https://simon.inspireus.click).
+
+- **Login:** Fields for name and password, name is currently saved to localStorage, pressing 'login' takes the user to the discussion.html page.
+- **Database:** The name of the discussion will change weekly based on that week's Come, Follow Me, but for now, it changes daily based on the date. Clicking on a scripture reference of the form 'book #:#' will bring up a sidebar which will eventually show the verses from a database. Currently, it shows the scripture reference and verse numbers with placeholder text. Several items are currently in localStorage but will eventually be in the server's database.
+- **Websocket:** User can display their own messages. A setInterval function periodically displays a single message. On the 'users' paage, all users that have ever logged in are shown in a table as 'online'. These will be replaced with websocket functionality, when I can track if a user is online or not. 
+- **Application Logic:** Messages are stored and retrieved dynamically. The content of a message matching a regex pattern gets wrapped with javascript that opens the sidebar when clicked, which updates depending on the element that was clicked. After a day, the discussions are saved in localStorage and can be viewed in the archive. (Since this is functional, I removed all placeholders in the Archive page. If a day has not passed, localStorage will not have updated, so this part will appear blank. It is not central to my app's functionality.) Names and study group names are saved in localStorage and updated accross the app.
