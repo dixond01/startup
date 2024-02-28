@@ -78,14 +78,27 @@ function setDiscussion() {
         }
     }
 
+    //if it's a new day (the date is not in the localstorage object array dateList) archive and refresh discussion
     if (!dateList.find(findTest)) {
         //archive discussion
         //change to draw from database?
         if (localStorage.getItem('date')) {
+
             const archiveDate = JSON.parse(localStorage.getItem('date'));
             const archiveMonth = archiveDate.month;
             const archiveDay = archiveDate.day;
-            localStorage.setItem(`${archiveMonth}${archiveDay}Discussion`, JSON.stringify({month: archiveMonth, day: archiveDay, messages: messageList}));
+            const archiveObject = {month: archiveMonth, day: archiveDay, messages: messageList};
+
+            if (localStorage.getItem('archiveList')) {
+                window.archiveList = JSON.parse(localStorage.getItem('archiveList'));
+            }
+            else {
+                window.archiveList = [];
+            }
+
+            archiveList.push(archiveObject);
+
+            localStorage.setItem('archiveList', JSON.stringify(archiveList));
         }
 
         //clear discussion
@@ -94,9 +107,6 @@ function setDiscussion() {
         //add date to dateList
         dateList.push({month: currentMonth, day: currentDay});
         localStorage.setItem('dateList', JSON.stringify(dateList));
-
-        
-        
         
     }
     //update discussionName
