@@ -125,21 +125,15 @@ function showSidebar(element) {
     if (element.textContent.match(scripturePattern)) {
         const match = element.textContent.match(scripturePattern);
         if (match[1]) {
-            console.log("book: ", match[1]);
             window.book = match[1];
         }
         else {
-            console.log("book: ", match[2]);
             window.book = match[2];
         }
-        console.log("chapter: ", match[3]);
         window.chapter = match[3];
-        console.log("first verse: ", match[4]);
         window.verses = [match[4]]; //may not overwrite previous verses
         if (match[5]) {
-            console.log("last verse: ", match[5]);
             for (let i = parseInt(match[4])+1; i<=parseInt(match[5]);i++) {
-                console.log("nextVerse: ", i);
                 window.verses.push(`${i}`);
             }
         }
