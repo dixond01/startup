@@ -49,12 +49,12 @@ function pushMessage() {
 }
 
 //webSocket simulation DELETE
-// setInterval(() => {
-//   chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
-//   messageList.push(chat);
-//   localStorage.setItem('messageList', JSON.stringify(messageList));
-//   displayMessage(chat);
-// }, 7000);
+setInterval(() => {
+  chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
+  messageList.push(chat);
+  localStorage.setItem('messageList', JSON.stringify(messageList));
+  displayMessage(chat);
+}, 7000);
 
 function setDiscussion() {
     const currentDate = new Date();
