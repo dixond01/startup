@@ -1190,3 +1190,87 @@ console.log(j.content)
     - language preference
     - authentication
     - track and share user activity
+
+## Node.js
+
+- `node -e <js code>`
+```
+> node
+> <line of code>
+output
+> <line of code>
+output
+```
+- `node <filename.js>`
+
+### Packages
+
+- install package using **n**ode **p**ackage **m**anager
+- include `require <pkg name>` in code
+- for each project using npm (using packages)
+  - initialize code to use npm
+  ```
+  ➜  mkdir npmtest
+  ➜  cd npmtest
+  ➜  npm init -y
+  ```
+    - make the directory that contains the javascript
+    - go into that directory
+    - initialize npm and step through the questionairre
+      - use `-y` to skip questionairre
+  - creates files in the directory
+    - also creates node_modules directory
+    - **include node_modules in .gitignore file**
+      - don't want to put it in the source control since it is very large
+      - because of this, when you clone from git to another location, you must run `npm install` (with no parameter). This will install the referenced pagages in the project directory's new node_modules directory
+  - in directory you made, install packages with
+  - `➜  npm install <pkg name>`
+  - to remove the reference to the package
+  - `npm uninstall <package name here>`
+
+#### Using a Package
+
+```
+const giveMeAJoke = require('give-me-a-joke');
+giveMeAJoke.getRandomDadJoke((joke) => {
+  console.log(joke);
+});
+```
+- `give-me-a-joke` is the package
+- `.getRandomDadJoke` is a function in the package
+
+#### Summary
+
+1. Create your project directory
+1. Initialize it for use with NPM by running npm init -y
+1. Make sure .gitignore file contains node_modules
+1. Install any desired packages with npm install <package name here>
+1. Add require('<package name here>') to your application's JavaScript
+1. Use the code the package provides in your JavaScript
+1. Run your code with node index.js
+
+### Creating a Web Service
+
+1. create a project
+```
+➜ mkdir webservicetest
+➜ cd webservicetest
+➜ npm init -y
+```
+2. Open VS Code and create a file named index.js
+3. paste the following code
+```
+const http = require('http');
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write(`<h1>Hello Node.js! [${req.method}] ${req.url}</h1>`);
+  res.end();
+});
+
+server.listen(8080, () => {
+  console.log(`Web service listening on port 8080`);
+});
+```
+4. `node index.js` in cmd line
+5. `localhost:8080` in browser
+- or, you can run in VS Code with `f5` -> `node.js` to run with debugger
