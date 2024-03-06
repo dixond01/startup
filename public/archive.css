@@ -45,3 +45,11 @@ hr {
 .lessonTitle {
     font-size: 1.5rem;
 }
+.btn-primary {
+    background-color: var(--secondary-color);
+    border: none;
+    --bs-btn-hover-bg: var(--secondary-color-lighter-1);
+    flex: 0.5;
+    --bs-btn-active-bg: var(--secondary-color-lighter-2);
+    font-weight: bold;
+}
