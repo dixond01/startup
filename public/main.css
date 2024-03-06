@@ -40,6 +40,19 @@
     justify-content: center;
     align-items: center;
   }
+/* 
+  #header1stLine {
+    display: flex;
+    flex-direction: row;
+  } */
+  #logoutBtn {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: var(--secondary-color-lighter-2);
+  }
 
 .websiteTitle {
   flex: 1;
