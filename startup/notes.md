@@ -1274,3 +1274,45 @@ server.listen(8080, () => {
 4. `node index.js` in cmd line
 5. `localhost:8080` in browser
 - or, you can run in VS Code with `f5` -> `node.js` to run with debugger
+
+## Service Design
+
+### Leverage Standards
+
+- **Transfer Protocols:** HTTP, HTTPS, UDP
+- **HTTP Verbs:** GET, PUT, POST, DELETE
+- **MIME types:** application/json, image/png
+- **HTTP headers:** cache, accept, cors
+- **Data Format:** JSON, YAML
+- Use these to make code understandable and accessible
+
+### Endpoint Design
+
+- **Grammatical:** Noun/resource based
+- **Readable:** `/store/provo/order/28502`
+  - make paths readable
+- **Simple:** single responsibility principle
+  - endpoints should do single, specific things
+- **Documented:** Open API
+  - openapi is used to document api
+
+### Remote Procedure Call (RPC)
+
+- functional use of HTTP
+- Ex. POST verb
+
+### Representational State Transfer (REST)
+
+- use HTTP as much as you can (opposite of RPC)
+- verb - noun - what to do
+  - ex. `PUT /order/2197 {"date": 102929}`
+
+### GraphQL
+
+- use one query to handle most requests(?)
+- make frontend smart, make server easier to manipulate
+
+## Cross Site Request Forgery (CORS)
+
+- single origin principle
+  - sites must allow their data to be accessed
