@@ -43,8 +43,11 @@ input {
     width: 150%;
     border-radius: 20px;
     border: none;
-    height: 2rem;
+    height: 1.5rem;
     outline: none;
+}
+label {
+    font-size:1.25rem;
 }
 h2 {
     font-size: 3rem;
