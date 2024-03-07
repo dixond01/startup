@@ -19,7 +19,7 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 
-//FUNCTIONS MAY NEED `next` PARAMETER
+//FUNCTIONS MAY NEED `next` PARAMETER AND CALL
 //GetStudyGroups
 apiRouter.get('/studygroups', (_req, res) => {
   res.send(studyGroups); 
@@ -30,6 +30,18 @@ apiRouter.post('/studygroup', (req, res) => {
   studyGroups = addGroup(req.body, studyGroups);
   res.send(studyGroups);
 })
+
+//GetUsers for usersList
+apiRouter.get('/users', (_req, res) => {
+  res.send(JSON.stringify(usersList)); //unexpected character at line 1 of the JSON data
+});
+
+//AddUser to usersList
+apiRouter.post('/user', (req, res) => {
+  usersList = usersList.push(req.body);
+  res.send(usersList);
+
+});
 
 // // GetScores
 // apiRouter.get('/scores', (_req, res) => {
@@ -50,6 +62,9 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+
+let usersList = [];
 
 let studyGroups = []; //saved in memory? Maybe? Don't know if that's what I want.
 function addGroup(name, studyGroups) {
