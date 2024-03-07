@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="index.css" />
 
+    <script defer src="createstudygroup.js"></script>
+
     <title>InspireUs Create Study Group</title>
     </head>
     <body>
@@ -25,7 +27,7 @@
             <div class="form">
                 <input type="text" id="studygroupinput" placeholder="Your study group name here" />
                 <div id="createStudyError" class="errorMessage"></div>
-                <button class="btn btn-primary rounded-pill px-3" id="studysubmitbtn" type="submit" onclick="window.location.href='index.html';">Submit</button>
+                <button class="btn btn-primary rounded-pill px-3" id="studysubmitbtn" onclick="createStudyGroup()">Submit</button>
             </div>
             
             </div>

@@ -14,6 +14,19 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+
+//FUNCTIONS MAY NEED `next` PARAMETER
+//GetStudyGroups
+apiRouter.get('/studygroups', (_req, res) => {
+  res.send(studyGroups); 
+})
+
+//AddStudyGroup
+apiRouter.post('/studygroup', (req, res) => {
+  studyGroups = addGroup(req.body, studyGroups);
+  res.send(studyGroups);
+})
+
 // // GetScores
 // apiRouter.get('/scores', (_req, res) => {
 //   res.send(scores);
@@ -33,3 +46,9 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+let studyGroups = []; //saved in memory? Maybe? Don't know if that's what I want.
+function addGroup(name, studyGroups) {
+  studyGroups.push(name);
+  return studyGroups;
+}
