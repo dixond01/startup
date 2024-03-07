@@ -1,27 +1,51 @@
 function login() {
+  //getting all the information
+    const emailEl = document.querySelector('#email');
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    let email = "";
+    if (emailEl.value.match(emailRegex)){ //may need to add email verification? via api?
+      email = emailEl.value;
+    } else {
+      const emailErrorEl = document.getElementById('emailError');
+      emailErrorEl.innerText = "Please enter a valid email."
+      return;
+    }
+    localStorage.setItem('email', email); //hope this works with email = emailEl.value
+    
+
     const nameEl = document.querySelector('#name');
-    localStorage.setItem('userName', nameEl.value);
+    const name = nameEl.value; //hope it doesn't conflict with name property of usersList
+    localStorage.setItem('userName', name);
+
+    const passwordEl = document.querySelector('#password');
+    const password = passwordEl.value;
+
     const studyNameEl = document.querySelector('#studyGroup');
-    localStorage.setItem('studyName', studyNameEl.value);
+    const studyName = studyNameEl.value;
+    localStorage.setItem('studyName', studyName);
+
 
     if (localStorage.getItem('usersList')) {
       window.usersList = JSON.parse(localStorage.getItem('usersList'));
       //current implementation will not create two instances of the same name. Fix during authentication?
-      if (usersList.find(x => x.name === nameEl.value)) {
-        usersList.find(x => x.name === nameEl.value).status = "online";
+      if (usersList.find(x => x.email === email)) {
+        if (usersList.find(x => x.email === email).name === name) {
+          usersList.find(x => x.email === email).status = "online";
+        } else {
+          const loginErrorEl = document.querySelector('#loginError');
+          loginErrorEl.innerText = "Name associated with email incorrect.";
+          return;
+        }
+        
+      } else {
+        usersList.push({ email: email, name: nameEl.value, status: "online"});
       }
-      else {
-        usersList.push({name: nameEl.value, status: "online"});
-      }
-
+    } else {
+      window.usersList = [{email: email, name: nameEl.value, status: "online"}];
     }
-    else {
-      window.usersList = [{name: nameEl.value, status: "online"}];
-    }
-//implement an array of objects with the keys 'name' and 'status' where 'status' is 'online' or 'offline'
-    //updates usersList in localStorage (not sure if stringify in right place)
+    
     localStorage.setItem('usersList', JSON.stringify(usersList));
 
     window.location.href = 'discussion.html';
-    //moving windows may not work. works in debugger but not otherwise
+ 
   }
