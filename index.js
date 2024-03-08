@@ -70,6 +70,18 @@ apiRouter.post('/date', (req, res) => {
   res.send(dateList);
 });
 
+let storedDate = {};
+//GetstoredDate
+apiRouter.get('/stored_date', (_req, res) => {
+  res.send(storedDate);
+});
+
+//Update storedDate
+apiRouter.post('/store_date', (req, res) => {
+  storedDate = req.body; 
+  res.send(storedDate);
+});
+
 let archiveList = [];
 //GetArchiveData for archiveList
 apiRouter.get('/archive_data', (_req, res) => {

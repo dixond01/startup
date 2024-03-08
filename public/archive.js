@@ -1,12 +1,19 @@
-function displayCards() {
+async function displayCards() {
     
 
-    if (localStorage.getItem('archiveList')) {
-        window.archiveList = JSON.parse(localStorage.getItem('archiveList'));
-    }
-    else {
-        window.archiveList = [];
-    }
+    // if (localStorage.getItem('archiveList')) {
+    //     window.archiveList = JSON.parse(localStorage.getItem('archiveList'));
+    // }
+    // else {
+    //     window.archiveList = [];
+    //}
+
+    //fetch
+    const archive_response = await fetch('/api/archive_data');
+    let archiveList = await archive_response.json();
+
+    // //TEST
+    // let archiveList = [{"month":"March","day":7,"messages":[{"name":"Rachel","message":"Helaman 5:12 (<-- click)"}]},{"month":"April","day":6,"messages":[{"name":"Rachel","message":"Helaman 5:12 (<-- click)"}]}];
 
     const cardListEl = document.getElementById('cardList');
 
@@ -15,7 +22,7 @@ function displayCards() {
         const cardEl = document.createElement('div');
         cardEl.classList.add('card');
         cardEl.setAttribute('id', index);
-        cardEl.setAttribute('onclick', 'movePage(archive)'); //not sure if archive is passed in or not
+        cardEl.setAttribute('onclick', `movePage(${index})`); //not sure if archive is passed in or not
         cardListEl.appendChild(cardEl);
 
         const dateEl = document.createElement('h4');
@@ -34,8 +41,17 @@ function displayCards() {
     }
 }
 
-function movePage(archive) {
+async function movePage(index) {
     //can stay local (not server) (i think)
+
+    // //TEST
+    // let archiveList = [{"month":"March","day":7,"messages":[{"name":"Rachel","message":"Helaman 5:12 (<-- click)"}]},{"month":"April","day":6,"messages":[{"name":"Rachel","message":"Helaman 5:12 (<-- click)"}]}];
+
+    //fetch
+    const archive_response = await fetch('/api/archive_data');
+    let archiveList = await archive_response.json();
+
+    let archive = archiveList[index];
     localStorage.setItem('currentArchive', JSON.stringify(archive));
     window.location.href = 'archive-discussion.html';
 

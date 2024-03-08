@@ -124,11 +124,14 @@ async function setDiscussion() {
     if (!dateList.find(findTest)) {
         //archive discussion
         //change to draw from database?
-        if (localStorage.getItem('date')) { //make fetch?
+        // if (localStorage.getItem('date')) { //make fetch?
 
-                    
+        //fetch
+        const get_storedDate_res = await fetch('/api/archive_data');
+        const archiveDate = await archive_response.json();
+                            
 
-            const archiveDate = JSON.parse(localStorage.getItem('date'));
+            // const archiveDate = JSON.parse(localStorage.getItem('date'));
             const archiveMonth = archiveDate.month;
             const archiveDay = archiveDate.day;
             const archiveObject = {month: archiveMonth, day: archiveDay, messages: messageList};

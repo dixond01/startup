@@ -1,4 +1,7 @@
 function displayMessage(chat) {
+    //UPDATE FROM DISCUSSION.JS
+
+    
     const discussionFeed = document.getElementById('discussionFeed');
     
     const chatEl = document.createElement('div');
@@ -20,9 +23,10 @@ function displayMessage(chat) {
 }
 
 const currentArchive = JSON.parse(localStorage.getItem('currentArchive'));
-messageList = currentArchive.messages;
+window.messageList = currentArchive.messages; //added window. to messageList. not sure if correct
 //no messageList. need to replace with specific messageList
 function displayMessages() {
+    //DO NOT UPDATE FROM DISCUSSION.JS
     const discussionFeed = document.getElementById('discussionFeed');
     for (chat of messageList) {
         displayMessage(chat);
@@ -31,6 +35,9 @@ function displayMessages() {
 }
 
 function showSidebar(element) {
+    //UPDATE FROM DISCUSSION.JS
+
+
     const sidebarEl = document.getElementById('sidebar');
 
     //need to update sidebar to match the scriptureReference
