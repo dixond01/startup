@@ -85,24 +85,28 @@ setInterval(async () => {
         });    
 
     messageList = await post_response.json();
-    
+
     localStorage.setItem('messageList', JSON.stringify(messageList));
     displayMessage(chat);
 }, 7000);
 
-function setDiscussion() {
+async function setDiscussion() {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
     
     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
     
 
-    if (localStorage.getItem('dateList')) {
-        window.dateList = JSON.parse(localStorage.getItem('dateList'));
-    }
-    else {
-        window.dateList = [];
-    }
+    // if (localStorage.getItem('dateList')) {
+    //     window.dateList = JSON.parse(localStorage.getItem('dateList'));
+    // }
+    // else {
+    //     window.dateList = [];
+    // }
+
+    //fetch
+    const get_response = await fetch('/api/dates');
+    let dateList = await get_response.json();
 
     function findTest(x) {
         if (x.month === currentMonth) {
@@ -116,7 +120,11 @@ function setDiscussion() {
     if (!dateList.find(findTest)) {
         //archive discussion
         //change to draw from database?
-        if (localStorage.getItem('date')) {
+        if (localStorage.getItem('date')) { //make fetch?
+
+            //fetch
+            const get_response = await fetch('/api/messages');
+            let messageList = await get_response.json();           
 
             const archiveDate = JSON.parse(localStorage.getItem('date'));
             const archiveMonth = archiveDate.month;
@@ -140,6 +148,17 @@ function setDiscussion() {
 
         //add date to dateList
         dateList.push({month: currentMonth, day: currentDay});
+
+        //fetch
+        dateList = JSON.stringify(dateList);
+        const post_response = await fetch('/api/date', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: dateList,
+            });    
+
+        dateList = await post_response.json();
+        
         localStorage.setItem('dateList', JSON.stringify(dateList));
         
     }

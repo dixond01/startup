@@ -58,6 +58,18 @@ apiRouter.post('/message', (req, res) => {
   res.send(messageList);
 });
 
+let dateList = [];
+//GetDates
+apiRouter.get('/dates', (_req, res) => {
+  res.send(dateList);
+});
+
+//AddDate to dateList
+apiRouter.post('/date', (req, res) => {
+  dateList = req.body; //only if req contains full messageList (primarily on frontend)
+  res.send(dateList);
+});
+
 // // GetScores
 // apiRouter.get('/scores', (_req, res) => {
 //   res.send(scores);
