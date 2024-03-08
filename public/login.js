@@ -10,19 +10,16 @@ async function login() {
       emailErrorEl.innerText = "Please enter a valid email."
       return;
     }
-    localStorage.setItem('email', email); //hope this works with email = emailEl.value
     
 
     const nameEl = document.querySelector('#name');
     const name = nameEl.value; //hope it doesn't conflict with name property of usersList
-    localStorage.setItem('userName', name);
 
     const passwordEl = document.querySelector('#password');
     const password = passwordEl.value;
 
     const studyNameEl = document.querySelector('#studyGroup');
     const studyName = studyNameEl.value;
-    localStorage.setItem('studyName', studyName);
 
 
     //implementing fetch
@@ -30,29 +27,34 @@ async function login() {
     window.usersList = await get_response.json();
 
 
-    console.log('Type:', typeof(usersList), 'List:', usersList)
+    // console.log('Type:', typeof(usersList), 'List:', usersList)
 
     // if (localStorage.getItem('usersList')) {
     //   window.usersList = JSON.parse(localStorage.getItem('usersList'));
-      if (usersList.find(x => x.email === email)) {
-        if (usersList.find(x => x.email === email).name === name) {
-          usersList.find(x => x.email === email).status = "online";
-        } else {
-          const loginErrorEl = document.querySelector('#loginError');
-          loginErrorEl.innerText = "Name associated with email incorrect.";
-          return;
-        }
+    if (usersList.find(x => x.email === email)) {
+      if (usersList.find(x => x.email === email).name === name) {
+        usersList.find(x => x.email === email).status = "online";
       } else {
-        usersList.push({ email: email, name: nameEl.value, status: "online"});
-      } 
+        const loginErrorEl = document.querySelector('#loginError');
+        loginErrorEl.innerText = "Name associated with email incorrect.";
+        return;
+      }
+    } else {
+      usersList.push({ email: email, name: nameEl.value, status: "online"});
+    } 
+
+    localStorage.setItem('email', email); //hope this works with email = emailEl.value
+    localStorage.setItem('userName', name);
+    localStorage.setItem('studyName', studyName);
+
     
     // else {
     //   window.usersList = [{email: email, name: nameEl.value, status: "online"}];
     // }
 
-    console.log('Before Post type', typeof(usersList),'list: ', usersList);
+    // console.log('Before Post type', typeof(usersList),'list: ', usersList);
     usersList = JSON.stringify(usersList);
-    console.log('After stringify type ', typeof(usersList),'list: ', usersList);
+    // console.log('After stringify type ', typeof(usersList),'list: ', usersList);
 
     
     const post_response = await fetch('/api/user', {
@@ -63,7 +65,7 @@ async function login() {
 
     usersList = await post_response.json();
 
-    console.log('after post', usersList);
+    // console.log('after post', usersList);
 
     localStorage.setItem('usersList', JSON.stringify(usersList));
 

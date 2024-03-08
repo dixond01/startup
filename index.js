@@ -34,15 +34,15 @@ apiRouter.post('/studygroup', (req, res) => {
 let usersList = [];
 //GetUsers for usersList
 apiRouter.get('/users', (_req, res) => {
-  console.log('Type: ', typeof(usersList), 'List: ', usersList)
+  // console.log('Type: ', typeof(usersList), 'List: ', usersList)
   res.send(usersList); //unexpected character at line 1 of the JSON data
 });
 
 //AddUser to usersList
 apiRouter.post('/user', (req, res) => {
-  console.log('Type: ', typeof(req.body), 'req.body: ', req.body);
+  // console.log('Type: ', typeof(req.body), 'req.body: ', req.body);
   usersList = req.body;
-  console.log('after push: ', usersList);
+  // console.log('after push: ', usersList);
   res.send(usersList);
 });
 
