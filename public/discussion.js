@@ -120,6 +120,8 @@ async function setDiscussion() {
         }
     }
 
+    let archiveDate = {}; //maybe?
+
     //if it's a new day (the date is not in the localstorage object array dateList) archive and refresh discussion
     if (!dateList.find(findTest)) {
         //archive discussion
@@ -128,9 +130,10 @@ async function setDiscussion() {
 
         //fetch
         const get_storedDate_res = await fetch('/api/archive_data');
-        const archiveDate = await archive_response.json();
+        archiveDate = await get_storedDate_res.json();
+        console.log('after fetch', archiveDate, 'type: ', typeof(archiveDate));
                             
-
+        if (archiveDate.length) {
             // const archiveDate = JSON.parse(localStorage.getItem('date'));
             const archiveMonth = archiveDate.month;
             const archiveDay = archiveDate.day;
@@ -197,6 +200,16 @@ async function setDiscussion() {
     //update discussionName
     const discussionName = document.getElementById('discussionName');
     discussionName.appendChild(document.createTextNode(`${currentMonth} ${currentDay}`));
+
+    //fetch
+    archiveDate = JSON.stringify(archiveDate);
+    const post_storedDate_response = await fetch('/api/store_date', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: archiveDate,
+        });    
+
+    archiveDate = await post_storedDate_response.json();
 
     //update date in localstorage
     localStorage.setItem('date', JSON.stringify({month: currentMonth, day: currentDay}));
