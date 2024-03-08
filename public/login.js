@@ -4,7 +4,7 @@ async function login() {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     let email = "";
     if (emailEl.value.match(emailRegex)){ //may need to add email verification? via api?
-      email = emailEl.value;
+      email = emailEl.value.toLowerCase();
     } else {
       const emailErrorEl = document.getElementById('emailError');
       emailErrorEl.innerText = "Please enter a valid email."
