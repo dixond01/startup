@@ -1,11 +1,17 @@
-function usersDisplay() {
-    window.usersList = JSON.parse(localStorage.getItem('usersList'));
+async function usersDisplay() {
+    const get_response = await fetch('/api/users');
+    window.usersList = await get_response.json();
+    //window.usersList = JSON.parse(localStorage.getItem('usersList'));
     const membersNumber = document.querySelector('#membersNumber');
     membersNumber.textContent = usersList.length;
 };
 
-function updateTable() {
+async function updateTable() {
     let tableElement = document.querySelector('#users');
+
+    const get_response = await fetch('/api/users');
+    window.usersList = await get_response.json();
+    
     for (user of usersList) {
         const rowElement = document.createElement("tr");
         tableElement.appendChild(rowElement);
