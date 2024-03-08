@@ -46,6 +46,18 @@ apiRouter.post('/user', (req, res) => {
   res.send(usersList);
 });
 
+let messageList = [];
+//GetMessages
+apiRouter.get('/messages', (_req, res) => {
+  res.send(messageList);
+});
+
+//AddMessage to messageList
+apiRouter.post('/message', (req, res) => {
+  messageList = req.body; //only if req contains full messageList (primarily on frontend)
+  res.send(messageList);
+});
+
 // // GetScores
 // apiRouter.get('/scores', (_req, res) => {
 //   res.send(scores);

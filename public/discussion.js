@@ -21,7 +21,12 @@ function displayMessage(chat) {
     chatEl.innerHTML = chatEl.innerHTML + message;
 }
 
-function displayMessages() {
+async function displayMessages() {
+
+    //fetch
+    const get_response = await fetch('/api/messages');
+    let messageList = await get_response.json();
+
     const discussionFeed = document.getElementById('discussionFeed');
     for (chat of messageList) {
         displayMessage(chat);
@@ -29,7 +34,11 @@ function displayMessages() {
     }
 }
 
-function pushMessage() {
+async function pushMessage() {
+    //fetch
+    const get_response = await fetch('/api/messages');
+    let messageList = await get_response.json();
+
     const chatbox = document.getElementById("chatbox");
     const string = chatbox.value;
     if (string) {
@@ -37,6 +46,17 @@ function pushMessage() {
         const userName = localStorage.getItem("userName");
         const chat = {name: userName, message: string}
         messageList.push(chat);
+
+        //fetch
+        messageList = JSON.stringify(messageList);
+        const post_response = await fetch('/api/message', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: messageList,
+          });    
+
+        messageList = await post_response.json();
+
         localStorage.setItem('messageList', JSON.stringify(messageList));
         displayMessage(chat);
         updateScroll();
@@ -49,11 +69,25 @@ function pushMessage() {
 }
 
 //webSocket simulation DELETE
-setInterval(() => {
-  chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
-  messageList.push(chat);
-  localStorage.setItem('messageList', JSON.stringify(messageList));
-  displayMessage(chat);
+setInterval(async () => {
+    //fetch
+    const get_response = await fetch('/api/messages');
+    let messageList = await get_response.json();
+
+    chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
+    messageList.push(chat);
+    //fetch
+    messageList = JSON.stringify(messageList);
+    const post_response = await fetch('/api/message', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: messageList,
+        });    
+
+    messageList = await post_response.json();
+    
+    localStorage.setItem('messageList', JSON.stringify(messageList));
+    displayMessage(chat);
 }, 7000);
 
 function setDiscussion() {
@@ -178,21 +212,21 @@ function hideSidebar() {
 }
 
 //might break something
-if (localStorage.getItem('messageList')) {
-    window.messageList = JSON.parse(localStorage.getItem('messageList'));
-}
-else {
-    window.messageList = [];
-}
+// if (localStorage.getItem('messageList')) {
+//     window.messageList = JSON.parse(localStorage.getItem('messageList'));
+// }
+// else {
+//     window.messageList = [];
+// }
 
 setDiscussion();
 
-if (localStorage.getItem('messageList')) {
-    window.messageList = JSON.parse(localStorage.getItem('messageList'));
-}
-else {
-    window.messageList = [];
-}
+// if (localStorage.getItem('messageList')) {
+//     window.messageList = JSON.parse(localStorage.getItem('messageList'));
+// }
+// else {
+//     window.messageList = [];
+// }
 
 displayMessages();
 
