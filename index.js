@@ -70,6 +70,18 @@ apiRouter.post('/date', (req, res) => {
   res.send(dateList);
 });
 
+let archiveList = [];
+//GetArchiveData for archiveList
+apiRouter.get('/archive_data', (_req, res) => {
+  res.send(archiveList);
+});
+
+//AddAchive to archiveList
+apiRouter.post('/archive_new_data', (req, res) => {
+  archiveList = req.body; //only if req contains full messageList (primarily on frontend)
+  res.send(archiveList);
+});
+
 // // GetScores
 // apiRouter.get('/scores', (_req, res) => {
 //   res.send(scores);

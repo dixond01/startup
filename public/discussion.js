@@ -108,6 +108,10 @@ async function setDiscussion() {
     const get_response = await fetch('/api/dates');
     let dateList = await get_response.json();
 
+    //fetch
+    const message_response = await fetch('/api/messages');
+    let messageList = await message_response.json();   
+
     function findTest(x) {
         if (x.month === currentMonth) {
             if (x.day === currentDay) {
@@ -122,29 +126,54 @@ async function setDiscussion() {
         //change to draw from database?
         if (localStorage.getItem('date')) { //make fetch?
 
-            //fetch
-            const get_response = await fetch('/api/messages');
-            let messageList = await get_response.json();           
+                    
 
             const archiveDate = JSON.parse(localStorage.getItem('date'));
             const archiveMonth = archiveDate.month;
             const archiveDay = archiveDate.day;
             const archiveObject = {month: archiveMonth, day: archiveDay, messages: messageList};
 
-            if (localStorage.getItem('archiveList')) {
-                window.archiveList = JSON.parse(localStorage.getItem('archiveList'));
-            }
-            else {
-                window.archiveList = [];
-            }
+            // if (localStorage.getItem('archiveList')) {
+            //     window.archiveList = JSON.parse(localStorage.getItem('archiveList'));
+            // }
+            // else {
+            //     window.archiveList = [];
+            // }
+
+            //fetch
+            const archive_response = await fetch('/api/archive_data');
+            let archiveList = await archive_response.json();
+
 
             archiveList.push(archiveObject);
+
+            //fetch
+            archiveList = JSON.stringify(archiveList);
+            const archive_post_response = await fetch('/api/archive_new_data', {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: archiveList,
+            });    
+
+            archiveList = await archive_post_response.json();
 
             localStorage.setItem('archiveList', JSON.stringify(archiveList));
         }
 
         //clear discussion
         localStorage.removeItem('messageList');
+        messageList = [];
+        //fetch
+        messageList = JSON.stringify(messageList);
+        const message_response = await fetch('/api/message', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: messageList,
+          });    
+
+        messageList = await message_response.json();
+
+
 
         //add date to dateList
         dateList.push({month: currentMonth, day: currentDay});
