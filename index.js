@@ -31,16 +31,19 @@ apiRouter.post('/studygroup', (req, res) => {
   res.send(studyGroups);
 })
 
+let usersList = [];
 //GetUsers for usersList
 apiRouter.get('/users', (_req, res) => {
-  res.send(JSON.stringify(usersList)); //unexpected character at line 1 of the JSON data
+  console.log('Type: ', typeof(usersList), 'List: ', usersList)
+  res.send(usersList); //unexpected character at line 1 of the JSON data
 });
 
 //AddUser to usersList
 apiRouter.post('/user', (req, res) => {
-  usersList = usersList.push(req.body);
+  console.log('Type: ', typeof(req.body), 'req.body: ', req.body);
+  usersList = req.body;
+  console.log('after push: ', usersList);
   res.send(usersList);
-
 });
 
 // // GetScores
@@ -64,7 +67,6 @@ app.listen(port, () => {
 });
 
 
-let usersList = [];
 
 let studyGroups = []; //saved in memory? Maybe? Don't know if that's what I want.
 function addGroup(name, studyGroups) {

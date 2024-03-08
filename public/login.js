@@ -27,7 +27,10 @@ async function login() {
 
     //implementing fetch
     const get_response = await fetch('/api/users');
-    window.usersList = JSON.parse(get_response.json());
+    window.usersList = await get_response.json();
+
+
+    console.log('Type:', typeof(usersList), 'List:', usersList)
 
     // if (localStorage.getItem('usersList')) {
     //   window.usersList = JSON.parse(localStorage.getItem('usersList'));
@@ -47,14 +50,20 @@ async function login() {
     //   window.usersList = [{email: email, name: nameEl.value, status: "online"}];
     // }
 
+    console.log('Before Post type', typeof(usersList),'list: ', usersList);
+    usersList = JSON.stringify(usersList);
+    console.log('After stringify type ', typeof(usersList),'list: ', usersList);
+
     
     const post_response = await fetch('/api/user', {
       method: 'POST',
       headers: {'content-type': 'application/json'},
-      body: JSON.stringify(usersList),
+      body: usersList,
     });
 
     usersList = await post_response.json();
+
+    console.log('after post', usersList);
 
     localStorage.setItem('usersList', JSON.stringify(usersList));
 
