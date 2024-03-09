@@ -313,11 +313,16 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
             //FETCH from bible
             response = await fetch(`https://bible-api.com/${book} ${chapter}:${verse}?translation=kjv`);
             //console.log("Type: ", typeof(response), "Response: ", response);
-            let resText = await response.text();
-            let resObj = JSON.parse(resText);
-            let text = resObj.text;
-            //console.log("Text: ", text);
-            return text
+            if (response.status < 400) {
+                let resText = await response.text();
+                let resObj = JSON.parse(resText);
+                let text = resObj.text;
+                //console.log("Text: ", text);
+                return text;
+            } else {
+                return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
+            }
+            
         } catch(err) {
             //return generic no support message
             return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
