@@ -88,7 +88,7 @@ setInterval(async () => {
 
     localStorage.setItem('messageList', JSON.stringify(messageList));
     displayMessage(chat);
-}, 7000);
+}, 14000);
 
 async function setDiscussion() {
     const currentDate = new Date();
