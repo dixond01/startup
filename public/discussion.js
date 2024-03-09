@@ -295,40 +295,31 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
     }
     let bookOfMormon = ["1nephi", "2nephi","jacob","enos","jarom","omni","wordsofmormon","mosiah","alma","helaman","3nephi","4nephi","mormon","ether","moroni"];
     if (bookOfMormon.includes(book)) {
-        response = await fetch(`https://book-of-mormon-api.vercel.app/${book}/${chapter}/${verse}`);
-        console.log("Type: ", typeof(response), "Response: ", response);
-        let resText = await response.text();
-        let resObj = JSON.parse(resText);
-        let text = resObj.text;
-        console.log("Text: ", text);
-        return text
-
-        // fetch(`https://book-of-mormon-api.vercel.app/${book}/${chapter}/${verse}`) 
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         console.log("Type:", typeof(data.text), "Text: ", data.text); //for tests
-        //         //text = JSON.parse(data.text);
-        //         let text = data.text;
-        //         console.log("Text: ", data.text);
-        //         return text;
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //         return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
-        //     });
+        try {
+            response = await fetch(`https://book-of-mormon-api.vercel.app/${book}/${chapter}/${verse}`);
+            console.log("Type: ", typeof(response), "Response: ", response);
+            let resText = await response.text();
+            let resObj = JSON.parse(resText);
+            let text = resObj.text;
+            console.log("Text: ", text);
+            return text
+        } catch(err) {
+            return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
+        }
+        
             
     } else {
         try{
             //FETCH from bible
-            fetch(`https://bible-api.com/${book} ${chapter}:${verse}?translation=kjv`) 
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data.text); //for tests
-                    return data.text;
-                }); 
+            response = await fetch(`https://bible-api.com/${book} ${chapter}:${verse}?translation=kjv`);
+            console.log("Type: ", typeof(response), "Response: ", response);
+            let resText = await response.text();
+            let resObj = JSON.parse(resText);
+            let text = resObj.text;
+            console.log("Text: ", text);
+            return text
         } catch(err) {
             //return generic no support message
-            console.log(err);
             return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
         }
     }
