@@ -264,7 +264,7 @@ async function showSidebar(element) {
             const textEl = document.createElement('span');
             //may want to add a class
             let scriptureText = await getScripture(book, chapter, verse);
-            console.log("in showSidebar", scriptureText);
+            //console.log("in showSidebar", scriptureText);
             textEl.textContent = scriptureText; //gives the book, chapter, and specific verse to the getScripture function which returns the text of the verse.
             //textEl.innerText = "This is placeholder text for the verse text from a database."
             verseEl.appendChild(textEl);
@@ -297,11 +297,11 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
     if (bookOfMormon.includes(book)) {
         try {
             response = await fetch(`https://book-of-mormon-api.vercel.app/${book}/${chapter}/${verse}`);
-            console.log("Type: ", typeof(response), "Response: ", response);
+            //console.log("Type: ", typeof(response), "Response: ", response);
             let resText = await response.text();
             let resObj = JSON.parse(resText);
             let text = resObj.text;
-            console.log("Text: ", text);
+            //console.log("Text: ", text);
             return text
         } catch(err) {
             return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
@@ -312,11 +312,11 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
         try{
             //FETCH from bible
             response = await fetch(`https://bible-api.com/${book} ${chapter}:${verse}?translation=kjv`);
-            console.log("Type: ", typeof(response), "Response: ", response);
+            //console.log("Type: ", typeof(response), "Response: ", response);
             let resText = await response.text();
             let resObj = JSON.parse(resText);
             let text = resObj.text;
-            console.log("Text: ", text);
+            //console.log("Text: ", text);
             return text
         } catch(err) {
             //return generic no support message
