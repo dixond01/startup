@@ -221,7 +221,7 @@ function updateScroll(){
     discussionFeedEl.scrollTop = discussionFeedEl.scrollHeight;
 }
 
-function showSidebar(element) {
+async function showSidebar(element) {
     const sidebarEl = document.getElementById('sidebar');
 
     //need to update sidebar to match the scriptureReference
@@ -230,6 +230,7 @@ function showSidebar(element) {
     referenceEl.textContent = referenceText;
 
     //match and group scriptureReference
+    scripturePattern = /(?:(\d [a-z]+)|([a-z]+))\ (\d+):(\d+)(?:\ ?-\ ?(\d+))?/i;
     if (element.textContent.match(scripturePattern)) {
         const match = element.textContent.match(scripturePattern);
         if (match[1]) {
@@ -262,7 +263,10 @@ function showSidebar(element) {
 
             const textEl = document.createElement('span');
             //may want to add a class
-            textEl.innerText = "This is placeholder text for the verse text from a database."
+            let scriptureText = await getScripture(book, chapter, verse);
+            console.log("in showSidebar", scriptureText);
+            textEl.textContent = scriptureText; //gives the book, chapter, and specific verse to the getScripture function which returns the text of the verse.
+            //textEl.innerText = "This is placeholder text for the verse text from a database."
             verseEl.appendChild(textEl);
         }
     }
@@ -275,6 +279,77 @@ function hideSidebar() {
     sidebar.classList.remove('show');
 }
 
+
+async function getScripture(book, chapter, verse) { //may conflict with window variables?
+    book = book.toLowerCase()
+    if (book === "1 nephi") {
+        book = "1nephi";
+    } else if (book === "2 nephi") {
+        book = "2nephi";
+    } else if (book === "words of mormon") {
+        book = "wordsofmormon";
+    } else if (book === "3 nephi") {
+        book = "3nephi";
+    } else if (book === "4 nephi") {
+        book = "4nephi";
+    }
+    let bookOfMormon = ["1nephi", "2nephi","jacob","enos","jarom","omni","wordsofmormon","mosiah","alma","helaman","3nephi","4nephi","mormon","ether","moroni"];
+    if (bookOfMormon.includes(book)) {
+        response = await fetch(`https://book-of-mormon-api.vercel.app/${book}/${chapter}/${verse}`);
+        console.log("Type: ", typeof(response), "Response: ", response);
+        let resText = await response.text();
+        let resObj = JSON.parse(resText);
+        let text = resObj.text;
+        console.log("Text: ", text);
+        return text
+
+        // fetch(`https://book-of-mormon-api.vercel.app/${book}/${chapter}/${verse}`) 
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         console.log("Type:", typeof(data.text), "Text: ", data.text); //for tests
+        //         //text = JSON.parse(data.text);
+        //         let text = data.text;
+        //         console.log("Text: ", data.text);
+        //         return text;
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //         return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
+        //     });
+            
+    } else {
+        try{
+            //FETCH from bible
+            fetch(`https://bible-api.com/${book} ${chapter}:${verse}?translation=kjv`) 
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data.text); //for tests
+                    return data.text;
+                }); 
+        } catch(err) {
+            //return generic no support message
+            console.log(err);
+            return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
+        }
+    }
+
+    
+    // 1st Nephi = "1nephi"
+    // 2nd Nephi = "2nephi"
+    // Jacob = "jacob"
+    // Enos = "enos"
+    // Jarom = "jarom"
+    // Omni = "omni"
+    // Words of Mormon = "wordsofmormon"
+    // Mosiah = "mosiah"
+    // Alma = "alma"
+    // Heleman = "helaman"
+    // 3rd Nephi = "3nephi"
+    // 4th Nephi = "4nephi"
+    // Mormon = "mormon"
+    // Ether = "ether"
+    // Moroni = "moroni"
+}
 //might break something
 // if (localStorage.getItem('messageList')) {
 //     window.messageList = JSON.parse(localStorage.getItem('messageList'));
@@ -296,3 +371,14 @@ displayMessages();
 
 updateScroll();
 
+// fetch("https://bible-api.com/john 3:16?translation=kjv") 
+//     .then((response) => response.json())
+//     .then((data) => console.log(data))
+    
+// fetch("https://book-of-mormon-api.vercel.app/1nephi/1/1") 
+//     .then((response) => response.json())
+//     .then((data) => console.log(data))
+
+// fetch("https://api.nephi.org/scriptures/?q=Genesis 1:1") 
+//     .then((response) => response.json())
+//     .then(console.log(response))
