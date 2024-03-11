@@ -1316,3 +1316,147 @@ server.listen(8080, () => {
 
 - single origin principle
   - sites must allow their data to be accessed
+
+## Deployment
+
+- more complex (but still simple) deployment includes
+- development -> (push) GitHub Repository -> Continuous Integration ->
+  - (testing auto-deploy) -> Staging (stage.com)
+  - or (manual-deploy) -> Production (prod.com)
+- environments for deployment might be subdomains
+- `./deploy.sh -k ~/prod.pem -h funky.com -s startup`
+  - credentials (prod.pem)
+  - deploy.sh
+    - 2. Delete previous files
+      3. copies over new package
+      4. deploy the service on the target
+      
+### Interruptive Deployment
+
+- deploy.sh
+- stops, replaces, and starts again while people may be using the service
+- problematic professionally
+
+### Rolling drain and replace
+
+- multiple servers with load balancer
+  - if one server is down, uses another
+  - deploy to one server and roll out to the others so the server is never completely down
+  - versions must be at least V n-1 compatible or else it won't work while rolling out
+  - throw away (but handle) extraneous data, and in next version, you won't have to handle it because no one will be able to request it 
+- drain, stop, start ... repeat
+  - drain is draining the connections to the server before stopping that server and deploying
+
+### Canary
+
+- gradual rolling out with only deploying one
+- monitor errors, make sure everything is working
+- roll out to others
+- "canary in a coal mine"
+
+### Blue/Green
+
+- blue is old, green is new
+- release green all at once, but keep blue up in case something goes wrong
+- after making sure things are working, can use blue as a staging environment, swap between them
+
+### A/B
+
+- for marketing purposes, make sure the features are useful
+- have two or more versions out at once
+- some percent of the traffic goes to the B server to test the new features
+- testing features on the users
+
+## Storage
+
+### Uploading Files to Server
+
+- frontend: file input (html element and functionality)
+  ```
+  <input
+    type="file"
+    id="fileInput"
+    name="file"
+    accept=".png, .jpeg, .jpg"
+    onchange="uploadFile(this)"
+  />
+  ```
+  ```
+  async function uploadFile(fileInput) {
+  const file = fileInput.files[0];
+  if (file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch('/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      document.querySelector('#upload').src = `/file/${data.file}`;
+    } else {
+      alert(data.message);
+    }
+  }
+  ```
+  
+}
+- backend: multer package
+  - built on top of express, makes it easier to interact with the http you need
+  - `npm install multer`
+  ```
+  const express = require('express');
+  const multer = require('multer');
+  
+  const app = express();
+  
+  app.use(express.static('public'));
+  
+  const upload = multer({
+    storage: multer.diskStorage({
+      destination: 'uploads/',
+      filename: (req, file, cb) => {
+        const filetype = file.originalname.split('.').pop();
+        const id = Math.round(Math.random() * 1e9);
+        const filename = `${id}.${filetype}`;
+        cb(null, filename);
+      },
+    }),
+    limits: { fileSize: 64000 },
+  });
+  
+  app.post('/upload', upload.single('file'), (req, res) => {
+    if (req.file) {
+      res.send({
+        message: 'Uploaded succeeded',
+        file: req.file.filename,
+      });
+    } else {
+      res.status(400).send({ message: 'Upload failed' });
+    }
+  });
+  
+  app.get('/file/:filename', (req, res) => {
+    res.sendFile(__dirname + `/uploads/${req.params.filename}`);
+  });
+  
+  app.use((err, req, res, next) => {
+    if (err instanceof multer.MulterError) {
+      res.status(413).send({ message: err.message });
+    } else {
+      res.status(500).send({ message: err.message });
+    }
+  });
+  
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
+  ```
+  - storing files on the server isn't a good long-term or large-server solution
+    1. Limited Space
+    2. No backup
+    3. Servers themselves are transient
+    4. Multiple servers hosting data - don't know which one the user is calling
+  - Should be using a dedicated storage service instead
