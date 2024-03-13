@@ -1460,3 +1460,99 @@ server.listen(8080, () => {
     3. Servers themselves are transient
     4. Multiple servers hosting data - don't know which one the user is calling
   - Should be using a dedicated storage service instead
+
+## Databases
+
+- MySQL - relational database
+
+### NoSQL (Everything but SQL)
+
+- Redis - Memory cached objects
+- ElasticSearch - ranked free text
+- MongoDB - JSON objects
+- DynamoDB - Key value pairs
+- Neo4J - graph based data
+- InflucDB - Time series data
+
+### MongoDB
+
+- what we're using in this class
+- an array of JSON objects
+- Use the Atlas cloud service
+- make IP address in Atlas `0.0.0.0/0`
+- `npm install mongodb`
+```
+const {mongoClient} = require('mongodb') //destructuring
+const userName = '<mongodb username for database>'
+const password = '<mongodb password for database>'
+const hostname = '<hostname from assignment (like cs260.xiu1cqz.mongodb.net)>'
+const url = `mongodb+srv://${userName}:${password}@{hostname}` // I think
+const client = new MongoClient(url)
+const db = client.db('startup') //creates or accesses a database
+```
+- testing connection
+```
+client
+  .connect()
+  .then(() => db.command({ping:1})
+  .then(() => console.log('Connected'))
+  .catch((ex) => {
+    console.log(`error with ${url} because ${ex.message}`);
+    process.exit(1);
+});
+```
+- inserting data
+```
+const collection1 = db.collection1('1');
+collection1.insertOne({<obj>});
+collction1.insertMany([<obj>,<obj>]); //to insert many into the collection
+```
+- if you run the code multiple times, it will insert multiple times
+  - want to put insert after an if statement to check if it is in the data first
+    
+#### Object-Based Queries
+
+- `db.collection1.find()`
+  - db is from `const db = client.db('startup')`
+    - your database
+  - collection1 is from `const collection1 = db.collction1('1')`
+    - collection within the database
+  - returns an iterator (?) to the whole document
+```
+// find all houses
+db.house.find();
+
+// find houses with two or more bedrooms
+db.house.find({ beds: { $gte: 2 } });
+
+// find houses that are available with less than three beds
+db.house.find({ status: 'available', beds: { $lt: 3 } });
+
+// find houses with either less than three beds or less than $1000 a night
+db.house.find({ $or: [(beds: { $lt: 3 }), (price: { $lt: 1000 })] });
+
+// find houses with the text 'modern' or 'beach' in the summary
+db.house.find({ summary: /(modern|beach)/i });
+```
+```
+const query 
+const cursor = collection1.find(query, options)
+const result = await cursor.toArray();
+result.forEach((i) => console.log(i)); //prints it out
+```
+- uses await, so best if put within an async function
+
+### Storing Credentials
+
+- create file called `dbconfig.json` with
+```
+{
+  "hostname": hostname
+  "username": username
+  "password": password
+}
+
+```
+- include in .gitignore `dbconfig.json`
+- `cfg = require('./dbconfig.json')`
+- change url in file to say cfg.hostname etc
