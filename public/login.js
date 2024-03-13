@@ -26,6 +26,23 @@ async function login() {
     const get_response = await fetch('/api/users');
     window.usersList = await get_response.json();
 
+    //adding mongo
+    const database = require('./database.js');
+    const usersCollection = database.db.collection('usersList');
+
+    if (usersCollection.find(x => x.email === email)) {
+      if (usersCollection.find(x => x.email === email).name === name) {
+        usersCollection.updateOne({name: name}, { $set: { status: "online" } })//on this line
+        usersCollection.find(x => x.email === email).status = "online";
+      } else {
+        const loginErrorEl = document.querySelector('#loginError');
+        loginErrorEl.innerText = "Name associated with email incorrect.";
+        return;
+      }
+    } else {
+      usersList.push({ email: email, name: nameEl.value, status: "online"});
+    } 
+
 
     // console.log('Type:', typeof(usersList), 'List:', usersList)
 
@@ -65,7 +82,7 @@ async function login() {
 
     usersList = await post_response.json();
 
-    // console.log('after post', usersList);
+    
 
     localStorage.setItem('usersList', JSON.stringify(usersList));
 
