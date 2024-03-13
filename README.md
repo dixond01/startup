@@ -80,3 +80,13 @@ I deployed the simon javascript at [simon.inspireus.click](https://simon.inspire
 - **Database:** The name of the discussion will change weekly based on that week's Come, Follow Me, but for now, it changes daily based on the date. Clicking on a scripture reference of the form 'book #:#' will bring up a sidebar which will eventually show the verses from a database. Currently, it shows the scripture reference and verse numbers with placeholder text. Several items are currently in localStorage but will eventually be in the server's database.
 - **Websocket:** User can display their own messages. A setInterval function periodically displays a single message. On the 'users' paage, all users that have ever logged in are shown in a table as 'online'. These will be replaced with websocket functionality, when I can track if a user is online or not. 
 - **Application Logic:** Messages are stored and retrieved dynamically. The content of a message matching a regex pattern gets wrapped with javascript that opens the sidebar when clicked, which updates depending on the element that was clicked. After a day, the discussions are saved in localStorage and can be viewed in the archive. (Since this is functional, I removed all placeholders in the Archive page. If a day has not passed, localStorage will not have updated, so this part will appear blank. It is not central to my app's functionality.) Names and study group names are saved in localStorage and updated accross the app.
+
+## Service Deliverable
+
+Simon service deployed.
+
+- **HTTP Service:** Complete!
+- **Static Middleware for Frontend:** Complete!
+- **3rd Party Enpoints on Frontend:** Complete! My app calls two different apis for the bible and the Book of Mormon. Unfortunately, there was not an api available for all the standard works, so there's no support for D&C, JS-History, or the Pearl of Great Price. I also had originally planned to get the weekly scriptures as the discussion name, but there is no api for that, so right now it is a discusison that refreshes and archives every day. I may end up changing it to weekly, but that hasn't been done yet.
+- **Backend Service Endpoints:** I added the data that would be needed server-wide from the localStorage to the service and provided enpoints for that. This includes the messages that are displayed, meaning the chat has functionality! There are also endpoints for a list of user objects, which includes online status. This is a placeholder for webSocket.
+- **Frontend Calls Service Endpoints:** GET and POST requests made using fetch and async/await to store and retrieve the data on the server.
