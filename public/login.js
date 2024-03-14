@@ -30,10 +30,10 @@ async function login() {
     const database = require('./database.js');
     const usersCollection = database.db.collection('usersList');
 
-    if (usersCollection.find(x => x.email === email)) {
-      if (usersCollection.find(x => x.email === email).name === name) {
-        usersCollection.updateOne({name: name}, { $set: { status: "online" } })//on this line
-        usersCollection.find(x => x.email === email).status = "online";
+    if (usersCollection.find({"email": email})) {
+      if (usersCollection.find({"email": email, "name": name})) {
+        usersCollection.updateOne({"email": email}, { $set: { "status": "online" } })//on this line
+        //usersCollection.find(x => x.email === email).status = "online";
       } else {
         const loginErrorEl = document.querySelector('#loginError');
         loginErrorEl.innerText = "Name associated with email incorrect.";
@@ -41,6 +41,7 @@ async function login() {
       }
     } else {
       usersList.push({ email: email, name: nameEl.value, status: "online"});
+      usersCollection.insertOne({"email": email, "name": name, "status": "online"});
     } 
 
 
@@ -48,17 +49,17 @@ async function login() {
 
     // if (localStorage.getItem('usersList')) {
     //   window.usersList = JSON.parse(localStorage.getItem('usersList'));
-    if (usersList.find(x => x.email === email)) {
-      if (usersList.find(x => x.email === email).name === name) {
-        usersList.find(x => x.email === email).status = "online";
-      } else {
-        const loginErrorEl = document.querySelector('#loginError');
-        loginErrorEl.innerText = "Name associated with email incorrect.";
-        return;
-      }
-    } else {
-      usersList.push({ email: email, name: nameEl.value, status: "online"});
-    } 
+    // if (usersList.find(x => x.email === email)) {
+    //   if (usersList.find(x => x.email === email).name === name) {
+    //     usersList.find(x => x.email === email).status = "online";
+    //   } else {
+    //     const loginErrorEl = document.querySelector('#loginError');
+    //     loginErrorEl.innerText = "Name associated with email incorrect.";
+    //     return;
+    //   }
+    // } else {
+    //   usersList.push({ email: email, name: nameEl.value, status: "online"});
+    // } 
 
     localStorage.setItem('email', email); //hope this works with email = emailEl.value
     localStorage.setItem('userName', name);
