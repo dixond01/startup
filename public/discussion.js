@@ -129,7 +129,7 @@ async function setDiscussion() {
         // if (localStorage.getItem('date')) { //make fetch?
 
         //fetch
-        const get_storedDate_res = await fetch('/api/archive_data');
+        const get_storedDate_res = await fetch('/api/stored_date');
         archiveDate = await get_storedDate_res.json();
         console.log('after fetch', archiveDate, 'type: ', typeof(archiveDate));
                             
@@ -202,14 +202,15 @@ async function setDiscussion() {
     discussionName.appendChild(document.createTextNode(`${currentMonth} ${currentDay}`));
 
     //fetch
+    archiveDate = {month: currentMonth, day: currentDay};
     archiveDate = JSON.stringify(archiveDate);
-    const post_storedDate_response = await fetch('/api/store_date', {
+    const post_storeDate_response = await fetch('/api/store_date', {
         method: 'POST',
         headers: {'content-type': 'application/json'},
         body: archiveDate,
         });    
 
-    archiveDate = await post_storedDate_response.json();
+    archiveDate = await post_storeDate_response.json();
 
     //update date in localstorage
     localStorage.setItem('date', JSON.stringify({month: currentMonth, day: currentDay}));
