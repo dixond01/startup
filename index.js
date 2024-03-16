@@ -40,11 +40,22 @@ apiRouter.get('/users', (_req, res) => {
 });
 
 //AddUser to usersList
-apiRouter.post('/user', (req, res) => {
-  // console.log('Type: ', typeof(req.body), 'req.body: ', req.body);
-  usersList = req.body;
-  // console.log('after push: ', usersList);
-  res.send(usersList);
+apiRouter.post('/user/:email/:name', async (req, res) => {
+  user = await DB.getUser(req.params.email);//maybe
+  if (user) {
+    if (user.name === req.params.name) {
+      DB.makeOnline(req.params.email);
+      return; //?
+    } else {
+      res.status(404).send({ msg: 'Name does not match email.' });
+      return;
+    }
+  } else {
+    DB.addUser(req.params.email, req.params.name);
+    return;
+  }
+  // usersList = req.body;
+  // res.send(usersList); //do I need to send it back?
 });
 
 let messageList = [];

@@ -54,16 +54,19 @@ async function login() {
     // console.log('After stringify type ', typeof(usersList),'list: ', usersList);
 
     
-    const post_response = await fetch('/api/user', {
+    const post_response = await fetch(`/api/user/${email}/${name}`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: usersList,
     });
 
+    if (post_response.status === 404) { //if change status code, also change this
+      const loginErrorEl = document.querySelector('#loginError');
+      loginErrorEl.innerText = "Name associated with email incorrect.";
+    }
+
+    //not sure if i need these two lines
     usersList = await post_response.json();
-
-    
-
     localStorage.setItem('usersList', JSON.stringify(usersList));
 
     window.location.href = 'discussion.html';

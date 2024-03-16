@@ -4,8 +4,8 @@ const { MongoClient } = require('mongodb')
 
 const client = new MongoClient(url);
 const db = client.db('startup');
+const userCollection = db.collection('user');
 
-//const collection = db.collection('test_collection');
 
 client
   .connect()
@@ -16,7 +16,19 @@ client
     process.exit(1);
 });
 
+function getUser (email) {
+  return userCollection.findOne({ email: email });
+}
 
+function makeOnline (email) {
+  userCollection.updateOne({email: email}, { $set: { status: "online" } });
+  return;
+}
+
+function addUser (email, name) {
+  userCollection.insertOne({email: email, name: name, status: online});
+  return;
+}
 
 // (async function testConnection() {
 //   await client.connect();
