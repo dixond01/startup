@@ -23,8 +23,8 @@ async function login() {
 
 
     //implementing fetch
-    const get_response = await fetch('/api/users');
-    window.usersList = await get_response.json();
+    // const get_response = await fetch('/api/users');
+    // window.usersList = await get_response.json();
 
     // console.log('Type:', typeof(usersList), 'List:', usersList)
 
@@ -50,14 +50,14 @@ async function login() {
     // }
 
     // console.log('Before Post type', typeof(usersList),'list: ', usersList);
-    usersList = JSON.stringify(usersList);
+    //usersList = JSON.stringify(usersList);
     // console.log('After stringify type ', typeof(usersList),'list: ', usersList);
 
     
-    const post_response = await fetch(`/api/user/${email}/${name}`, {
+    const post_response = await fetch(`/api/user/${email}/${name}/online`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
-      body: usersList, //implemented like a GET. Problem?
+      //body: usersList, //implemented like a GET. Problem?
     });
 
     if (post_response.status === 404) { //if change status code, also change this
@@ -66,8 +66,8 @@ async function login() {
       return;
     } else {
       //not sure if i need these two lines
-      usersList = await post_response.json();
-      localStorage.setItem('usersList', JSON.stringify(usersList));
+      // usersList = await post_response.json();
+      // localStorage.setItem('usersList', JSON.stringify(usersList));
 
       window.location.href = 'discussion.html';
     }

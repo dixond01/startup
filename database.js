@@ -30,11 +30,16 @@ function addUser (email, name) {
   return;
 }
 
+function makeOffline (email) {
+  userCollection.updateOne({email: email}, { $set: {status: "offline"}});
+  return;
+}
 
 module.exports = {
   getUser,
   makeOnline,
-  addUser
+  addUser,
+  makeOffline
 };
 // (async function testConnection() {
 //   await client.connect();

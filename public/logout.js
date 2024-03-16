@@ -1,20 +1,16 @@
 async function logout() {
     userName = localStorage.getItem('userName');
-    if (localStorage.getItem('usersList')) {
-        window.usersList = JSON.parse(localStorage.getItem('usersList'));
-        if (usersList.find(x => x.name === userName)) {
-          usersList.find(x => x.name === userName).status = "offline";
-        }
-    } 
+    email = localStorage.getItem('email');
 
-    usersList = JSON.stringify(usersList);
-    const post_response = await fetch('/api/user', {
+    //usersList = JSON.stringify(usersList);
+
+    const post_response = await fetch(`/api/user/${email}/${userName}/offline`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
-      body: usersList,
+      // body: usersList,
     });
 
-    localStorage.setItem('usersList', usersList);
+    //localStorage.setItem('usersList', usersList);
     //make Post request
     window.location.href = 'index.html';
 }

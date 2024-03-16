@@ -40,19 +40,26 @@ apiRouter.get('/users', (_req, res) => {
 });
 
 //AddUser to usersList
-apiRouter.post('/user/:email/:name', async (req, res) => {
+//status is what the function should do (if status = online, the function should make the user online)
+apiRouter.post('/user/:email/:name/:status', async (req, res) => {
   user = await DB.getUser(req.params.email);//maybe
-  if (user) {
-    if (user.name === req.params.name) {
-      DB.makeOnline(req.params.email);
-      res.status(200).send({msg: 'All good!'});
-      return; //?
+  if (req.params.status == 'online') {
+    if (user) {
+      if (user.name === req.params.name) {
+        DB.makeOnline(req.params.email);
+        res.status(200).send({msg: 'All good!'});
+        return; //?
+      } else {
+        res.status(404).send({ msg: 'Name does not match email.' });
+        return;
+      }
     } else {
-      res.status(404).send({ msg: 'Name does not match email.' });
+      DB.addUser(req.params.email, req.params.name);
+      res.status(200).send({msg: 'All good!'});
       return;
     }
-  } else {
-    DB.addUser(req.params.email, req.params.name);
+  } else { //when the status is "offline"
+    DB.makeOffline(req.params.email);
     res.status(200).send({msg: 'All good!'});
     return;
   }
