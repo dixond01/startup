@@ -64,12 +64,11 @@ async function login() {
       const loginErrorEl = document.querySelector('#loginError');
       loginErrorEl.innerText = "Name associated with email incorrect.";
       return;
+    } else {
+      //not sure if i need these two lines
+      usersList = await post_response.json();
+      localStorage.setItem('usersList', JSON.stringify(usersList));
+
+      window.location.href = 'discussion.html';
     }
-
-    //not sure if i need these two lines
-    usersList = await post_response.json();
-    localStorage.setItem('usersList', JSON.stringify(usersList));
-
-    window.location.href = 'discussion.html';
- 
   }

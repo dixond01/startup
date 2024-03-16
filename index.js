@@ -45,6 +45,7 @@ apiRouter.post('/user/:email/:name', async (req, res) => {
   if (user) {
     if (user.name === req.params.name) {
       DB.makeOnline(req.params.email);
+      res.status(200).send({msg: 'All good!'});
       return; //?
     } else {
       res.status(404).send({ msg: 'Name does not match email.' });
@@ -52,6 +53,7 @@ apiRouter.post('/user/:email/:name', async (req, res) => {
     }
   } else {
     DB.addUser(req.params.email, req.params.name);
+    res.status(200).send({msg: 'All good!'});
     return;
   }
   // usersList = req.body;
