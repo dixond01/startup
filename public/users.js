@@ -1,6 +1,7 @@
 async function usersDisplay() {
     const get_response = await fetch('/api/users');
     window.usersList = await get_response.json();
+    console.log("Type: ", typeof(usersList), "List: ", usersList);
     //window.usersList = JSON.parse(localStorage.getItem('usersList'));
     const membersNumber = document.querySelector('#membersNumber');
     membersNumber.textContent = usersList.length;

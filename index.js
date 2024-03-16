@@ -34,8 +34,9 @@ apiRouter.post('/studygroup', (req, res) => {
 
 let usersList = [];
 //GetUsers for usersList
-apiRouter.get('/users', (_req, res) => {
+apiRouter.get('/users', async (_req, res) => {
   // console.log('Type: ', typeof(usersList), 'List: ', usersList)
+  usersList = await DB.getUsers();
   res.send(usersList); //unexpected character at line 1 of the JSON data
 });
 

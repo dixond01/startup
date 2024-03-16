@@ -16,6 +16,11 @@ client
     process.exit(1);
 });
 
+async function getUsers () {
+  const users = await userCollection.find({}).toArray();
+  return users;
+}
+
 function getUser (email) {
   return userCollection.findOne({ email: email });
 }
@@ -36,10 +41,11 @@ function makeOffline (email) {
 }
 
 module.exports = {
+  getUsers,
   getUser,
   makeOnline,
   addUser,
-  makeOffline
+  makeOffline,
 };
 // (async function testConnection() {
 //   await client.connect();
