@@ -28,17 +28,17 @@ async function login() {
 
     // console.log('Type:', typeof(usersList), 'List:', usersList)
 
-    if (usersList.find(x => x.email === email)) {
-      if (usersList.find(x => x.email === email).name === name) {
-        usersList.find(x => x.email === email).status = "online";
-      } else {
-        const loginErrorEl = document.querySelector('#loginError');
-        loginErrorEl.innerText = "Name associated with email incorrect.";
-        return;
-      }
-    } else {
-      usersList.push({ email: email, name: nameEl.value, status: "online"});
-    } 
+    // if (usersList.find(x => x.email === email)) {
+    //   if (usersList.find(x => x.email === email).name === name) {
+    //     usersList.find(x => x.email === email).status = "online";
+    //   } else {
+    //     const loginErrorEl = document.querySelector('#loginError');
+    //     loginErrorEl.innerText = "Name associated with email incorrect.";
+    //     return;
+    //   }
+    // } else {
+    //   usersList.push({ email: email, name: nameEl.value, status: "online"});
+    // } 
 
     localStorage.setItem('email', email); //hope this works with email = emailEl.value
     localStorage.setItem('userName', name);
@@ -57,12 +57,13 @@ async function login() {
     const post_response = await fetch(`/api/user/${email}/${name}`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
-      body: usersList,
+      body: usersList, //implemented like a GET. Problem?
     });
 
     if (post_response.status === 404) { //if change status code, also change this
       const loginErrorEl = document.querySelector('#loginError');
       loginErrorEl.innerText = "Name associated with email incorrect.";
+      return;
     }
 
     //not sure if i need these two lines

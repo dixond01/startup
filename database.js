@@ -26,10 +26,16 @@ function makeOnline (email) {
 }
 
 function addUser (email, name) {
-  userCollection.insertOne({email: email, name: name, status: online});
+  userCollection.insertOne({email: email, name: name, status: "online"});
   return;
 }
 
+
+module.exports = {
+  getUser,
+  makeOnline,
+  addUser
+};
 // (async function testConnection() {
 //   await client.connect();
 //   await db.command({ ping: 1 });
