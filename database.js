@@ -5,6 +5,7 @@ const { MongoClient } = require('mongodb')
 const client = new MongoClient(url);
 const db = client.db('startup');
 const userCollection = db.collection('user');
+const studyGroupsCollection = db.collection('studyGroups');
 
 
 client
@@ -15,6 +16,16 @@ client
     console.log(`error with ${url} because ${ex.message}`);
     process.exit(1);
 });
+
+async function getStudyGroups () {
+  const studyGroups = await studyGroupsCollection.find({}).toArray();
+  return studyGroups;
+}
+
+function addGroup (groupName) {
+  studyGroupsCollection.insertOne({studyGroupName: groupName});//will create separate documents for each studyGroup
+  return;
+}
 
 async function getUsers () {
   const users = await userCollection.find({}).toArray();
@@ -41,6 +52,8 @@ function makeOffline (email) {
 }
 
 module.exports = {
+  getStudyGroups,
+  addGroup,
   getUsers,
   getUser,
   makeOnline,

@@ -22,13 +22,14 @@ app.use(`/api`, apiRouter);
 
 //FUNCTIONS MAY NEED `next` PARAMETER AND CALL
 //GetStudyGroups
-apiRouter.get('/studygroups', (_req, res) => {
+apiRouter.get('/studygroups', async (_req, res) => {
+  studyGroups = await DB.getStudyGroups();
   res.send(studyGroups); 
 })
 
 //AddStudyGroup
-apiRouter.post('/studygroup', (req, res) => {
-  studyGroups = addGroup(req.body, studyGroups);
+apiRouter.post('/studygroup', async(req, res) => {
+  studyGroups = await DB.addGroup(req.body);
   res.send(studyGroups);
 })
 
