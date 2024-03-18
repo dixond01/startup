@@ -41,6 +41,22 @@ apiRouter.get('/users', async (_req, res) => {
   res.send(usersList); //unexpected character at line 1 of the JSON data
 });
 
+//Registering a new user
+apiRouter.post('/auth/create', async (req, res) => {
+  if (await DB.getUser(req.body.email)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await DB.createUser(req.body.email, req.body.name, req.body.password);
+
+    // Set the cookie
+    //setAuthCookie(res, user.token);
+
+    res.send({
+      id: user._id,
+    });
+  }
+});
+
 //AddUser to usersList
 //status is what the function should do (if status = online, the function should make the user online)
 apiRouter.post('/user/:email/:name/:status', async (req, res) => {
@@ -56,8 +72,7 @@ apiRouter.post('/user/:email/:name/:status', async (req, res) => {
         return;
       }
     } else {
-      DB.addUser(req.params.email, req.params.name);
-      res.status(200).send({msg: 'All good!'});
+      res.status(401).send({msg: 'Unauthorized (email not registered or incorrect password).'});
       return;
     }
   } else { //when the status is "offline"

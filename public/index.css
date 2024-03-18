@@ -20,7 +20,19 @@ main {
     font-weight: bold;
     font-size: 1.25rem;
 }
+
+/* #btnWrapper {
+    display: flex;
+    flex-direction: column;
+} */
 #studybtn {
+    width: 100%;
+    flex: 1;
+}
+#studysubmitbtn {
+width: 30%; 
+}
+#registerbtn {
     width: 100%;
     flex: 1;
 }

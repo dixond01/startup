@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}/?retryWrites=true&w=majority&appName=Cluster0`;
 const { MongoClient } = require('mongodb')
@@ -16,6 +18,22 @@ client
     console.log(`error with ${url} because ${ex.message}`);
     process.exit(1);
 });
+
+async function createUser(email, name, password) {
+  // Hash the password before we insert it into the database
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    email: email,
+    name: name,
+    password: passwordHash,
+    status: "offline",
+    token: uuid.v4(),
+  };
+  await userCollection.insertOne(user);
+
+  return user;
+}
 
 async function getStudyGroups () {
   const studyGroups = await studyGroupsCollection.find({}).toArray();
@@ -41,10 +59,10 @@ function makeOnline (email) {
   return;
 }
 
-function addUser (email, name) {
-  userCollection.insertOne({email: email, name: name, status: "online"});
-  return;
-}
+// function addUser (email, name) {
+//   userCollection.insertOne({email: email, name: name, status: "online"});
+//   return;
+// }
 
 function makeOffline (email) {
   userCollection.updateOne({email: email}, { $set: {status: "offline"}});
@@ -52,12 +70,13 @@ function makeOffline (email) {
 }
 
 module.exports = {
+  createUser,
   getStudyGroups,
   addGroup,
   getUsers,
   getUser,
   makeOnline,
-  addUser,
+  //addUser,
   makeOffline,
 };
 // (async function testConnection() {
