@@ -1,4 +1,4 @@
-const config = require('./dbconfig.json');
+const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}/?retryWrites=true&w=majority&appName=Cluster0`;
 const { MongoClient } = require('mongodb')
 
