@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const DB = require('./database.js');
+const cookieParser = require('cookie-parser');
+
+let authCookieName = 'token';
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -19,7 +22,8 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-
+//cookie parser
+app.use(cookieParser());
 //FUNCTIONS MAY NEED `next` PARAMETER AND CALL
 //GetStudyGroups
 apiRouter.get('/studygroups', async (_req, res) => {
@@ -49,7 +53,7 @@ apiRouter.post('/auth/create', async (req, res) => {
     const user = await DB.createUser(req.body.email, req.body.name, req.body.password);
 
     // Set the cookie
-    //setAuthCookie(res, user.token);
+    setAuthCookie(res, user.token);
 
     res.send({
       id: user._id,
@@ -62,11 +66,20 @@ apiRouter.post('/auth/create', async (req, res) => {
 apiRouter.post('/user/:email/:name/:status', async (req, res) => {
   user = await DB.getUser(req.params.email);
   if (req.params.status == 'online') {
+    //if there exists a document in 
     if (user) {
       if (user.name === req.params.name) {
-        DB.makeOnline(req.params.email);
-        res.status(200).send({msg: 'All good!'});
-        return; //?
+        //implementing authentication
+        if (await bcrypt.compare(req.body.password, user.password)) { //added req.body. May cause a type error?
+          setAuthCookie(res, user.token);
+
+          DB.makeOnline(req.params.email);
+          res.status(200).send({msg: 'All good!'});
+          return; //?
+        } else {
+          res.status(401).send({msg: 'Unauthorized (email not registered or incorrect password).'});
+          return;
+        }
       } else {
         res.status(404).send({ msg: 'Name does not match email.' });
         return;
@@ -159,7 +172,13 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
 
 let studyGroups = []; //saved in memory? Maybe? Don't know if that's what I want.
 // function addGroup(name, studyGroups) {
