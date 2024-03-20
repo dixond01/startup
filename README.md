@@ -90,3 +90,11 @@ Simon service deployed.
 - **3rd Party Enpoints on Frontend:** Complete! My app calls two different apis for the bible and the Book of Mormon. Unfortunately, there was not an api available for all the standard works, so there's no support for D&C, JS-History, or the Pearl of Great Price. I also had originally planned to get the weekly scriptures as the discussion name, but there is no api for that, so right now it is a discusison that refreshes and archives every day. I may end up changing it to weekly, but that hasn't been done yet.
 - **Backend Service Endpoints:** I added the data that would be needed server-wide from the localStorage to the service and provided enpoints for that. This includes the messages that are displayed, meaning the chat has functionality! There are also endpoints for a list of user objects, which includes online status. This is a placeholder for webSocket.
 - **Frontend Calls Service Endpoints:** GET and POST requests made using fetch and async/await to store and retrieve the data on the server.
+
+## Database/Login Deliverable
+
+- **New User Registration:** created a new html page for registration. Users are stored in mongoDB with encrypted passwords. New users must register before logging in.
+- **Existing User Authentication:** using bcrypt, passwords must match. Names must also match the name stored with the email in the database for users to login.
+- **Stores Application Data in MongoDB:** users, study group names, and the list of messages associated with each day are stored in MongoDB.
+- **Stores and Retrieves Credentials in MongoDB:** users, along with their passwords and tokens, are stored in MongoDB and retrieved upon login, logout, and accessing endpoints in the application.
+- **Restricts Functionality:** on frontend, users cannot access the application without first logging in, which requires authentication. On backend, all endpoints other than those used for registration and logging in cannot be accessed without a token. 
