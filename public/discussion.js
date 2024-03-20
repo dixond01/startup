@@ -12,10 +12,8 @@ function displayMessage(chat) {
     chatEl.appendChild(nameEl);
 
     const noHTML = chat['message'].replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, "");
-    //add RegEx for finding the verses
-    scripturePattern = /(?:(\d [a-z]+)|([a-z]+))\ (\d+):(\d+)(?:\ ?-\ ?(\d+))?/i;
-    //save books, chapters, and verses to variables for use in a database later (global variables)
-    
+    //RegEx for finding the verses
+    scripturePattern = /(?:(\d [a-z]+)|([a-z]+))\ (\d+):(\d+)(?:\ ?-\ ?(\d+))?/i;   
     
     const message = noHTML.replace(scripturePattern, "<span class='scriptureReference' onclick='showSidebar(this)'>$&</span>");
     chatEl.innerHTML = chatEl.innerHTML + message;
@@ -64,57 +62,45 @@ async function pushMessage() {
 
         messageList = await post_response.json();
 
-        localStorage.setItem('messageList', JSON.stringify(messageList));
         displayMessage(chat);
         updateScroll();
     }
     else {
-        //could give a message saying you must type a character? idk
         return;
     }
 
 }
 
 //webSocket simulation DELETE
-// setInterval(async () => {
-//     //fetch
-//     const currentDate = new Date();
-//     const currentDay = currentDate.getDate();
-//     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+setInterval(async () => {
+    //fetch
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
     
-//     //fetch
-//     const get_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
-//     let messageList = await get_response.json();
+    //fetch
+    const get_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
+    let messageList = await get_response.json();
 
-//     chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
-//     messageList.push(chat);
-//     //fetch
-//     // messageList = JSON.stringify(messageList);
-//     const post_response = await fetch('/api/message', {
-//         method: 'POST',
-//         headers: {'content-type': 'application/json'},
-//         body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
-//       });     
+    chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
+    messageList.push(chat);
+    //fetch
+    const post_response = await fetch('/api/message', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
+      });     
 
-//     messageList = await post_response.json();
+    messageList = await post_response.json();
 
-//     localStorage.setItem('messageList', JSON.stringify(messageList));
-//     displayMessage(chat);
-// }, 14000);
+    displayMessage(chat);
+}, 14000);
 
 async function setDiscussion() {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
     
-
-    // if (localStorage.getItem('dateList')) {
-    //     window.dateList = JSON.parse(localStorage.getItem('dateList'));
-    // }
-    // else {
-    //     window.dateList = [];
-    // }
-
     //fetch
     const get_response = await fetch('/api/dates');
     let dateList = await get_response.json();
@@ -131,13 +117,11 @@ async function setDiscussion() {
         }
     }
 
-    let archiveDate = {}; //maybe?
+    let archiveDate = {};
 
     //if it's a new day (the date is not in the localstorage object array dateList) archive and refresh discussion
     if (!dateList.find(findTest)) {
         //archive discussion
-        //change to draw from database?
-        // if (localStorage.getItem('date')) { //make fetch?
 
         //fetch
         const get_storedDate_res = await fetch('/api/stored_date');
@@ -145,22 +129,13 @@ async function setDiscussion() {
         console.log('after fetch', archiveDate, 'type: ', typeof(archiveDate));
                             
         if (archiveDate.length) {
-            // const archiveDate = JSON.parse(localStorage.getItem('date'));
             const archiveMonth = archiveDate.month;
             const archiveDay = archiveDate.day;
             const archiveObject = {month: archiveMonth, day: archiveDay, messages: messageList};
 
-            // if (localStorage.getItem('archiveList')) {
-            //     window.archiveList = JSON.parse(localStorage.getItem('archiveList'));
-            // }
-            // else {
-            //     window.archiveList = [];
-            // }
-
             //fetch
             const archive_response = await fetch('/api/archive_data');
             let archiveList = await archive_response.json();
-
 
             archiveList.push(archiveObject);
 
@@ -173,15 +148,12 @@ async function setDiscussion() {
             });    
 
             archiveList = await archive_post_response.json();
-
-            localStorage.setItem('archiveList', JSON.stringify(archiveList));
         }
 
         //clear discussion
-        localStorage.removeItem('messageList');
         messageList = [];
+
         //fetch
-        // messageList = JSON.stringify(messageList);
         const message_response = await fetch('/api/message', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
@@ -189,8 +161,6 @@ async function setDiscussion() {
           });       
 
         messageList = await message_response.json();
-
-
 
         //add date to dateList
         dateList.push({month: currentMonth, day: currentDay});
@@ -204,9 +174,7 @@ async function setDiscussion() {
             });    
 
         dateList = await post_response.json();
-        
-        localStorage.setItem('dateList', JSON.stringify(dateList));
-        
+                
     }
     //update discussionName
     const discussionName = document.getElementById('discussionName');
@@ -222,9 +190,6 @@ async function setDiscussion() {
         });    
 
     archiveDate = await post_storeDate_response.json();
-
-    //update date in localstorage
-    localStorage.setItem('date', JSON.stringify({month: currentMonth, day: currentDay}));
 }
 
 
@@ -236,7 +201,6 @@ function updateScroll(){
 async function showSidebar(element) {
     const sidebarEl = document.getElementById('sidebar');
 
-    //need to update sidebar to match the scriptureReference
     const referenceText = element.textContent;
     const referenceEl = document.getElementById('reference');
     referenceEl.textContent = referenceText;
@@ -252,7 +216,7 @@ async function showSidebar(element) {
             window.book = match[2];
         }
         window.chapter = match[3];
-        window.verses = [match[4]]; //may not overwrite previous verses
+        window.verses = [match[4]]; 
         if (match[5]) {
             for (let i = parseInt(match[4])+1; i<=parseInt(match[5]);i++) {
                 window.verses.push(`${i}`);
@@ -274,11 +238,8 @@ async function showSidebar(element) {
             verseEl.appendChild(numberEl);
 
             const textEl = document.createElement('span');
-            //may want to add a class
             let scriptureText = await getScripture(book, chapter, verse);
-            //console.log("in showSidebar", scriptureText);
             textEl.textContent = scriptureText; //gives the book, chapter, and specific verse to the getScripture function which returns the text of the verse.
-            //textEl.innerText = "This is placeholder text for the verse text from a database."
             verseEl.appendChild(textEl);
         }
     }
@@ -290,7 +251,6 @@ function hideSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.remove('show');
 }
-
 
 async function getScripture(book, chapter, verse) { //may conflict with window variables?
     book = book.toLowerCase()
@@ -309,11 +269,9 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
     if (bookOfMormon.includes(book)) {
         try {
             response = await fetch(`https://book-of-mormon-api.vercel.app/${book}/${chapter}/${verse}`);
-            //console.log("Type: ", typeof(response), "Response: ", response);
             let resText = await response.text();
             let resObj = JSON.parse(resText);
             let text = resObj.text;
-            //console.log("Text: ", text);
             return text
         } catch(err) {
             return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
@@ -324,12 +282,10 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
         try{
             //FETCH from bible
             response = await fetch(`https://bible-api.com/${book} ${chapter}:${verse}?translation=kjv`);
-            //console.log("Type: ", typeof(response), "Response: ", response);
             if (response.status < 400) {
                 let resText = await response.text();
                 let resObj = JSON.parse(resText);
                 let text = resObj.text;
-                //console.log("Text: ", text);
                 return text;
             } else {
                 return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
@@ -340,53 +296,9 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
             return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
         }
     }
-
-    
-    // 1st Nephi = "1nephi"
-    // 2nd Nephi = "2nephi"
-    // Jacob = "jacob"
-    // Enos = "enos"
-    // Jarom = "jarom"
-    // Omni = "omni"
-    // Words of Mormon = "wordsofmormon"
-    // Mosiah = "mosiah"
-    // Alma = "alma"
-    // Heleman = "helaman"
-    // 3rd Nephi = "3nephi"
-    // 4th Nephi = "4nephi"
-    // Mormon = "mormon"
-    // Ether = "ether"
-    // Moroni = "moroni"
 }
-//might break something
-// if (localStorage.getItem('messageList')) {
-//     window.messageList = JSON.parse(localStorage.getItem('messageList'));
-// }
-// else {
-//     window.messageList = [];
-// }
-
 setDiscussion();
-
-// if (localStorage.getItem('messageList')) {
-//     window.messageList = JSON.parse(localStorage.getItem('messageList'));
-// }
-// else {
-//     window.messageList = [];
-// }
 
 displayMessages();
 
 updateScroll();
-
-// fetch("https://bible-api.com/john 3:16?translation=kjv") 
-//     .then((response) => response.json())
-//     .then((data) => console.log(data))
-    
-// fetch("https://book-of-mormon-api.vercel.app/1nephi/1/1") 
-//     .then((response) => response.json())
-//     .then((data) => console.log(data))
-
-// fetch("https://api.nephi.org/scriptures/?q=Genesis 1:1") 
-//     .then((response) => response.json())
-//     .then(console.log(response))
