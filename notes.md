@@ -1556,3 +1556,46 @@ result.forEach((i) => console.log(i)); //prints it out
 - include in .gitignore `dbconfig.json`
 - `cfg = require('./dbconfig.json')`
 - change url in file to say cfg.hostname etc
+
+## Authorization
+
+- want multi-layered protection
+  - use "hashes" to encrypt passwords
+  - then would need access to the hashes and the algorithm used to generate the hashes
+    - hash table attack
+- storing passwords salted
+  - generate a random hash and tag it onto the hash
+    - then would need access to three things
+      - would have to create a hash table for every possible salt
+        
+### Bcrypt
+
+-`npm install bcrypt`
+  - should use a hash of length 10 (i thinl)
+  - `hashedpassword = await bcrypt.hash("password", 10); `
+ ```
+if (await bcrypt.compare("password", hashedPassword)) (
+  console.log("passwords match")
+)
+```
+
+### Authorization Tokens
+
+- make sure they don't have to provide and decrypt a password at every endpoint
+- `npm install uuid`
+- `const uuid = require('uuid')`
+- `const token = uuid.v4();`
+
+### Cookies
+
+- backend is leaving something on the frontend that can be passed back to the backend to see what happened in the past
+- Response
+  - `Set-Cookie: session=x83yzi; Secure; HttpOnly; SameSite=Strict`
+    - session=x83yzi <- only means something to the application running it, usually longer
+    - Secure <- HTTPS only
+    - HttpOnly <- !JavaScript (JavaScript can't see it, only transferred as a header in a fetch request)
+    - SameSite <- only given back to origin (website backend that generated the cookie)
+  - Next Request
+    - `Cookie: sessoin=x83yzi`
+- need to install middleware `cookie-parser` as well
+- can delete cookie when they log out
