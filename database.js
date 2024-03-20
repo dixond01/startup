@@ -92,6 +92,18 @@ async function postMessage(date, messageList) {
   }
 }
 
+async function getDates() {
+  try {
+    const cursor = await messagesCollection.find();
+    const array = await cursor.toArray();
+    const dateList = await array.map(doc => doc.date);
+    return dateList;
+  } catch (error) {
+    console.error('Error fetching dates:', error);
+    throw error; // Rethrow the error to propagate it to the caller
+  }
+}
+
 module.exports = {
   createUser,
   getStudyGroups,
@@ -102,7 +114,8 @@ module.exports = {
   //addUser,
   makeOffline,
   getMessages,
-  postMessage
+  postMessage,
+  getDates
 };
 // (async function testConnection() {
 //   await client.connect();

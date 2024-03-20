@@ -95,22 +95,23 @@ apiRouter.get('/messages/:month/:day', async (_req, res) => {
 });
 
 //AddMessage to messageList
-apiRouter.post('/message', (req, res) => {
+apiRouter.post('/message', async (req, res) => {
   messageList = DB.postMessage(req.body.date, req.body.messageList);
   res.send(messageList);
 });
 
 let dateList = [];
 //GetDates
-apiRouter.get('/dates', (_req, res) => {
+apiRouter.get('/dates', async (_req, res) => {
+  let dateList = await DB.getDates();
   res.send(dateList);
 });
 
-//AddDate to dateList
-apiRouter.post('/date', (req, res) => {
-  dateList = req.body; //only if req contains full messageList (primarily on frontend)
-  res.send(dateList);
-});
+//AddDate to dateList (currently not called)
+// apiRouter.post('/date', (req, res) => {
+//   dateList = req.body; //only if req contains full messageList (primarily on frontend)
+//   res.send(dateList);
+// });
 
 let storedDate = {};
 //GetstoredDate

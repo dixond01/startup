@@ -102,22 +102,22 @@ async function setDiscussion() {
     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
     
     //fetch
-    const get_response = await fetch('/api/dates');
-    let dateList = await get_response.json();
-
-    //fetch
     const message_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
     let messageList = await message_response.json();   
 
     function findTest(x) {
-        if (x.month === currentMonth) {
-            if (x.day === currentDay) {
+        if (x.month == currentMonth) {
+            if (x.day == currentDay) {
                 return true;
             }
         }
     }
 
     let archiveDate = {};
+
+    //fetch
+    const get_response = await fetch('/api/dates');
+    let dateList = await get_response.json();
 
     //if it's a new day (the date is not in the localstorage object array dateList) archive and refresh discussion
     if (!dateList.find(findTest)) {
@@ -163,17 +163,17 @@ async function setDiscussion() {
         messageList = await message_response.json();
 
         //add date to dateList
-        dateList.push({month: currentMonth, day: currentDay});
+        // dateList.push({month: currentMonth, day: currentDay});
 
-        //fetch
-        dateList = JSON.stringify(dateList);
-        const post_response = await fetch('/api/date', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: dateList,
-            });    
+        // //fetch
+        // dateList = JSON.stringify(dateList);
+        // const post_response = await fetch('/api/date', {
+        //     method: 'POST',
+        //     headers: {'content-type': 'application/json'},
+        //     body: dateList,
+        //     });    
 
-        dateList = await post_response.json();
+        // dateList = await post_response.json();
                 
     }
     //update discussionName
