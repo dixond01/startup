@@ -126,10 +126,11 @@ apiRouter.post('/store_date', (req, res) => {
   res.send(storedDate);
 });
 
-let archiveList = [];
+//let archiveList = [];
 //GetArchiveData for archiveList
-apiRouter.get('/archive_data', (_req, res) => {
-  res.send(archiveList);
+apiRouter.get('/archive_data', async (_req, res) => {
+  let dateList = await DB.getDates();
+  res.send(dateList);
 });
 
 //AddAchive to archiveList

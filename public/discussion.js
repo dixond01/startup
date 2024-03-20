@@ -107,13 +107,14 @@ async function setDiscussion() {
     
     
     //fetch
+    let messageList = []
     const message_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
     if (message_response.headers.get('content-type')?.includes('application/json')) {
-        window.messageList = await message_response.json();
+        messageList = await message_response.json();
         // Process jsonData
       } else {
         // Handle other content types
-        window.messageList = message_response;
+        messageList = null;
       }
     //let messageList = await message_response.json();   
     if (messageList == null) {

@@ -22,15 +22,16 @@ function displayMessage(chat) {
     chatEl.innerHTML = chatEl.innerHTML + message;
 }
 
-const currentArchive = JSON.parse(localStorage.getItem('currentArchive'));
-window.messageList = currentArchive.messages; //added window. to messageList. not sure if correct
+
+//window.messageList = await get_response.json();
+
+
+//window.messageList = currentArchive.messages; //added window. to messageList. not sure if correct
 //no messageList. need to replace with specific messageList
-function displayMessages() {
+function displayMessages(messageList) {
     //DO NOT UPDATE FROM DISCUSSION.JS
-    const discussionFeed = document.getElementById('discussionFeed');
     for (chat of messageList) {
         displayMessage(chat);
-
     }
 }
 
@@ -98,11 +99,23 @@ function updateScroll(){
 }
 
 
-
+const currentArchive = JSON.parse(localStorage.getItem('currentArchive'));
+const month = currentArchive.month;
+const day = currentArchive.day;
 
 const discussionName = document.getElementById('discussionName');
 discussionName.appendChild(document.createTextNode(`${currentArchive.month} ${currentArchive.day}`));
 
-displayMessages();
+let messageList = [];
+const get_response = fetch(`/api/messages/${month}/${day}`);
+get_response.then(result => {
+    return result.json(); // Returns a promise
+}).then(data => {
+    messageList = data; // Now data contains the parsed JSON
+    console.log(messageList);
+    displayMessages(messageList);
+    updateScroll();
+});
+// displayMessages(messageList);
 
-updateScroll();
+// updateScroll();

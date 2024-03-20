@@ -1,19 +1,27 @@
-async function displayCards() {
-    
+async function setArchiveList() {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
 
-    // if (localStorage.getItem('archiveList')) {
-    //     window.archiveList = JSON.parse(localStorage.getItem('archiveList'));
-    // }
-    // else {
-    //     window.archiveList = [];
-    //}
-
-    //fetch
+    //fetch (changed to return the date_list)
     const archive_response = await fetch('/api/archive_data');
-    let archiveList = await archive_response.json();
+    let dateList = await archive_response.json();
 
-    // //TEST
-    // let archiveList = [{"month":"March","day":7,"messages":[{"name":"Rachel","message":"Helaman 5:12 (<-- click)"}]},{"month":"April","day":6,"messages":[{"name":"Rachel","message":"Helaman 5:12 (<-- click)"}]}];
+    // const isObjectInArray = dateList.some(obj => {
+    //     // Check if the object matches the searchObject
+    //     return obj.month === searchObject.month && obj.day === searchObject.day /* Add more conditions as needed */;
+    // });
+
+    let archiveList = [];
+    const searchObject = {month: currentMonth, day: currentDay}; //currentDay may be wrong type?
+    console.log("dateList", dateList, "searchObject", searchObject);
+    archiveList = dateList.filter(obj => obj.month !== searchObject.month && obj.day !== searchObject.day);
+    //archiveList = dateList.filter(obj => obj !== searchObject);
+    console.log("archiveList: ", archiveList);
+    return archiveList;
+}
+
+async function displayCards(archiveList) {
 
     const cardListEl = document.getElementById('cardList');
 
@@ -44,17 +52,24 @@ async function displayCards() {
 async function movePage(index) {
     //can stay local (not server) (i think)
 
-    // //TEST
-    // let archiveList = [{"month":"March","day":7,"messages":[{"name":"Rachel","message":"Helaman 5:12 (<-- click)"}]},{"month":"April","day":6,"messages":[{"name":"Rachel","message":"Helaman 5:12 (<-- click)"}]}];
-
     //fetch
-    const archive_response = await fetch('/api/archive_data');
-    let archiveList = await archive_response.json();
+    // const archive_response = await fetch('/api/archive_data');
+    // let archiveList = await archive_response.json();
+    const promise = setArchiveList();
+    promise.then(result => {
+        const archiveList = result;
+        let archive = archiveList[index];
+        localStorage.setItem('currentArchive', JSON.stringify(archive));
+        window.location.href = 'archive-discussion.html';
+    });
 
-    let archive = archiveList[index];
-    localStorage.setItem('currentArchive', JSON.stringify(archive));
-    window.location.href = 'archive-discussion.html';
+    // let archive = archiveList[index];
+    // localStorage.setItem('currentArchive', JSON.stringify(archive));
+    // window.location.href = 'archive-discussion.html';
 
 }
 
-displayCards();
+const promise = setArchiveList();
+    promise.then(result => {
+        displayCards(result);
+    });
