@@ -88,9 +88,10 @@ let messageList = [];
 //GetMessages
 apiRouter.get('/messages/:month/:day', async (_req, res) => {
   let messageList = await DB.getMessages(_req.params.month, _req.params.day);
-  if (messageList === undefined) {
-    messageList = [];
-  }
+  //may need the following lines. setDiscussion should make sure there is always a document with the current day tho...
+  // if (messageList === undefined) {
+  //   messageList = [];
+  // }
   res.send(messageList);
 });
 

@@ -69,9 +69,13 @@ function makeOffline (email) {
 async function getMessages(month, day) {
   day = Number(day);
   const document = await messagesCollection.findOne({date: {month: month, day: day}});
-  //console.log(document)
-  const messageList = document.messageList; //need to implement this. doc = {date: {month: month, day: day}, messageList:[{name: name, message: message}]}
-  return messageList;
+  if (document == null) {
+    return document;
+  } else {
+    const messageList = document.messageList; //need to implement this. doc = {date: {month: month, day: day}, messageList:[{name: name, message: message}]}
+    return messageList;
+  }
+
 }
 
 async function postMessage(date, messageList) {
