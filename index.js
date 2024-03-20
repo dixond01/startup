@@ -59,6 +59,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
+//might need logout functionality?
 //AddUser to usersList
 //status is what the function should do (if status = online, the function should make the user online)
 apiRouter.post('/user/:email/:name/:status', async (req, res) => {
@@ -88,6 +89,7 @@ apiRouter.post('/user/:email/:name/:status', async (req, res) => {
     }
   } else { //when the status is "offline"
     DB.makeOffline(req.params.email);
+    res.clearCookie(authCookieName);
     res.status(200).send({msg: 'All good!'});
     return;
   }
