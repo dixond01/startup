@@ -60,7 +60,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 //AddUser to usersList
 //status is what the function should do (if status = online, the function should make the user online)
 apiRouter.post('/user/:email/:name/:status', async (req, res) => {
-  user = await DB.getUser(req.params.email);//maybe
+  user = await DB.getUser(req.params.email);
   if (req.params.status == 'online') {
     if (user) {
       if (user.name === req.params.name) {
@@ -86,13 +86,17 @@ apiRouter.post('/user/:email/:name/:status', async (req, res) => {
 
 let messageList = [];
 //GetMessages
-apiRouter.get('/messages', (_req, res) => {
+apiRouter.get('/messages/:month/:day', async (_req, res) => {
+  let messageList = await DB.getMessages(_req.params.month, _req.params.day);
+  if (messageList === undefined) {
+    messageList = [];
+  }
   res.send(messageList);
 });
 
 //AddMessage to messageList
 apiRouter.post('/message', (req, res) => {
-  messageList = req.body; //only if req contains full messageList (primarily on frontend)
+  messageList = DB.postMessage(req.body.date, req.body.messageList);
   res.send(messageList);
 });
 

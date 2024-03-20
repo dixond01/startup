@@ -6,8 +6,10 @@ const { MongoClient } = require('mongodb')
 
 const client = new MongoClient(url);
 const db = client.db('startup');
+
 const userCollection = db.collection('user');
 const studyGroupsCollection = db.collection('studyGroups');
+const messagesCollection = db.collection('messages');
 
 
 client
@@ -59,14 +61,35 @@ function makeOnline (email) {
   return;
 }
 
-// function addUser (email, name) {
-//   userCollection.insertOne({email: email, name: name, status: "online"});
-//   return;
-// }
-
 function makeOffline (email) {
   userCollection.updateOne({email: email}, { $set: {status: "offline"}});
   return;
+}
+
+async function getMessages(month, day) {
+  day = Number(day);
+  const document = await messagesCollection.findOne({date: {month: month, day: day}});
+  //console.log(document)
+  const messageList = document.messageList; //need to implement this. doc = {date: {month: month, day: day}, messageList:[{name: name, message: message}]}
+  return messageList;
+}
+
+async function postMessage(date, messageList) {
+  day = Number(date.day);
+  //how do I add jus the new message? change frontend? updateOne?
+  const cursor = await messagesCollection.find({date: {month: date.month, day: day}});
+  // Convert the cursor to an array
+  const documents = await cursor.toArray();
+
+  if (documents.length !== 0) {
+    messagesCollection.updateOne({date: {month: date.month, day: date.day}}, { $set: {messageList: messageList}});
+    messageList = await messagesCollection.findOne({date: {month: date.month, day: date.day}}).messageList;
+    return messageList;
+  } else {
+    messagesCollection.insertOne({date: {month: date.month, day: date.day}, messageList: []});
+    messageList = messagesCollection.findOne({date: {month: date.month, day: date.day}}).messageList;
+    return messageList;
+  }
 }
 
 module.exports = {
@@ -78,6 +101,8 @@ module.exports = {
   makeOnline,
   //addUser,
   makeOffline,
+  getMessages,
+  postMessage
 };
 // (async function testConnection() {
 //   await client.connect();

@@ -23,8 +23,12 @@ function displayMessage(chat) {
 
 async function displayMessages() {
 
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+    
     //fetch
-    const get_response = await fetch('/api/messages');
+    const get_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
     let messageList = await get_response.json();
 
     const discussionFeed = document.getElementById('discussionFeed');
@@ -35,8 +39,12 @@ async function displayMessages() {
 }
 
 async function pushMessage() {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+    
     //fetch
-    const get_response = await fetch('/api/messages');
+    const get_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
     let messageList = await get_response.json();
 
     const chatbox = document.getElementById("chatbox");
@@ -48,11 +56,10 @@ async function pushMessage() {
         messageList.push(chat);
 
         //fetch
-        messageList = JSON.stringify(messageList);
         const post_response = await fetch('/api/message', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
-            body: messageList,
+            body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
           });    
 
         messageList = await post_response.json();
@@ -69,31 +76,35 @@ async function pushMessage() {
 }
 
 //webSocket simulation DELETE
-setInterval(async () => {
-    //fetch
-    const get_response = await fetch('/api/messages');
-    let messageList = await get_response.json();
+// setInterval(async () => {
+//     //fetch
+//     const currentDate = new Date();
+//     const currentDay = currentDate.getDate();
+//     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+    
+//     //fetch
+//     const get_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
+//     let messageList = await get_response.json();
 
-    chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
-    messageList.push(chat);
-    //fetch
-    messageList = JSON.stringify(messageList);
-    const post_response = await fetch('/api/message', {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        body: messageList,
-        });    
+//     chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
+//     messageList.push(chat);
+//     //fetch
+//     // messageList = JSON.stringify(messageList);
+//     const post_response = await fetch('/api/message', {
+//         method: 'POST',
+//         headers: {'content-type': 'application/json'},
+//         body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
+//       });     
 
-    messageList = await post_response.json();
+//     messageList = await post_response.json();
 
-    localStorage.setItem('messageList', JSON.stringify(messageList));
-    displayMessage(chat);
-}, 14000);
+//     localStorage.setItem('messageList', JSON.stringify(messageList));
+//     displayMessage(chat);
+// }, 14000);
 
 async function setDiscussion() {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
-    
     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
     
 
@@ -109,7 +120,7 @@ async function setDiscussion() {
     let dateList = await get_response.json();
 
     //fetch
-    const message_response = await fetch('/api/messages');
+    const message_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
     let messageList = await message_response.json();   
 
     function findTest(x) {
@@ -170,12 +181,12 @@ async function setDiscussion() {
         localStorage.removeItem('messageList');
         messageList = [];
         //fetch
-        messageList = JSON.stringify(messageList);
+        // messageList = JSON.stringify(messageList);
         const message_response = await fetch('/api/message', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
-            body: messageList,
-          });    
+            body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
+          });       
 
         messageList = await message_response.json();
 
