@@ -97,7 +97,7 @@ apiRouter.get('/messages/:month/:day', async (_req, res) => {
 
 //AddMessage to messageList
 apiRouter.post('/message', async (req, res) => {
-  messageList = await DB.postMessage(req.body.date, req.body.messageList);
+  messageList = DB.postMessage(req.body.date, req.body.messageList);
   res.send(messageList);
 });
 
