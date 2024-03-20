@@ -97,11 +97,11 @@ apiRouter.get('/messages/:month/:day', async (_req, res) => {
 
 //AddMessage to messageList
 apiRouter.post('/message', async (req, res) => {
-  messageList = DB.postMessage(req.body.date, req.body.messageList);
+  messageList = await DB.postMessage(req.body.date, req.body.messageList);
   res.send(messageList);
 });
 
-let dateList = [];
+//let dateList = [];
 //GetDates
 apiRouter.get('/dates', async (_req, res) => {
   let dateList = await DB.getDates();
@@ -114,17 +114,17 @@ apiRouter.get('/dates', async (_req, res) => {
 //   res.send(dateList);
 // });
 
-let storedDate = {};
-//GetstoredDate
-apiRouter.get('/stored_date', (_req, res) => {
-  res.send(storedDate);
-});
+// let storedDate = {};
+// //GetstoredDate
+// apiRouter.get('/stored_date', (_req, res) => {
+//   res.send(storedDate);
+// });
 
-//Update storedDate
-apiRouter.post('/store_date', (req, res) => {
-  storedDate = req.body; 
-  res.send(storedDate);
-});
+// //Update storedDate
+// apiRouter.post('/store_date', (req, res) => {
+//   storedDate = req.body; 
+//   res.send(storedDate);
+// });
 
 //let archiveList = [];
 //GetArchiveData for archiveList
@@ -133,11 +133,11 @@ apiRouter.get('/archive_data', async (_req, res) => {
   res.send(dateList);
 });
 
-//AddAchive to archiveList
-apiRouter.post('/archive_new_data', (req, res) => {
-  archiveList = req.body; //only if req contains full messageList (primarily on frontend)
-  res.send(archiveList);
-});
+// //AddAchive to archiveList
+// apiRouter.post('/archive_new_data', (req, res) => {
+//   archiveList = req.body; //only if req contains full messageList (primarily on frontend)
+//   res.send(archiveList);
+// });
 
 // // GetScores
 // apiRouter.get('/scores', (_req, res) => {
@@ -162,7 +162,7 @@ app.listen(port, () => {
 
 
 let studyGroups = []; //saved in memory? Maybe? Don't know if that's what I want.
-function addGroup(name, studyGroups) {
-  studyGroups.push(name);
-  return studyGroups;
-}
+// function addGroup(name, studyGroups) {
+//   studyGroups.push(name);
+//   return studyGroups;
+// }
