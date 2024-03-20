@@ -37,13 +37,7 @@ apiRouter.post('/studygroup', async(req, res) => {
   res.send(studyGroups);
 })
 
-let usersList = [];
-//GetUsers for usersList
-apiRouter.get('/users', async (_req, res) => {
-  // console.log('Type: ', typeof(usersList), 'List: ', usersList)
-  usersList = await DB.getUsers();
-  res.send(usersList); //unexpected character at line 1 of the JSON data
-});
+
 
 //Registering a new user
 apiRouter.post('/auth/create', async (req, res) => {
@@ -97,26 +91,43 @@ apiRouter.post('/user/:email/:name/:status', async (req, res) => {
   // res.send(usersList); //do I need to send it back?
 });
 
+var secureApiRouter = express.Router();
+apiRouter.use(secureApiRouter);
+
+secureApiRouter.use(async (req, res, next) => {
+  authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+let usersList = [];
+//GetUsers for usersList
+secureApiRouter.get('/users', async (_req, res) => {
+  // console.log('Type: ', typeof(usersList), 'List: ', usersList)
+  usersList = await DB.getUsers();
+  res.send(usersList); //unexpected character at line 1 of the JSON data
+});
+
 let messageList = [];
 //GetMessages
-apiRouter.get('/messages/:month/:day', async (_req, res) => {
+secureApiRouter.get('/messages/:month/:day', async (_req, res) => {
   let messageList = await DB.getMessages(_req.params.month, _req.params.day);
-  //may need the following lines. setDiscussion should make sure there is always a document with the current day tho...
-  // if (messageList === undefined) {
-  //   messageList = [];
-  // }
   res.send(messageList);
 });
 
 //AddMessage to messageList
-apiRouter.post('/message', async (req, res) => {
+secureApiRouter.post('/message', async (req, res) => {
   messageList = DB.postMessage(req.body.date, req.body.messageList);
   res.send(messageList);
 });
 
 //let dateList = [];
 //GetDates
-apiRouter.get('/dates', async (_req, res) => {
+secureApiRouter.get('/dates', async (_req, res) => {
   let dateList = await DB.getDates();
   res.send(dateList);
 });
@@ -141,7 +152,7 @@ apiRouter.get('/dates', async (_req, res) => {
 
 //let archiveList = [];
 //GetArchiveData for archiveList
-apiRouter.get('/archive_data', async (_req, res) => {
+secureApiRouter.get('/archive_data', async (_req, res) => {
   let dateList = await DB.getDates();
   res.send(dateList);
 });
@@ -162,6 +173,11 @@ apiRouter.get('/archive_data', async (_req, res) => {
 //   scores = updateScores(req.body, scores);
 //   res.send(scores);
 // });
+
+// Default error handler
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
+});
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {

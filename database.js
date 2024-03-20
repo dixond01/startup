@@ -56,6 +56,10 @@ function getUser (email) {
   return userCollection.findOne({ email: email });
 }
 
+function getUserByToken(token) {
+  return userCollection.findOne({ token: token });
+}
+
 function makeOnline (email) {
   userCollection.updateOne({email: email}, { $set: { status: "online" } });
   return;
@@ -114,6 +118,7 @@ module.exports = {
   addGroup,
   getUsers,
   getUser,
+  getUserByToken,
   makeOnline,
   //addUser,
   makeOffline,
