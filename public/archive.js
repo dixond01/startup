@@ -15,7 +15,7 @@ async function setArchiveList() {
     let archiveList = [];
     const searchObject = {month: currentMonth, day: currentDay}; //currentDay may be wrong type?
     console.log("dateList", dateList, "searchObject", searchObject);
-    archiveList = dateList.filter(obj => obj.month !== searchObject.month && obj.day !== searchObject.day);
+    archiveList = dateList.filter(obj => !(obj.month == searchObject.month && obj.day == searchObject.day));
     //archiveList = dateList.filter(obj => obj !== searchObject);
     console.log("archiveList: ", archiveList);
     return archiveList;
