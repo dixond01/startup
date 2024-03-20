@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const DB = require('./database.js');
+const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 
 let authCookieName = 'token';
@@ -18,12 +19,15 @@ app.use(bodyParser.text());
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
 
+//cookie parser
+app.use(cookieParser());
+
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-//cookie parser
-app.use(cookieParser());
+
+
 //FUNCTIONS MAY NEED `next` PARAMETER AND CALL
 //GetStudyGroups
 apiRouter.get('/studygroups', async (_req, res) => {
