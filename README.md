@@ -98,3 +98,10 @@ Simon service deployed.
 - **Stores Application Data in MongoDB:** users, study group names, and the list of messages associated with each day are stored in MongoDB.
 - **Stores and Retrieves Credentials in MongoDB:** users, along with their passwords and tokens, are stored in MongoDB and retrieved upon login, logout, and accessing endpoints in the application.
 - **Restricts Functionality:** on frontend, users cannot access the application without first logging in, which requires authentication. On backend, all endpoints other than those used for registration and logging in cannot be accessed without a token. 
+
+## Websocket Deliverable
+
+- **Backend Listens for Websocket Connection:** Done! The backend listens for websocket connections and messages.
+- **Frontend Makes Websocket Connection:** Done! Each main javascript page after login (discussion.js, users.js, archive.js, and archive-discussion.js) includes code to open a connection when the page is loaded and close it when it is closed.
+- **Data Sent Over Websocket Connection:** Done! Messages are sent over websocket when a user sends a message, and the users' statuses (online or offline) are sent from the backend to the frontend (users.js) after the database has been updated.
+- **Websocket Data Displayed:** Done! The messages are displayed on each session, and the status messages display a table with the status of each user. This table only updates when the page is refreshed, but this is intentional.
