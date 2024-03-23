@@ -63,6 +63,7 @@ async function pushMessage() {
         messageList = await post_response.json();
 
         displayMessage(chat);
+        socket.send(JSON.stringify(chat));
         updateScroll();
     }
     else {
@@ -72,29 +73,29 @@ async function pushMessage() {
 }
 
 //webSocket simulation DELETE
-setInterval(async () => {
-    //fetch
-    const currentDate = new Date();
-    const currentDay = currentDate.getDate();
-    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+// setInterval(async () => {
+//     //fetch
+//     const currentDate = new Date();
+//     const currentDay = currentDate.getDate();
+//     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
     
-    //fetch
-    const get_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
-    let messageList = await get_response.json();
+//     //fetch
+//     const get_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
+//     let messageList = await get_response.json();
 
-    chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
-    messageList.push(chat);
-    //fetch
-    const post_response = await fetch('/api/message', {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
-      });     
+//     chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
+//     messageList.push(chat);
+//     //fetch
+//     const post_response = await fetch('/api/message', {
+//         method: 'POST',
+//         headers: {'content-type': 'application/json'},
+//         body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
+//       });     
 
-    messageList = await post_response.json();
+//     messageList = await post_response.json();
 
-    displayMessage(chat);
-}, 14000);
+//     displayMessage(chat);
+// }, 14000);
 
 async function setDiscussion() {
     
@@ -309,14 +310,30 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
                 return text;
             } else {
                 return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
-            }
-            
+            } 
         } catch(err) {
             //return generic no support message
             return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
         }
     }
 }
+
+
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+socket.onopen = (event) => {
+    //get table to update (online)
+};
+socket.onclose = (event) => {
+    //get table to update (offline)
+};
+socket.onmessage = async (event) => {
+    //get connections to update their messages
+    //call displayMessage(chat) (i think.)
+    const chat = JSON.parse(await event.data.text());
+    displayMessage(chat);
+};
+
 setDiscussion();
 
 displayMessages();
