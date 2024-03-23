@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const DB = require('./database.js');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
+const { peerProxy } = require('./peerProxy.js');
 
 let authCookieName = 'token';
 
@@ -190,10 +191,6 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
-
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
     secure: true,
@@ -202,8 +199,8 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-let studyGroups = []; //saved in memory? Maybe? Don't know if that's what I want.
-// function addGroup(name, studyGroups) {
-//   studyGroups.push(name);
-//   return studyGroups;
-// }
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+peerProxy(httpService);
