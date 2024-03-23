@@ -72,30 +72,6 @@ async function pushMessage() {
 
 }
 
-//webSocket simulation DELETE
-// setInterval(async () => {
-//     //fetch
-//     const currentDate = new Date();
-//     const currentDay = currentDate.getDate();
-//     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
-    
-//     //fetch
-//     const get_response = await fetch(`/api/messages/${currentMonth}/${currentDay}`);
-//     let messageList = await get_response.json();
-
-//     chat = {name: 'Rachel', message: 'Helaman 5:12 (<-- click)'};
-//     messageList.push(chat);
-//     //fetch
-//     const post_response = await fetch('/api/message', {
-//         method: 'POST',
-//         headers: {'content-type': 'application/json'},
-//         body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
-//       });     
-
-//     messageList = await post_response.json();
-
-//     displayMessage(chat);
-// }, 14000);
 
 async function setDiscussion() {
     
@@ -125,92 +101,6 @@ async function setDiscussion() {
             body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: []})
           });  
     }
-
-
-    // function findTest(x) {
-    //     if (x.month == currentMonth) {
-    //         if (x.day == currentDay) {
-    //             return true;
-    //         }
-    //     }
-    // }
-
-    // let archiveDate = {};
-
-    // //fetch
-    // const get_response = await fetch('/api/dates');
-    // let dateList = await get_response.json();
-
-    // //if it's a new day (the date is not in the localstorage object array dateList) archive and refresh discussion
-    // if (!dateList.find(findTest)) {
-    //     //archive discussion
-
-    //     //fetch
-    //     const get_storedDate_res = await fetch('/api/stored_date');
-    //     archiveDate = await get_storedDate_res.json();
-                            
-    //     if (archiveDate.length) {
-    //         const archiveMonth = archiveDate.month;
-    //         const archiveDay = archiveDate.day;
-    //         const archiveObject = {month: archiveMonth, day: archiveDay, messages: messageList};
-
-    //         //fetch
-    //         const archive_response = await fetch('/api/archive_data');
-    //         let archiveList = await archive_response.json();
-
-    //         archiveList.push(archiveObject);
-
-    //         //fetch
-    //         archiveList = JSON.stringify(archiveList);
-    //         const archive_post_response = await fetch('/api/archive_new_data', {
-    //             method: 'POST',
-    //             headers: {'content-type': 'application/json'},
-    //             body: archiveList,
-    //         });    
-
-    //         archiveList = await archive_post_response.json();
-    //     }
-
-    //     //clear discussion
-    //     messageList = [];
-
-    //     //fetch
-    //     const message_response = await fetch('/api/message', {
-    //         method: 'POST',
-    //         headers: {'content-type': 'application/json'},
-    //         body: JSON.stringify({date: {month: currentMonth, day: currentDay}, messageList: messageList})
-    //       });       
-
-    //     messageList = await message_response.json();
-
-    //     //add date to dateList
-    //     // dateList.push({month: currentMonth, day: currentDay});
-
-    //     // //fetch
-    //     // dateList = JSON.stringify(dateList);
-    //     // const post_response = await fetch('/api/date', {
-    //     //     method: 'POST',
-    //     //     headers: {'content-type': 'application/json'},
-    //     //     body: dateList,
-    //     //     });    
-
-    //     // dateList = await post_response.json();
-                
-    // }
-    //update discussionName
-    // const discussionName = document.getElementById('discussionName');
-    // discussionName.appendChild(document.createTextNode(`${currentMonth} ${currentDay}`));
-
-    //fetch
-    // archiveDate = {month: currentMonth, day: currentDay};
-    // archiveDate = JSON.stringify(archiveDate);
-    // const post_storeDate_response = await fetch('/api/store_date', {
-    //     method: 'POST',
-    //     headers: {'content-type': 'application/json'},
-    //     body: archiveDate,
-    //     });    
-
-    // archiveDate = await post_storeDate_response.json();
 }
 
 
