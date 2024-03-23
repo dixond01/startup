@@ -130,6 +130,12 @@ function updateScroll(){
     discussionFeedEl.scrollTop = discussionFeedEl.scrollHeight;
 }
 
+const token = sessionStorage.getItem('token'); // Assume you have the token available here
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws?token=${encodeURIComponent(token)}`);
+window.addEventListener('beforeunload', function(event) {
+    socket.close();
+  });
 
 const currentArchive = JSON.parse(sessionStorage.getItem('currentArchive'));
 const month = currentArchive.month;

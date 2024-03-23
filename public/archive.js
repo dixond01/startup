@@ -73,3 +73,10 @@ const promise = setArchiveList();
     promise.then(result => {
         displayCards(result);
     });
+
+const token = sessionStorage.getItem('token'); // Assume you have the token available here
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws?token=${encodeURIComponent(token)}`);
+window.addEventListener('beforeunload', function(event) {
+    socket.close();
+  });

@@ -38,7 +38,10 @@ function peerProxy(httpServer) {
     });
 
     // Remove the closed connection so we don't try to forward anymore
-    ws.on('close', () => {
+    ws.on('close', async () => {
+      const parameters = url.parse(request.url, true).query;
+      const token = parameters.token;
+      user = await DB.getUserByToken(token);
       DB.makeOffline(user.email);
       const pos = connections.findIndex((o, i) => o.id === connection.id);
 
@@ -64,7 +67,7 @@ function peerProxy(httpServer) {
         c.ws.ping();
       }
     });
-  }, 10000);
+  }, 1000000);
 }
 
 module.exports = { peerProxy };
