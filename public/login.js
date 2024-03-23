@@ -60,13 +60,15 @@ async function login() {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({password: password}),
-      //body: usersList, //implemented like a GET. Problem?
     });
 
     if (post_response.ok) {
-      window.location.href = 'discussion.html';
+      
       sessionStorage.setItem('email', email); //hope this works with email = emailEl.value
       sessionStorage.setItem('userName', name);
+      const responseData = await post_response.json();
+      sessionStorage.setItem('token', responseData.token);
+      window.location.href = 'discussion.html';
       // sessionStorage.setItem('studyName', studyName);
     } else {
       const body = await post_response.json();

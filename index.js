@@ -74,7 +74,7 @@ apiRouter.post('/user/:email/:name/:status', async (req, res) => {
           setAuthCookie(res, user.token);
 
           DB.makeOnline(req.params.email);
-          res.status(200).send({msg: 'All good!'});
+          res.status(200).json({msg: 'All good!', token: user.token});
           return; //?
         } else {
           res.status(401).send({msg: 'Unauthorized (email not registered or incorrect password).'});

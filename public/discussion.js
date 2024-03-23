@@ -207,9 +207,9 @@ async function getScripture(book, chapter, verse) { //may conflict with window v
     }
 }
 
-
+const token = sessionStorage.getItem('token'); // Assume you have the token available here
 const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws?token=${encodeURIComponent(token)}`);
 socket.onopen = (event) => {
     //get table to update (online)
 
@@ -223,6 +223,9 @@ socket.onmessage = async (event) => {
     const chat = JSON.parse(await event.data.text());
     displayMessage(chat);
 };
+window.addEventListener('beforeunload', function(event) {
+    socket.close();
+  });
 
 setDiscussion();
 

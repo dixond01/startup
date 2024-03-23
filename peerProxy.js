@@ -1,5 +1,7 @@
 const { WebSocketServer } = require('ws');
 const uuid = require('uuid');
+const DB = require('./database.js');
+const url = require('url');
 
 function peerProxy(httpServer) {
   // Create a websocket object
@@ -15,9 +17,16 @@ function peerProxy(httpServer) {
   // Keep track of all the connections so we can forward messages
   let connections = [];
 
-  wss.on('connection', (ws) => {
+  wss.on('connection', async function connection(ws, request) {
     const connection = { id: uuid.v4(), alive: true, ws: ws };
     connections.push(connection);
+
+    const parameters = url.parse(request.url, true).query;
+    const token = parameters.token;
+    user = await DB.getUserByToken(token);
+    DB.makeOnline(user.email);
+    //authenticate token? with user.token = token?
+    
 
     // Forward messages to everyone except the sender
     ws.on('message', function message(data) {
@@ -30,6 +39,7 @@ function peerProxy(httpServer) {
 
     // Remove the closed connection so we don't try to forward anymore
     ws.on('close', () => {
+      DB.makeOffline(user.email);
       const pos = connections.findIndex((o, i) => o.id === connection.id);
 
       if (pos >= 0) {
