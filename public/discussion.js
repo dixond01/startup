@@ -63,7 +63,8 @@ async function pushMessage() {
         messageList = await post_response.json();
 
         displayMessage(chat);
-        socket.send(JSON.stringify(chat));
+        socket.send(JSON.stringify({type: 'chat', value: chat}));
+        //socket.send(JSON.stringify(chat));
         updateScroll();
     }
     else {
@@ -221,8 +222,12 @@ socket.onclose = (event) => {
 socket.onmessage = async (event) => {
     //get connections to update their messages
     //call displayMessage(chat) (i think.)
-    const chat = JSON.parse(await event.data.text());
-    displayMessage(chat);
+    const msg = JSON.parse(await event.data); //reove .text()?
+    if (msg.type == 'chat'){
+        const chat = msg.value;
+        displayMessage(chat);
+    }
+    
 };
 window.addEventListener('beforeunload', function(event) {
     socket.close();

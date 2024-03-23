@@ -26,6 +26,7 @@ function peerProxy(httpServer) {
     const token = parameters.token;
     user = await DB.getUserByToken(token);
     DB.makeOnline(user.email);
+    ws.send(JSON.stringify({type: 'status', value: 'online'}));
     //authenticate token? with user.token = token?
     
 
@@ -46,6 +47,7 @@ function peerProxy(httpServer) {
       DB.makeOffline(user.email);
       const pos = connections.findIndex((o, i) => o.id === connection.id);
       console.log("connection closed");
+      ws.send(JSON.stringify({type: 'status', value: 'offline'}));
 
       if (pos >= 0) {
         connections.splice(pos, 1);
@@ -53,7 +55,11 @@ function peerProxy(httpServer) {
     });
 
     // Respond to pong messages by marking the connection alive
-    ws.on('pong', () => {
+    ws.on('pong', async () => {
+      const parameters = url.parse(request.url, true).query;
+      const token = parameters.token;
+      user = await DB.getUserByToken(token);
+      DB.makeOnline(user.email);
       connection.alive = true;
     });
   });

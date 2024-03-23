@@ -37,6 +37,13 @@ const socket = new WebSocket(`${protocol}://${window.location.host}/ws?token=${e
 window.addEventListener('beforeunload', function(event) {
     socket.close();
   });
-
-usersDisplay();
-updateTable();
+  socket.onmessage = async (event) => {
+    //get connections to update their messages
+    //call displayMessage(chat) (i think.)
+    const msg = JSON.parse(await event.data);
+    if (msg.type == 'status' && msg.value == 'online'){
+        usersDisplay();
+        updateTable();
+    }
+    
+};
