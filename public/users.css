@@ -60,3 +60,6 @@ img {
 .offline {
     color: red;
 }
+  #logoutBtn {
+    font-weight: bold;
+  }
