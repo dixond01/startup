@@ -65,9 +65,9 @@ async function login() {
 
     if (post_response.ok) {
       window.location.href = 'discussion.html';
-      localStorage.setItem('email', email); //hope this works with email = emailEl.value
-      localStorage.setItem('userName', name);
-      // localStorage.setItem('studyName', studyName);
+      sessionStorage.setItem('email', email); //hope this works with email = emailEl.value
+      sessionStorage.setItem('userName', name);
+      // sessionStorage.setItem('studyName', studyName);
     } else {
       const body = await post_response.json();
       const loginErrorEl = document.querySelector('#loginError');

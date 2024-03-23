@@ -49,7 +49,7 @@ async function pushMessage() {
     const string = chatbox.value;
     if (string) {
         chatbox.value = "";
-        const userName = localStorage.getItem("userName");
+        const userName = sessionStorage.getItem("userName");
         const chat = {name: userName, message: string}
         messageList.push(chat);
 
@@ -212,6 +212,7 @@ const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 socket.onopen = (event) => {
     //get table to update (online)
+
 };
 socket.onclose = (event) => {
     //get table to update (offline)

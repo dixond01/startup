@@ -131,7 +131,7 @@ function updateScroll(){
 }
 
 
-const currentArchive = JSON.parse(localStorage.getItem('currentArchive'));
+const currentArchive = JSON.parse(sessionStorage.getItem('currentArchive'));
 const month = currentArchive.month;
 const day = currentArchive.day;
 

@@ -18,7 +18,7 @@ async function createStudyGroup() {
             body: studyName, //removed JSON.stringify
          });
         // const studyGroups = await response.json();
-        // localStorage.setItem('studyGroups', JSON.stringify(studyGroups));
+        // sessionStorage.setItem('studyGroups', JSON.stringify(studyGroups));
         window.location.href = 'index.html';
     }
 

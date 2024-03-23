@@ -1,6 +1,6 @@
 async function logout() {
-    userName = localStorage.getItem('userName');
-    email = localStorage.getItem('email');
+    userName = sessionStorage.getItem('userName');
+    email = sessionStorage.getItem('email');
 
     //usersList = JSON.stringify(usersList);
 

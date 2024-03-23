@@ -59,12 +59,12 @@ async function movePage(index) {
     promise.then(result => {
         const archiveList = result;
         let archive = archiveList[index];
-        localStorage.setItem('currentArchive', JSON.stringify(archive));
+        sessionStorage.setItem('currentArchive', JSON.stringify(archive));
         window.location.href = 'archive-discussion.html';
     });
 
     // let archive = archiveList[index];
-    // localStorage.setItem('currentArchive', JSON.stringify(archive));
+    // sessionStorage.setItem('currentArchive', JSON.stringify(archive));
     // window.location.href = 'archive-discussion.html';
 
 }
