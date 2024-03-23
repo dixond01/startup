@@ -1,7 +1,4 @@
 function displayMessage(chat) {
-    //UPDATE FROM DISCUSSION.JS
-
-    
     const discussionFeed = document.getElementById('discussionFeed');
     
     const chatEl = document.createElement('div');
@@ -13,21 +10,13 @@ function displayMessage(chat) {
     chatEl.appendChild(nameEl);
 
     const noHTML = chat['message'].replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, "");
-    //add RegEx for finding the verses
-    scripturePattern = /(?:(\d [a-z]+)|([a-z]+))\ (\d+):(\d+)(?:\ ?-\ ?(\d+))?/i;
-    //save books, chapters, and verses to variables for use in a database later (global variables)
-    
+    //RegEx for finding the verses
+    scripturePattern = /(?:(\d [a-z]+)|([a-z]+))\ (\d+):(\d+)(?:\ ?-\ ?(\d+))?/i;   
     
     const message = noHTML.replace(scripturePattern, "<span class='scriptureReference' onclick='showSidebar(this)'>$&</span>");
     chatEl.innerHTML = chatEl.innerHTML + message;
 }
 
-
-//window.messageList = await get_response.json();
-
-
-//window.messageList = currentArchive.messages; //added window. to messageList. not sure if correct
-//no messageList. need to replace with specific messageList
 function displayMessages(messageList) {
     //DO NOT UPDATE FROM DISCUSSION.JS
     for (chat of messageList) {
@@ -35,18 +24,16 @@ function displayMessages(messageList) {
     }
 }
 
-function showSidebar(element) {
+async function showSidebar(element) {
     //UPDATE FROM DISCUSSION.JS
-
-
     const sidebarEl = document.getElementById('sidebar');
 
-    //need to update sidebar to match the scriptureReference
     const referenceText = element.textContent;
     const referenceEl = document.getElementById('reference');
     referenceEl.textContent = referenceText;
 
     //match and group scriptureReference
+    scripturePattern = /(?:(\d [a-z]+)|([a-z]+))\ (\d+):(\d+)(?:\ ?-\ ?(\d+))?/i;
     if (element.textContent.match(scripturePattern)) {
         const match = element.textContent.match(scripturePattern);
         if (match[1]) {
@@ -56,7 +43,7 @@ function showSidebar(element) {
             window.book = match[2];
         }
         window.chapter = match[3];
-        window.verses = [match[4]]; //may not overwrite previous verses
+        window.verses = [match[4]]; 
         if (match[5]) {
             for (let i = parseInt(match[4])+1; i<=parseInt(match[5]);i++) {
                 window.verses.push(`${i}`);
@@ -78,8 +65,8 @@ function showSidebar(element) {
             verseEl.appendChild(numberEl);
 
             const textEl = document.createElement('span');
-            //may want to add a class
-            textEl.innerText = "This is placeholder text for the verse text from a database."
+            let scriptureText = await getScripture(book, chapter, verse);
+            textEl.textContent = scriptureText; //gives the book, chapter, and specific verse to the getScripture function which returns the text of the verse.
             verseEl.appendChild(textEl);
         }
     }
@@ -92,6 +79,51 @@ function hideSidebar() {
     sidebar.classList.remove('show');
 }
 
+async function getScripture(book, chapter, verse) { //may conflict with window variables?
+    //UPDATe FROM DISCUSSION.JS
+    book = book.toLowerCase()
+    if (book === "1 nephi") {
+        book = "1nephi";
+    } else if (book === "2 nephi") {
+        book = "2nephi";
+    } else if (book === "words of mormon") {
+        book = "wordsofmormon";
+    } else if (book === "3 nephi") {
+        book = "3nephi";
+    } else if (book === "4 nephi") {
+        book = "4nephi";
+    }
+    let bookOfMormon = ["1nephi", "2nephi","jacob","enos","jarom","omni","wordsofmormon","mosiah","alma","helaman","3nephi","4nephi","mormon","ether","moroni"];
+    if (bookOfMormon.includes(book)) {
+        try {
+            response = await fetch(`https://book-of-mormon-api.vercel.app/${book}/${chapter}/${verse}`);
+            let resText = await response.text();
+            let resObj = JSON.parse(resText);
+            let text = resObj.text;
+            return text
+        } catch(err) {
+            return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
+        }
+        
+            
+    } else {
+        try{
+            //FETCH from bible
+            response = await fetch(`https://bible-api.com/${book} ${chapter}:${verse}?translation=kjv`);
+            if (response.status < 400) {
+                let resText = await response.text();
+                let resObj = JSON.parse(resText);
+                let text = resObj.text;
+                return text;
+            } else {
+                return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
+            } 
+        } catch(err) {
+            //return generic no support message
+            return "We do not support this reference right now. Sorry! (Currently, we only offer support for the KJV Bible and the Book of Mormon.)";
+        }
+    }
+}
 
 function updateScroll(){
     var discussionFeedEl = document.getElementById("discussionFeed");

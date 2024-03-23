@@ -72,7 +72,6 @@ async function pushMessage() {
 
 }
 
-
 async function setDiscussion() {
     
     const currentDate = new Date();
