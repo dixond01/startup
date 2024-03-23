@@ -20,6 +20,7 @@ function peerProxy(httpServer) {
   wss.on('connection', async function connection(ws, request) {
     const connection = { id: uuid.v4(), alive: true, ws: ws };
     connections.push(connection);
+    console.log("connection made");
 
     const parameters = url.parse(request.url, true).query;
     const token = parameters.token;
@@ -44,6 +45,7 @@ function peerProxy(httpServer) {
       user = await DB.getUserByToken(token);
       DB.makeOffline(user.email);
       const pos = connections.findIndex((o, i) => o.id === connection.id);
+      console.log("connection closed");
 
       if (pos >= 0) {
         connections.splice(pos, 1);
@@ -64,10 +66,16 @@ function peerProxy(httpServer) {
         c.ws.terminate();
       } else {
         c.alive = false;
-        c.ws.ping();
+        try {
+          c.ws.ping();
+        } catch (error) {
+          console.error('Error sending ping:', error);
+          // Optionally terminate the connection or take other actions
+          c.ws.terminate();
+        }
       }
     });
-  }, 1000000);
+  }, 500000);
 }
 
 module.exports = { peerProxy };
