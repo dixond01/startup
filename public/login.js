@@ -53,8 +53,8 @@ async function login() {
     const passwordEl = document.querySelector('#password');
     const password = passwordEl.value;
 
-    const studyNameEl = document.querySelector('#studyGroup');
-    const studyName = studyNameEl.value;
+    // const studyNameEl = document.querySelector('#studyGroup');
+    // const studyName = studyNameEl.value;
     
     const post_response = await fetch(`/api/user/${email}/${name}/online`, {
       method: 'POST',
@@ -67,7 +67,7 @@ async function login() {
       window.location.href = 'discussion.html';
       localStorage.setItem('email', email); //hope this works with email = emailEl.value
       localStorage.setItem('userName', name);
-      localStorage.setItem('studyName', studyName);
+      // localStorage.setItem('studyName', studyName);
     } else {
       const body = await post_response.json();
       const loginErrorEl = document.querySelector('#loginError');
