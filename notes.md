@@ -1599,3 +1599,80 @@ if (await bcrypt.compare("password", hashedPassword)) (
     - `Cookie: sessoin=x83yzi`
 - need to install middleware `cookie-parser` as well
 - can delete cookie when they log out
+
+## Security
+
+- cybercrime costs will reach annual 10.5 trillion by 2025
+
+### OWASP 10
+
+- Open(source) Worldwide Application Security Project
+
+1. Broken Access Control
+  - URL bypass. Can access resources without authentication
+  - Resource path allows access
+  - Put security in backend code not frontend
+  - Require authentication before serving up resources
+2. Cryptographic Failures
+  - Transmitting data as cear text
+  - Not encrypting at rest or transit
+    - rest: stored on disk, persisted storage. Encrypt database
+    - transit: when you send it (use https and right version of TLS (1.3, not 1.1)
+  - Weak cryptography (SHA1, MD5)
+  - Misused cryptography (no salt, wrong params (1 length vs 10 length)
+3. Injection
+  - User supplied data is not sanitized
+    - can add javascript to chats, database with SQL injection
+  - user supplied data programmatically executed
+4. Insecure Design
+  - Whole team
+  - Not aware of best practices
+  - Unlimited trial accounts
+  - Customer data not segmented
+    - should only see one person's data, not everyones if an attack is successful
+  - Single layer defense
+5. Security Misconfiguration
+  - Development info exposed
+    - give hacker info about the system
+  - Using default configurations
+    - add security
+  - Unnecessary features installed
+    - may have security holes
+  - System not hardened
+6. Vulnerable Components
+  - unnecessary/unused packages imported
+    - 5 was system, this is packages
+  - Untrusted/verified sources
+  - Out of date software
+  - Not tracking vulnerability bulletins
+  - Package versions not locked
+7. ID and Auth Failures
+  - Credential stuffing
+    - compromised list of userNames, passwords
+    - must validate
+  - Brute force attacks
+    - guess a password
+  - Permitting weak passwords
+  - Weak credential recovery
+  - Credentials in URL
+  - Not expiring auth tokens
+8. Software Integrity Failures
+  - Unverified CDN usage
+    - content distribution networks
+  - Unverified packages (npm install)
+    - Google has their own packages, they do not just download things
+  - Unverified updates
+  - Insecure CD/CI platforms
+9. jLogging Failure
+  - Not logging critical requests
+  - Not monitoring system performance
+  - Logs not audited, automatic or manual
+  - Logs not stored centrally
+  - No real-time response
+  - Make sure logging is immutable
+10. Server Side Request Forgery
+  - specific
+  - give URL to server. Server requests bytes and returns them to image, etc.
+- Put on your white hat
+  - think like a hacker to figure out how to protect
+- Security Minded
