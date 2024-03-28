@@ -40,7 +40,14 @@ window.addEventListener('beforeunload', function(event) {
   socket.onmessage = async (event) => {
     //get connections to update their messages
     //call displayMessage(chat) (i think.)
-    const msg = JSON.parse(await event.data);
+    let msg = {};
+    if (event.data instanceof Blob) {
+        const text = await event.data.text();
+        msg = JSON.parse(text);
+    } else {
+        msg = JSON.parse(await event.data);
+    }
+    // const msg = JSON.parse(await event.data);
     if (msg.type == 'status' && msg.value == 'online'){
         usersDisplay();
         updateTable();
