@@ -1676,3 +1676,50 @@ if (await bcrypt.compare("password", hashedPassword)) (
 - Put on your white hat
   - think like a hacker to figure out how to protect
 - Security Minded
+
+## Web Frameworks
+
+- simplifiy common patterns
+- provide common components
+- improve performance
+- increase device coverage
+  - handle differences in browsers/devices underneath
+
+### React
+
+- still gaining use
+- JSX
+  - combines JavaScript and HTML
+  - use transpiler (Babel) to turn back into JS for the browser to use
+  1. write JSX
+  2. run transpiler
+  3. gives you files
+  4. deploy those files
+- with codePen, tell JS under Pen Settings to use the Babel preprocessor
+  - import react library and react dom (for injecting into the dom)
+
+#### Components
+
+- little functions that can be rendered with an html tag
+```
+const Hello = () => {
+  return <p>Hello World</p>;
+};
+ReactDOM.render(<Hello />, <select html element to insert it into>);
+```
+- also a class representation of components, but it's old. Use functional representation.
+- Properties
+  - in component: define and use as a parameter
+  - in render: provide
+  ```
+  const Hello = ({phrase}) => {
+    return (
+      <div>
+        <p>Hello {phrase}</p>
+      </div>
+    );
+  };
+  reactDOM.render(<Hello phrase="you" />,
+      <select html element to insert it into>);
+  ```
+
