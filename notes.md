@@ -1722,4 +1722,33 @@ ReactDOM.render(<Hello />, <select html element to insert it into>);
   reactDOM.render(<Hello phrase="you" />,
       <select html element to insert it into>);
   ```
+- use App component to insert basic html with routes to other components
+  
+### Routers
 
+- wrap whole application with router
+- use NavLink tags to trigger routing
+- use Route tags (wrapped with Routes) to map the route to components
+  - `<Route path='/' element={<Home />} exact />`
+  - `exact` is for a path `/` with nothing after it
+  - use `path="*"` for everything else to have a default page render (login or discussion?)
+
+### Toolchain 
+
+- different tools needed to deploy to production
+  - babel for transpiling, bundling, polyfills (for browser compatibility)
+  - magnify for compressing
+- run the tools before deployment
+- ours will be driven by Vite
+  - frontend build tool
+  - includes linter to make sure code is clean
+  - `npm run dev` runs vite for debugging
+  - `npm run build` runs vite build which converts jsx
+ 
+### Frontend/Backend Interaction
+
+- frontend (React) will be in main directory. Will create subdirectory for the services (backend)
+- in development
+  - vite.confic.js
+  ```
+  ikmport { defineConfig } from vite
