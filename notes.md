@@ -1752,3 +1752,24 @@ ReactDOM.render(<Hello />, <select html element to insert it into>);
   - vite.confic.js
   ```
   ikmport { defineConfig } from vite
+
+### Reactivity
+
+- properties to components
+  - send properties when using componenets, interpreted as parameters
+- state on components
+
+### Hooks
+
+- useState - component state
+- useEffect - side effects, what happens when the comoponent is rendered or when it cleans it up
+  - can use a parameter to also make it trigger whenever a state is changed
+  ```
+  const [count1, updateCount1] = React.useState(0);
+  React.useEffect(() => {
+    console.log("Some stuff happened");
+  }, [count1]);
+  ```
+- hooks only work in funciton components (what we use now)
+- only at top funciton scope
+  - conditionals must go inside the useEffect
