@@ -1,53 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="index.css" />
-    <script defer src="login.js"></script>
-
-    <title>InspireUs Login</title>
-    </head>
-    <body>
-        <header>
-            <h1 class="websiteTitle">InspireUs</h1>
-        </header>
-        <main>
-            <h2 class="pageTitle">Login:</h2>
-            <div class="form">
-                <label for="email">Email:</label>
-                <input for="email" id="email" placeholder="Your email here"/>
-                <div id="emailError" class="errorMessage"></div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" placeholder="Your name here" />
-                <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="Your password here" />
-                <div id="loginError" class="errorMessage"></div>
-                <button class="btn btn-primary rounded-pill px-3" onclick="login()">Login</button>
-              </div>
-              <div id="createstudy"><h2 id="or">Or</h2>
-                <button class="btn btn-primary rounded-pill px-3" id="registerbtn" onclick="window.location.href='register.html';">Register</button>
-              </div>
-        </main>
-
-        <footer>
-            <div class="container-fluid">
-              <span class="text-reset">Darbi Dixon</span>
-              <a class="text-reset" href="https://github.com/dixond01/startup">GitHub</a>
-            </div>
-          </footer>
-
-    </body>
-    <script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-  crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <meta name="theme-color" content="#000000" /> -->
+<!-- why is there an icon?? -->
+    <title>InspireUs</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/index.jsx"></script>
+  </body>
 </html>
