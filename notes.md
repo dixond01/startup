@@ -1676,3 +1676,159 @@ if (await bcrypt.compare("password", hashedPassword)) (
 - Put on your white hat
   - think like a hacker to figure out how to protect
 - Security Minded
+
+## Web Frameworks
+
+- simplifiy common patterns
+- provide common components
+- improve performance
+- increase device coverage
+  - handle differences in browsers/devices underneath
+
+### React
+
+- still gaining use
+- JSX
+  - combines JavaScript and HTML
+  - use transpiler (Babel) to turn back into JS for the browser to use
+  1. write JSX
+  2. run transpiler
+  3. gives you files
+  4. deploy those files
+- with codePen, tell JS under Pen Settings to use the Babel preprocessor
+  - import react library and react dom (for injecting into the dom)
+
+#### Components
+
+- little functions that can be rendered with an html tag
+```
+const Hello = () => {
+  return <p>Hello World</p>;
+};
+ReactDOM.render(<Hello />, <select html element to insert it into>);
+```
+- also a class representation of components, but it's old. Use functional representation.
+- Properties
+  - in component: define and use as a parameter
+  - in render: provide
+  ```
+  const Hello = ({phrase}) => {
+    return (
+      <div>
+        <p>Hello {phrase}</p>
+      </div>
+    );
+  };
+  reactDOM.render(<Hello phrase="you" />,
+      <select html element to insert it into>);
+  ```
+- use App component to insert basic html with routes to other components
+  
+### Routers
+
+- wrap whole application with router
+- use NavLink tags to trigger routing
+- use Route tags (wrapped with Routes) to map the route to components
+  - `<Route path='/' element={<Home />} exact />`
+  - `exact` is for a path `/` with nothing after it
+  - use `path="*"` for everything else to have a default page render (login or discussion?)
+
+### Toolchain 
+
+- different tools needed to deploy to production
+  - babel for transpiling, bundling, polyfills (for browser compatibility)
+  - magnify for compressing
+- run the tools before deployment
+- ours will be driven by Vite
+  - frontend build tool
+  - includes linter to make sure code is clean
+  - `npm run dev` runs vite for debugging
+  - `npm run build` runs vite build which converts jsx
+ 
+### Frontend/Backend Interaction
+
+- frontend (React) will be in main directory. Will create subdirectory for the services (backend)
+- in development
+  - vite.confic.js
+  ```
+  ikmport { defineConfig } from vite
+
+### Reactivity
+
+- properties to components
+  - send properties when using componenets, interpreted as parameters
+- state on components
+
+### Hooks
+
+- useState - component state
+- useEffect - side effects, what happens when the comoponent is rendered or when it cleans it up
+  - can use a parameter to also make it trigger whenever a state is changed
+  ```
+  const [count1, updateCount1] = React.useState(0);
+  React.useEffect(() => {
+    console.log("Some stuff happened");
+  }, [count1]);
+  ```
+- hooks only work in funciton components (what we use now)
+- only at top funciton scope
+  - conditionals must go inside the useEffect
+
+## TypeScript
+
+### Static Type Checking
+
+- typing always done when compiling - binary has no typing
+- in parameters - `value: number`
+- in variables - `let count: number= 'one'`
+- in document.querySelector
+  - `const el = document.querySelector<HTMLElement>('#id');`
+- to install and run
+  - `npm install -g typescript`
+    - `-g` installs globally. Be careful. Allows use on command line.
+  - `index.ts`
+    - `.ts` instead `.js` for typescript
+- only used in development - toolchain, cannot be run in browser
+  - cannot use typescript without some sort of toolchain
+
+### Configuration
+
+- tsconfig.json
+  - use sourcemap to allow debugging
+ 
+### Interface
+
+```
+interface Book {
+  title: string;
+  id: number;
+}
+```
+- forces an object to have specific fields
+- be more careful about expected parameters
+
+### Unions
+
+- make a type only have certain possible values
+- `type AuthState = 'authenticated' | 'unauthenticated';`
+- forces correct spelling, etc
+
+## Performance
+
+- optimize for real usage
+  - cache, bandwidth, cpu, storage of the market, not just your machine
+- optimize based on data
+  - don't guess, get data on user experience, usage, etc
+- prioritize bottlenecks
+- look at download size
+- compress, reduce, minify
+- lazy load
+- use psychology
+  - make them feel like their performance is good even if it isn't
+- use lighthouse to test
+  - only on Chrome
+- pingdom to test from other places in the world
+  - dotcom-tools.com as well, can test multiple at once
+- inspect
+  - network
+    - can simulate different performances
