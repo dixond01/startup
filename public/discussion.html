@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="discussion.css"/>
 
-    <!-- <script defer src="studygroup.js"></script> -->
     <script defer src="logout.js"></script>
     <script defer src="discussion.js"></script>
 
@@ -30,14 +29,12 @@
         <main>
             
             <div id="discussion">
-                <!-- <h3 >Study Group: <span class="studyGroup">yourStudyGroup</span></h3> -->
                 <h1 class="pageTitle">Discussion: <span id="discussionName"></span></h1>
                 <div id="discussionFeed">
                     
                 </div>
             <hr />
                 <form method="get">
-                    <!--Add action option to update the discussion to include the text-->
                     <label for="chatbox"></label>
                     <input type="text" id="chatbox" placeholder="Type here..." />
                     <button type="button" id="postBtn" class="btn btn-primary rounded-pill px-3" onclick="pushMessage()">Post</button> <!--Not sure if type is right. was 'submit' Want to add icon for button.-->
