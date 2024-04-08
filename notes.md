@@ -1773,3 +1773,62 @@ ReactDOM.render(<Hello />, <select html element to insert it into>);
 - hooks only work in funciton components (what we use now)
 - only at top funciton scope
   - conditionals must go inside the useEffect
+
+## TypeScript
+
+### Static Type Checking
+
+- typing always done when compiling - binary has no typing
+- in parameters - `value: number`
+- in variables - `let count: number= 'one'`
+- in document.querySelector
+  - `const el = document.querySelector<HTMLElement>('#id');`
+- to install and run
+  - `npm install -g typescript`
+    - `-g` installs globally. Be careful. Allows use on command line.
+  - `index.ts`
+    - `.ts` instead `.js` for typescript
+- only used in development - toolchain, cannot be run in browser
+  - cannot use typescript without some sort of toolchain
+
+### Configuration
+
+- tsconfig.json
+  - use sourcemap to allow debugging
+ 
+### Interface
+
+```
+interface Book {
+  title: string;
+  id: number;
+}
+```
+- forces an object to have specific fields
+- be more careful about expected parameters
+
+### Unions
+
+- make a type only have certain possible values
+- `type AuthState = 'authenticated' | 'unauthenticated';`
+- forces correct spelling, etc
+
+## Performance
+
+- optimize for real usage
+  - cache, bandwidth, cpu, storage of the market, not just your machine
+- optimize based on data
+  - don't guess, get data on user experience, usage, etc
+- prioritize bottlenecks
+- look at download size
+- compress, reduce, minify
+- lazy load
+- use psychology
+  - make them feel like their performance is good even if it isn't
+- use lighthouse to test
+  - only on Chrome
+- pingdom to test from other places in the world
+  - dotcom-tools.com as well, can test multiple at once
+- inspect
+  - network
+    - can simulate different performances
