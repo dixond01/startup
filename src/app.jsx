@@ -11,33 +11,33 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 export default function App() {
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-const navigate = useNavigate();
-  
-const goToLoginPage = () => {
-    navigate('');
-};
-
-async function logout() {
-    userName = sessionStorage.getItem('userName');
-    email = sessionStorage.getItem('email');
+    // const navigate = useNavigate();
     
-    try {
-        const post_response = await fetch(`/api/user/${email}/${userName}/offline`, {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            // body: usersList,
-          });
-  
-        if (post_response.ok) {
-            setIsLoggedIn(false);
-          goToLoginPage();
-        } 
-      } catch (error) {
-        console.error('There was an error!', error);
-      }
-    }
+    // const goToLoginPage = () => {
+    //     navigate('');
+    // };
+
+    async function logout() {
+        const userName = sessionStorage.getItem('userName');
+        const email = sessionStorage.getItem('email');
+        
+        try {
+            const post_response = await fetch(`/api/user/${email}/${userName}/offline`, {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                // body: usersList,
+            });
+    
+            if (post_response.ok) {
+                setIsLoggedIn(false);
+                // goToLoginPage();
+            } 
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+        }
     
   return (
     <BrowserRouter>
@@ -49,7 +49,7 @@ async function logout() {
             }
             {isLoggedIn === true && (
             <header>
-                <div id="header1stLine"><h1 className="websiteTitle">InspireUs</h1><button className="btn btn-primary rounded-pill px-3" id="logoutBtn" onClick={logout}>Logout</button></div>
+                <div id="header1stLine"><h1 className="websiteTitle">InspireUs</h1><NavLink to=''><button className="btn btn-primary rounded-pill px-3" id="logoutBtn" onClick={logout}>Logout</button></NavLink></div>
                 <nav className="pageNav">
                       <span><NavLink to="archive.html">Archive</NavLink></span>
                       <span><NavLink to="discussion.html">Home</NavLink></span>
