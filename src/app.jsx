@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login.jsx';
+import { Register } from './login/register.jsx'
 import { Archive } from './archive/archive.jsx';
 import { Discussion } from './discussion/discussion.jsx';
 import { Users } from './users/users.jsx';
@@ -35,6 +36,7 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
             <Route path='/archive' element={<Archive />} />
             <Route path='/discussion' element={<Discussion />} />
             <Route path='/users' element={<Users />} />
+            <Route path='/register' element={<Register />} />
             <Route path='*' element={<NotFound />} />
         </Routes>
 

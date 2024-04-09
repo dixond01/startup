@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 
-export function Login({ isLoggedIn, setIsLoggedIn }) {
+export function Register() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
   
-  const goToDiscussionPage = () => {
-    navigate('/discussion');
-  };
+    const goToLoginPage = () => {
+        navigate('');
+    };
 
-  const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -36,20 +36,14 @@ export function Login({ isLoggedIn, setIsLoggedIn }) {
     }
 
     try {
-      const post_response = await fetch(`/api/user/${email}/${name}/online`, {
+      const post_response = await fetch(`/api/auth/create`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({password}),
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({ email: {email}, name: {name}, password: {password} }),
       });
 
       if (post_response.ok) {
-        const responseData = await post_response.json();
-        sessionStorage.setItem('email', email);
-        sessionStorage.setItem('userName', name);
-        sessionStorage.setItem('token', responseData.token);
-        // window.location.href = 'discussion.html';
-        setIsLoggedIn(true);
-        goToDiscussionPage();
+        goToLoginPage();
       } else {
         const body = await post_response.json();
         setLoginError(`Error: ${body.msg}`);
@@ -59,28 +53,35 @@ export function Login({ isLoggedIn, setIsLoggedIn }) {
     }
   };
 
-  const goToRegisterPage = () => {
-    navigate('/register');
-  }; 
-
   return (
     <main id='loginPage'>
-      <h2 className="pageTitle">Login:</h2>
+      <h2 className="pageTitle">Register:</h2>
             <form className='form' onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
                 <input htmlFor="email" id="email" placeholder="Your email here" name="email" value={email} onChange={handleChange}/>
-                {emailError && <div id="emailError" className="errorMessage">{emailError}</div>}
+                {/* <div id="emailError" className="errorMessage"></div> */}
+                {loginError && <div id="emailError" className="errorMessage">{emailError}</div>}
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" placeholder="Your name here" name="name" value={name} onChange={handleChange}/>
                 <label htmlFor="password">Password:</label>
                 <input type="password" id="password" placeholder="Your password here" name="password" value={password} onChange={handleChange}/>
                 {/* <div id="loginError" className="errorMessage"></div> */}
                 {loginError && <div id="loginError" className="errorMessage">{loginError}</div>}
-                <button className="btn btn-primary rounded-pill px-3" type="submit">Login</button>
+                <button className="btn btn-primary rounded-pill px-3" type="submit">Register</button>
+                
               </form>
-              <div id="createstudy"><h2 id="or">Or</h2>
-                <button className="btn btn-primary rounded-pill px-3" id="registerbtn" onClick={goToRegisterPage}>Register</button>
-              </div>
+              <div>Some random stuff</div>
+            {/* <div class="form">
+                <label for="email">Email:</label>
+                <input for="email" id="email" placeholder="Your email here"/>
+                <div id="emailError" class="errorMessage"></div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Your name here" />
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Your password here" />
+                <div id="loginError" class="errorMessage"></div>
+                <button class="btn btn-primary rounded-pill px-3" onclick="register()">Register</button>
+              </div> */}
     </main>
   );
 }
