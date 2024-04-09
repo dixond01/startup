@@ -1,8 +1,8 @@
 import React from 'react';
 
-export function Login() {
+export function Login({ isLoggedIn, setIsLoggedIn }) {
   return (
-    <main className='container-fluid bg-secondary text-center'>
+    <main >
       <div>login displayed here</div>
     </main>
   );

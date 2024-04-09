@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Users() {
   return (
-    <main className='container-fluid bg-secondary text-center'>
+    <main>
       <div>users displayed here</div>
     </main>
   );
