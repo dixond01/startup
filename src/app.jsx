@@ -32,7 +32,7 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
             )}
 
         <Routes>
-            <Route path='/' element={<Login />} exact />
+            <Route path='/' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} exact />
             <Route path='/archive' element={<Archive />} />
             <Route path='/discussion' element={<Discussion />} />
             <Route path='/users' element={<Users />} />
