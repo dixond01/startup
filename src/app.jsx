@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
 import { Login } from './login/login.jsx';
 import { Register } from './login/register.jsx'
 import { Archive } from './archive/archive.jsx';
@@ -12,6 +12,33 @@ import './app.css';
 
 export default function App() {
 const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+const navigate = useNavigate();
+  
+const goToLoginPage = () => {
+    navigate('');
+};
+
+async function logout() {
+    userName = sessionStorage.getItem('userName');
+    email = sessionStorage.getItem('email');
+    
+    try {
+        const post_response = await fetch(`/api/user/${email}/${userName}/offline`, {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            // body: usersList,
+          });
+  
+        if (post_response.ok) {
+            setIsLoggedIn(false);
+          goToLoginPage();
+        } 
+      } catch (error) {
+        console.error('There was an error!', error);
+      }
+    }
+    
   return (
     <BrowserRouter>
     <div id='app' className='body'>
@@ -22,7 +49,7 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
             }
             {isLoggedIn === true && (
             <header>
-                <div id="header1stLine"><h1 className="websiteTitle">InspireUs</h1><button className="btn btn-primary rounded-pill px-3" id="logoutBtn" onclick="logout()">Logout</button></div>
+                <div id="header1stLine"><h1 className="websiteTitle">InspireUs</h1><button className="btn btn-primary rounded-pill px-3" id="logoutBtn" onClick={logout}>Logout</button></div>
                 <nav className="pageNav">
                       <span><NavLink to="archive.html">Archive</NavLink></span>
                       <span><NavLink to="discussion.html">Home</NavLink></span>
