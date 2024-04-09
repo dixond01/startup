@@ -108,7 +108,7 @@
       padding: 0 0.5rem;
     } */
     
-    footer {
+    #app footer {
       background-color: var(--accent-color);
       /* margin-top: 2vh; */
       padding: 1vh;
@@ -121,7 +121,7 @@
       text-align: left;
     }
   
-    footer a {
+    #app footer a {
       float: right;
     }
   

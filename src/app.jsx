@@ -13,7 +13,7 @@ export default function App() {
 const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <BrowserRouter>
-    <div className='body'>
+    <div id='app' className='body'>
             {isLoggedIn === false && (
             <header>
                 <h1 className="websiteTitle">InspireUs</h1>
