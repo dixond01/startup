@@ -51,9 +51,9 @@ export default function App() {
             <header>
                 <div id="header1stLine"><h1 className="websiteTitle">InspireUs</h1><NavLink to=''><button className="btn btn-primary rounded-pill px-3" id="logoutBtn" onClick={logout}>Logout</button></NavLink></div>
                 <nav className="pageNav">
-                      <span><NavLink to="archive.html">Archive</NavLink></span>
-                      <span><NavLink to="discussion.html">Home</NavLink></span>
-                      <span><NavLink to="users.html">Users</NavLink></span>
+                      <span><NavLink to="archive">Archive</NavLink></span>
+                      <span><NavLink to="discussion">Home</NavLink></span>
+                      <span><NavLink to="users">Users</NavLink></span>
                   </nav>
               </header>
             )}
