@@ -1832,3 +1832,62 @@ interface Book {
 - inspect
   - network
     - can simulate different performances
+
+## UX Design
+
+- "Don't make [the user] think." - Steve Krug
+- Simplicity
+- strong calls to action
+- Design as a story
+- Consistency
+  - Use a UI Framework
+    - material.io
+    - tailwind
+    - bootstrap
+    - create uniformity and consistency across the web
+- Navigation
+  - sitemap - how do they expect the flow to go?
+  - display location
+  - browser controls
+  - breadcrumbs - navigate back up the path
+  - anticipate common paths
+- Color
+  - contrast
+  - primary, secondary, and focus
+  - usually about 3 colors, not including white and black
+- Typography
+  - basic classes
+    - serif
+    - sans serif
+    - monospace (same width characters)
+    - handwriting
+  - font pickers and explorers
+    - google fonts
+  - the less fonts, the better
+- Text
+  - sizes
+    - consistency
+- Proofread
+- Iconocraphy
+  - use standard icons
+- Space
+  - preserve whitespace
+- Interaction
+  - break down complex processes
+- Decision Fatigue
+  - the time to make a decision increases logarithmically with the number of choices presented
+- Device Awareness
+- Performance
+- Accessibility
+  - visual
+    - high contrast
+    - screen reader support
+  - audio
+    - closed caption
+    - etc...
+- Walls
+  - registration
+  - payment
+  - login
+  - navigation
+  - legal
