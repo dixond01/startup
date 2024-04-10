@@ -1,40 +1,40 @@
-body {
+.body {
     overflow: auto;
 }
-main {
+#usersPage main {
     align-items: center;
     justify-content: center;
 }
-h1 {
+#usersPage h1 {
     flex: 0;
     font-size: 2.5rem;
 }
-h3 {
+#usersPage h3 {
     flex: 0;
 }
-hr {
+#usersPage hr {
     flex: 0;
 }
-table {
+#usersPage table {
     flex: 1;
     margin: 2vh;
     width: 80%;
     margin-bottom: 5vh;
     font-size: 1.5rem;
 }
-tr {
+#usersPage tr {
     border-bottom: 2px solid var(--secondary-color-lighter-1);
 }
-th {
+#usersPage th {
     color: var(--secondary-color-darker);
     font-size: 2rem;
 }
-img {
+#usersPage img {
     flex: 0;
     /* margin: 2vh; */
     width: 100%;
 }
-#imgTitle {
+#usersPage #imgTitle {
     width: 100%;
     /* position: relative; */
     background-image: url("https://www.churchofjesuschrist.org/imgs/4005509d620611eebc38eeeeac1ec7196f7f2ce7/full/!1920%2C440/0/default");
@@ -46,7 +46,7 @@ img {
     display: flex;
     flex-direction: column;
 }
-#studyGroupTitle {
+#usersPage #studyGroupTitle {
     align-content: center;
     display: flex;
     justify-content: center;
@@ -54,12 +54,12 @@ img {
     flex: 1;
 }
 
-.online {
+#usersPage .online {
     color: green;
 }
-.offline {
+#usersPage .offline {
     color: red;
 }
-  #logoutBtn {
+#usersPage #logoutBtn {
     font-weight: bold;
   }
