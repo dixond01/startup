@@ -1,9 +1,9 @@
 
-body {
+.body {
     overflow: hidden;
     min-height: 100vh;
 }
-main {
+#discussionPage main {
     font-size: 1rem;
     padding: 3vh;
     flex-grow: 1;
@@ -14,22 +14,22 @@ main {
     flex-direction: column;
     overflow: hidden;
 }
-#discussion h1, h3{
+#discussionPage #discussion h1, h3{
     flex: 0;
 }
-#discussion h1 {
+#discussionPage #discussion h1 {
     font-size: 2rem;
 }
-#discussion h3 {
+#discussionPage #discussion h3 {
     font-size: 1.5rem;
 }
-.userName {
+#discussionPage .userName {
     font-weight: bold;
 }
-.scriptureReference {
+#discussionPage .scriptureReference {
     text-decoration: underline;
 }
-#discussion {
+#discussionPage #discussion {
     /* max-height: 70vh; */
     display: flex;
     flex-direction:column;
@@ -37,8 +37,10 @@ main {
     overflow: hidden;
     margin-left: 5vw;
     margin-right: 5vw;
+    padding: 3vh;
+    width: 80%;
 }
-#discussionFeed {
+#discussionPage #discussionFeed {
     max-height: 80%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -48,13 +50,14 @@ main {
     text-align: left;
     font-size: 1rem;
 }
-footer {
+#discussionPage footer {
     margin-top: auto;
     flex-shrink: 0;
     height: 50px;
     display: flex;
 }
-form {
+#discussionPage form {
+    font-size: 1rem;
     flex-shrink: 0;
     margin-top: auto;
     flex: 0 0 40px;
@@ -63,7 +66,7 @@ form {
     justify-content: space-around;
     align-items: center;
 }
-input {
+#discussionPage input {
     border-radius: 20px;
     border: none;
     padding: 1vw;
@@ -71,7 +74,7 @@ input {
     height: 80%;
     outline: none;
 }
-.btn-primary {
+#discussionPage .btn-primary {
     background-color: var(--secondary-color);
     border: none;
     --bs-btn-hover-bg: var(--secondary-color-lighter-1);
@@ -80,7 +83,7 @@ input {
     font-weight: bold;
 }
 
-#sidebar {
+#discussionPage #sidebar {
     position: fixed;
     top: 0;
     width: 250px;
@@ -95,11 +98,11 @@ input {
     padding: 2vh;
 }
 
-#sidebar.show {
+#discussionPage #sidebar.show {
     right: 0; /*for using js: add show class to the sidebar*/
 }
 
-#sideHead {
+#discussionPage #sideHead {
     flex: 0;
     display: flex;
     flex-direction: row;
@@ -111,7 +114,7 @@ input {
     border-bottom: 1px solid var(--secondary-color-lighter-1);
 }
 
-#xButton {
+#discussionPage #xButton {
     background: none;
     border: none;
     position: absolute;
@@ -120,12 +123,12 @@ input {
     color: var(--secondary-color-darker);
 }
 
-.scripture {
+#discussionPage .scripture {
     text-align: left;
     overflow: auto;
 }
 
-.verseNumber {
+#discussionPage .verseNumber {
     color: var(--accent-color);
     font-weight: bold;
 }
