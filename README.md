@@ -105,3 +105,12 @@ Simon service deployed.
 - **Frontend Makes Websocket Connection:** Done! Each main javascript page after login (discussion.js, users.js, archive.js, and archive-discussion.js) includes code to open a connection when the page is loaded and close it when it is closed.
 - **Data Sent Over Websocket Connection:** Done! Messages are sent over websocket when a user sends a message, and the users' statuses (online or offline) are sent from the backend to the frontend (users.js) after the database has been updated.
 - **Websocket Data Displayed:** Done! The messages are displayed on each session, and the status messages display a table with the status of each user. This table only updates when the page is refreshed, but this is intentional.
+
+## React Deliverable
+
+NOTE: I have not implemented the entire application. I technically have all the requirements, but the actual chat and archive do not work. 
+
+- **Bundled Using Vite:** Complete!
+- **Multiple Functional React Components:** Complete! I have functional app (which contains logout), login, and users components.
+- **React Router:** Complete! Used to switch between pages when logging in and out, also used in navigation header after logging in.
+- **React Hooks:** Complete! Used UseState in all components and useEffect in the users component. 
