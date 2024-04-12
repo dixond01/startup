@@ -1891,3 +1891,28 @@ interface Book {
   - login
   - navigation
   - legal
+
+## Progressive Web Application (PWA)
+
+- apple has native app model
+  - need three developers, one on Apple, one on Android, and one on website
+  - try to use cross compiling for one codebase that can be converted to three
+    - react dom and native
+    - still differences
+- PWA
+  - target the browser in development and make the browser have access to device features, design one app for all
+    - one code base
+    - code base smaller than native
+    - one distribution for easy updates (no approvals through app store)
+    - no app store
+      - no approval, (little) installation, or fees
+    - works offline
+      - first time visiting online, invited to install, but do not have to update from app store because the updates that are pushed to the website are also pushed to the app because they are the same (kinda a facade for the website)
+    - advanced caching
+    - native like experience
+  - whatpwacando.today
+- how to convert into PWA
+  - manifest
+  - icons
+  - service worker
+  - offline fallbacks
