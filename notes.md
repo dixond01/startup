@@ -1832,3 +1832,87 @@ interface Book {
 - inspect
   - network
     - can simulate different performances
+
+## UX Design
+
+- "Don't make [the user] think." - Steve Krug
+- Simplicity
+- strong calls to action
+- Design as a story
+- Consistency
+  - Use a UI Framework
+    - material.io
+    - tailwind
+    - bootstrap
+    - create uniformity and consistency across the web
+- Navigation
+  - sitemap - how do they expect the flow to go?
+  - display location
+  - browser controls
+  - breadcrumbs - navigate back up the path
+  - anticipate common paths
+- Color
+  - contrast
+  - primary, secondary, and focus
+  - usually about 3 colors, not including white and black
+- Typography
+  - basic classes
+    - serif
+    - sans serif
+    - monospace (same width characters)
+    - handwriting
+  - font pickers and explorers
+    - google fonts
+  - the less fonts, the better
+- Text
+  - sizes
+    - consistency
+- Proofread
+- Iconocraphy
+  - use standard icons
+- Space
+  - preserve whitespace
+- Interaction
+  - break down complex processes
+- Decision Fatigue
+  - the time to make a decision increases logarithmically with the number of choices presented
+- Device Awareness
+- Performance
+- Accessibility
+  - visual
+    - high contrast
+    - screen reader support
+  - audio
+    - closed caption
+    - etc...
+- Walls
+  - registration
+  - payment
+  - login
+  - navigation
+  - legal
+
+## Progressive Web Application (PWA)
+
+- apple has native app model
+  - need three developers, one on Apple, one on Android, and one on website
+  - try to use cross compiling for one codebase that can be converted to three
+    - react dom and native
+    - still differences
+- PWA
+  - target the browser in development and make the browser have access to device features, design one app for all
+    - one code base
+    - code base smaller than native
+    - one distribution for easy updates (no approvals through app store)
+    - no app store
+      - no approval, (little) installation, or fees
+    - works offline
+      - first time visiting online, invited to install, but do not have to update from app store because the updates that are pushed to the website are also pushed to the app because they are the same (kinda a facade for the website)
+    - advanced caching
+    - native like experience
+  - whatpwacando.today
+- how to convert into PWA
+  - manifest
+  - icons
+  - service worker
+  - offline fallbacks
