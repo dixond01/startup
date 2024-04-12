@@ -68,7 +68,6 @@ export function Register() {
                 <button className="btn btn-primary rounded-pill px-3" type="submit">Register</button>
                 
               </form>
-              <div>Some random stuff</div>
     </main>
   );
 }
